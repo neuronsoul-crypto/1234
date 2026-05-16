@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Маршруты дайвинга — Дайвинг-Волшебник</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:'Inter',sans-serif;background:#08080f;color:#fff;-webkit-font-smoothing:antialiased}
+
+:root{
+  --gold:#c8a84b;
+  --gold2:#e8c96a;
+  --bg:#08080f;
+  --bg2:#0e0e1a;
+  --bg3:#13131f;
+  --border:rgba(255,255,255,.08);
+  --muted:rgba(255,255,255,.45);
+}
+
+/* ── PAGE LAYOUT ── */
+.page{display:flex;flex-direction:column;min-height:100vh}
+
+/* ── HEADER ── */
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;border-bottom:1px solid var(--border);background:rgba(8,8,15,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:50}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-mark{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center}
+.logo-mark svg{width:20px;height:20px;fill:#08080f}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:#fff}
+.logo-sub{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:1px}
+.hdr-right{display:flex;align-items:center;gap:16px}
+.back-btn{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);text-decoration:none;transition:color .2s}
+.back-btn:hover{color:#fff}
+.back-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── HERO STRIP ── */
+.hero-strip{padding:48px 32px 40px;text-align:center;background:linear-gradient(to bottom,rgba(200,168,75,.04),transparent)}
+.strip-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);padding:5px 16px;border:1px solid rgba(200,168,75,.3);border-radius:100px;margin-bottom:16px}
+.strip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,48px);font-weight:700;line-height:1.15;margin-bottom:12px}
+.strip-sub{font-size:15px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7}
+
+/* ── MAP SECTION ── */
+.map-section{padding:0 32px 64px;flex:1}
+.map-wrap{max-width:1200px;margin:0 auto;position:relative}
+
+/* ── MAP CONTAINER ── */
+.map-container{
+  position:relative;
+  width:100%;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:0 24px 64px rgba(0,0,0,.6);
+  background:#0d1a2a; /* fallback while image loads */
+  cursor:crosshair; /* helps in calibration mode */
+}
+.map-container.normal-cursor{cursor:default}
+.map-img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+
+/* placeholder when no image yet */
+.map-placeholder{
+  width:100%;aspect-ratio:16/9;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  background:linear-gradient(135deg,#0d1a2a,#0a1520);
+  color:var(--muted);
+}
+.map-placeholder svg{width:64px;height:64px;stroke:rgba(200,168,75,.3);fill:none;stroke-width:1.5}
+.map-placeholder p{font-size:16px}
+.map-placeholder small{font-size:13px;color:rgba(255,255,255,.2)}
+
+/* ── MARKERS ── */
+.marker{
+  position:absolute;
+  transform:translate(-50%,-50%);
+  cursor:pointer;
+  z-index:10;
+  transition:transform .2s ease;
+}
+.marker:hover{transform:translate(-50%,-50%) scale(1.15)}
+.marker.active{transform:translate(-50%,-50%) scale(1.2);z-index:20}
+
+.marker-dot{
+  width:38px;height:38px;
+  border-radius:50%;
+  background:#e07b6a;
+  border:3px solid rgba(255,255,255,.9);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(224,123,106,.6),0 0 0 0 rgba(224,123,106,.3);
+  animation:markerPulse 2.5s infinite;
+  position:relative;
+  transition:background .2s,box-shadow .2s,transform .2s;
+}
+.marker:hover .marker-dot{background:#f08c7a}
+.marker.active .marker-dot{
+  background:#fff;
+  box-shadow:0 4px 20px rgba(224,123,106,.9);
+  animation:none;
+}
+.marker.active .marker-num{color:#e07b6a}
+@keyframes markerPulse{
+  0%,100%{box-shadow:0 4px 16px rgba(224,123,106,.6),0 0 0 0 rgba(224,123,106,.3)}
+  50%{box-shadow:0 4px 16px rgba(224,123,106,.6),0 0 0 12px rgba(224,123,106,0)}
+}
+.marker-num{font-size:13px;font-weight:800;color:#fff;line-height:1;transition:color .2s}
+
+/* label on hover */
+.marker-label{
+  position:absolute;
+  bottom:calc(100% + 8px);
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(8,8,15,.9);
+  border:1px solid rgba(200,168,75,.3);
+  border-radius:8px;
+  padding:6px 12px;
+  font-size:12px;font-weight:600;color:#fff;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .2s;
+  backdrop-filter:blur(8px);
+}
+.marker:hover .marker-label,.marker.active .marker-label{opacity:1}
+
+/* ── POPUP ── */
+.popup-overlay{
+  display:none;
+  position:fixed;inset:0;z-index:200;
+  background:rgba(8,8,15,.6);
+  backdrop-filter:blur(6px);
+  align-items:center;justify-content:center;
+  padding:24px;
+}
+.popup-overlay.open{display:flex}
+
+.popup{
+  background:var(--bg3);
+  border:1px solid rgba(200,168,75,.2);
+  border-radius:24px;
+  width:100%;max-width:560px;
+  max-height:90vh;
+  overflow-y:auto;
+  box-shadow:0 32px 80px rgba(0,0,0,.7);
+  animation:popIn .3s cubic-bezier(.34,1.56,.64,1);
+  position:relative;
+}
+@keyframes popIn{from{opacity:0;transform:scale(.92) translateY(12px)}to{opacity:1;transform:none}}
+
+.popup-img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:18px 18px 0 0}
+.popup-img-placeholder{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#0d1a2a,#1a2a3a);border-radius:18px 18px 0 0;display:flex;align-items:center;justify-content:center}
+.popup-img-placeholder svg{width:48px;height:48px;stroke:rgba(200,168,75,.3);fill:none;stroke-width:1.5}
+
+.popup-body{padding:28px 28px 32px}
+.popup-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:50%;font-size:14px;font-weight:800;color:#08080f;margin-bottom:14px}
+.popup-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:12px;line-height:1.2}
+.popup-meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.popup-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 12px;background:rgba(200,168,75,.08);border:1px solid rgba(200,168,75,.2);border-radius:100px;color:var(--gold)}
+.popup-tag svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.popup-desc{font-size:15px;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:24px}
+.popup-btn{display:block;width:100%;text-align:center;padding:15px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#08080f;border-radius:100px;font-size:15px;font-weight:700;text-decoration:none;transition:.2s;border:none;cursor:pointer}
+.popup-btn:hover{box-shadow:0 8px 24px rgba(200,168,75,.4);transform:translateY(-1px)}
+.popup-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:rgba(8,8,15,.7);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);font-size:18px;transition:.2s;z-index:5;backdrop-filter:blur(8px)}
+.popup-close:hover{background:rgba(255,255,255,.1);color:#fff}
+
+/* ── SIDEBAR LIST ── */
+.map-layout{display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start}
+.sidebar{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-height:600px;overflow-y:auto}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-track{background:transparent}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(200,168,75,.3);border-radius:4px}
+.sidebar-title{padding:18px 20px;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border)}
+.sidebar-item{display:flex;align-items:center;gap:14px;padding:14px 20px;cursor:pointer;transition:background .2s;border-bottom:1px solid rgba(255,255,255,.04)}
+.sidebar-item:last-child{border-bottom:none}
+.sidebar-item:hover,.sidebar-item.active{background:rgba(200,168,75,.07)}
+.sidebar-item.active .item-num{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#08080f}
+.item-num{width:28px;height:28px;border-radius:50%;background:rgba(200,168,75,.1);border:1px solid rgba(200,168,75,.25);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--gold);flex-shrink:0;transition:.2s}
+.item-name{font-size:14px;font-weight:600;color:#fff;margin-bottom:2px;line-height:1.3}
+.item-sub{font-size:12px;color:var(--muted)}
+
+/* ── CALIBRATION MODE ── */
+.calib-bar{
+  display:none;
+  align-items:center;gap:12px;
+  background:rgba(200,168,75,.1);
+  border:1px solid rgba(200,168,75,.35);
+  border-radius:12px;
+  padding:12px 20px;
+  margin-bottom:20px;
+  font-size:13px;
+  color:var(--gold);
+}
+.calib-bar.on{display:flex}
+.calib-bar svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.calib-coords{font-family:monospace;font-size:14px;font-weight:700;background:rgba(200,168,75,.15);padding:4px 10px;border-radius:6px;color:#fff;min-width:160px}
+.calib-note{color:var(--muted);font-size:12px;flex:1}
+
+/* ── TOOLBAR ── */
+.toolbar{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.tool-btn{display:flex;align-items:center;gap:7px;padding:9px 18px;border-radius:100px;font-size:13px;font-weight:600;border:1px solid var(--border);background:var(--bg2);color:var(--muted);cursor:pointer;transition:.2s}
+.tool-btn:hover{border-color:rgba(200,168,75,.4);color:var(--gold)}
+.tool-btn.active{background:rgba(200,168,75,.1);border-color:rgba(200,168,75,.4);color:var(--gold)}
+.tool-btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.legend{margin-left:auto;font-size:12px;color:var(--muted)}
+.legend span{color:var(--gold);font-weight:600}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){.map-layout{grid-template-columns:1fr}.sidebar{max-height:300px}}
+@media(max-width:600px){.hdr{padding:14px 20px}.map-section{padding:0 16px 48px}.hero-strip{padding:32px 20px 28px}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<header class="hdr">
+  <a href="index.html" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 3a3 3 0 110 6 3 3 0 010-6zm0 14c-2.67 0-8 1.34-8 4v-1c0-2.66 5.33-4 8-4s8 1.34 8 4v1c0-2.66-5.33-4-8-4z"/></svg>
+    </div>
+    <div>
+      <div class="logo-name">Дайвинг‑Волшебник</div>
+      <div class="logo-sub">Маршруты погружений</div>
+    </div>
+  </a>
+  <div class="hdr-right">
+    <a href="index.html" class="back-btn">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      На главную
+    </a>
+  </div>
+</header>
+
+<!-- HERO STRIP -->
+<div class="hero-strip">
+  <div class="strip-tag">Интерактивная карта</div>
+  <h1 class="strip-title">Маршруты погружений</h1>
+  <p class="strip-sub">Нажми на любую точку на карте, чтобы узнать подробности о маршруте</p>
+</div>
+
+<!-- MAP SECTION -->
+<div class="map-section">
+  <div class="map-wrap">
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <button class="tool-btn" id="calibBtn" onclick="toggleCalib()">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+        Режим координат
+      </button>
+      <button class="tool-btn" onclick="closePopup()">
+        <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        Сбросить выбор
+      </button>
+      <div class="legend">Точек на карте: <span id="pointCount">0</span></div>
+    </div>
+
+    <!-- CALIBRATION BAR -->
+    <div class="calib-bar" id="calibBar">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+      <span class="calib-coords" id="calibCoords">x: — &nbsp; y: —</span>
+      <span class="calib-note">Кликни по карте — скопируй координаты и вставь в data.js для нужной точки</span>
+    </div>
+
+    <!-- MAP + SIDEBAR -->
+    <div class="map-layout">
+
+      <!-- MAP -->
+      <div class="map-container normal-cursor" id="mapContainer">
+        <img src="map-bg.webp" alt="Карта маршрутов дайвинга" class="map-img" id="mapImg">
+
+        <!-- MARKERS will be injected here -->
+        <div id="markersLayer"></div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <div class="sidebar-title">Все маршруты</div>
+        <div id="sidebarList"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div><!-- .page -->
+
+<!-- POPUP OVERLAY -->
+<div class="popup-overlay" id="popupOverlay" onclick="handleOverlayClick(event)">
+  <div class="popup" id="popup">
+    <button class="popup-close" onclick="closePopup()">✕</button>
+    <div id="popupContent"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     DATA — замени эти 10 точек на свои данные
+     x, y — координаты в процентах от размера карты
+     Используй "Режим координат" чтобы получить точные значения
+═══════════════════════════════════════════════ -->
+<script>
+const POINTS = [
+  {
+    id: 1,
+    name: 'Подводный арт-парк',
+    short: 'Глубина 8–15 м · Начинающий',
+    depth: '8–15 м',
+    level: 'Начинающий',
+    duration: '45 мин',
+    photo: 'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=560&q=80',
+    desc: 'Уникальная галерея подводных скульптур. Со временем фигуры обросли водорослями и мидиями, став настоящим рукотворным рифом. Идеально для фотографии и первых погружений.',
+    x: 7, y: 17
+  },
+  {
+    id: 2,
+    name: 'Торпедник',
+    short: 'Глубина 18–24 м · Advanced',
+    depth: '18–24 м',
+    level: 'Advanced',
+    duration: '50 мин',
+    photo: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=560&q=80',
+    desc: 'Затонувший учебный аппарат эпохи холодной войны. Металлический корпус покрыт мидиями и морскими анемонами. Отличная видимость, умеренное течение.',
+    x: 9, y: 34
+  },
+  {
+    id: 3,
+    name: 'Бухта «Гравийная»',
+    short: 'Глубина 5–12 м · Начинающий',
+    depth: '5–12 м',
+    level: 'Начинающий',
+    duration: '40 мин',
+    photo: 'https://images.unsplash.com/photo-1682687220067-dced9a881b56?w=560&q=80',
+    desc: 'Защищённая бухта с галечным дном и богатой донной фауной. Здесь водятся морские коньки, ежи и крабы. Спокойная вода, нет течений — идеально для новичков и детей.',
+    x: 12, y: 44
+  },
+  {
+    id: 4,
+    name: '«Гараж»',
+    short: 'Глубина 12–18 м · Open Water',
+    depth: '12–18 м',
+    level: 'Open Water',
+    duration: '50 мин',
+    photo: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=560&q=80',
+    desc: 'Серия живописных подводных гротов, напоминающих автомобильный гараж. Внутри гротов держится стая горбылей. Нужен фонарь — внутри темно и красиво.',
+    x: 10, y: 57
+  },
+  {
+    id: 5,
+    name: 'Бухта «Влюблённых»',
+    short: 'Глубина 6–10 м · Начинающий',
+    depth: '6–10 м',
+    level: 'Начинающий',
+    duration: '45 мин',
+    photo: 'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=560&q=80',
+    desc: 'Романтичная бухта с кристально чистой водой. Мелководье с зарослями посейдонии, в которых прячутся морские иглы и мелкие каракатицы. Часто выбирают для первых совместных погружений.',
+    x: 20, y: 63
+  },
+  {
+    id: 6,
+    name: '«Акулий плавник»',
+    short: 'Глубина 15–22 м · Advanced',
+    depth: '15–22 м',
+    level: 'Advanced',
+    duration: '55 мин',
+    photo: 'https://images.unsplash.com/photo-1551244072-5d12893278bc?w=560&q=80',
+    desc: 'Скальный выступ, уходящий в глубину. Напоминает спинной плавник акулы. Сильные вертикальные течения, вдоль стены держатся пеламиды и лобаны. Требует опыта.',
+    x: 32, y: 63
+  },
+  {
+    id: 7,
+    name: '«Гнездо гориллы»',
+    short: 'Глубина 10–16 м · Open Water',
+    depth: '10–16 м',
+    level: 'Open Water',
+    duration: '50 мин',
+    photo: 'https://images.unsplash.com/photo-1626178793926-22b28830aa30?w=560&q=80',
+    desc: 'Нагромождение огромных валунов, образующих лабиринт ходов. Между камнями прячутся крупные мурены и осьминоги. Местные называют это место «гнездом» за причудливую форму скал.',
+    x: 43, y: 74
+  },
+  {
+    id: 8,
+    name: '«Белые камни»',
+    short: 'Глубина 8–20 м · Open Water',
+    depth: '8–20 м',
+    level: 'Open Water',
+    duration: '55 мин',
+    photo: 'https://images.unsplash.com/photo-1682687221038-404670f09ef1?w=560&q=80',
+    desc: 'Живописная группа белых известняковых скал. Под водой они образуют арки и тоннели. Место облюбовали ласточки хвостатые и каменные окуни. Прекрасная видимость до 20 м.',
+    x: 53, y: 77
+  },
+  {
+    id: 9,
+    name: 'Маяк',
+    short: 'Глубина 10–28 м · Advanced',
+    depth: '10–28 м',
+    level: 'Advanced',
+    duration: '60 мин',
+    photo: 'https://images.unsplash.com/photo-1601225998165-5d6ce9a4e29f?w=560&q=80',
+    desc: 'Погружение под основание старого маяка. Скальная стена уходит вертикально вниз. Богатая жизнь на всех горизонтах: от мидиевых банок до стай ставриды на глубине.',
+    x: 63, y: 75
+  },
+  {
+    id: 10,
+    name: 'Пещера Карадагского змея',
+    short: 'Глубина 18–30 м · Rescue+',
+    depth: '18–30 м',
+    level: 'Rescue+',
+    duration: '65 мин',
+    photo: 'https://images.unsplash.com/photo-1527004013197-933b32acee50?w=560&q=80',
+    desc: 'Легендарная подводная пещера с многовековой историей. Узкий вход ведёт в просторный грот с воздушным пузырём. Внутри обитают гигантские крабы и раки-богомолы. Только для опытных дайверов.',
+    x: 78, y: 60
+  },
+];
+</script>
+
+<script>
+// ─── STATE ───
+let activeId  = null;
+let calibMode = false;
+
+// ─── INIT ───
+function init() {
+  renderMarkers();
+  renderSidebar();
+  document.getElementById('pointCount').textContent = POINTS.length;
+
+  // close popup on Escape
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePopup(); });
+}
+
+// ─── MARKERS ───
+function renderMarkers() {
+  const layer = document.getElementById('markersLayer');
+  layer.innerHTML = '';
+  POINTS.forEach(p => {
+    const m = document.createElement('div');
+    m.className = 'marker';
+    m.id = 'marker-' + p.id;
+    m.style.left = p.x + '%';
+    m.style.top  = p.y + '%';
+    m.innerHTML = `
+      <div class="marker-dot"><span class="marker-num">${p.id}</span></div>
+      <div class="marker-label">${p.name}</div>
+    `;
+    m.addEventListener('click', e => { e.stopPropagation(); openPoint(p.id); });
+    layer.appendChild(m);
+  });
+}
+
+// ─── SIDEBAR ───
+function renderSidebar() {
+  const list = document.getElementById('sidebarList');
+  list.innerHTML = '';
+  POINTS.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'sidebar-item';
+    item.id = 'item-' + p.id;
+    item.innerHTML = `
+      <div class="item-num">${p.id}</div>
+      <div>
+        <div class="item-name">${p.name}</div>
+        <div class="item-sub">${p.short}</div>
+      </div>
+    `;
+    item.addEventListener('click', () => openPoint(p.id));
+    list.appendChild(item);
+  });
+}
+
+// ─── OPEN POINT ───
+function openPoint(id) {
+  const p = POINTS.find(x => x.id === id);
+  if (!p) return;
+
+  // update active marker
+  document.querySelectorAll('.marker').forEach(m => m.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+  document.getElementById('marker-' + id)?.classList.add('active');
+  document.getElementById('item-'   + id)?.classList.add('active');
+  activeId = id;
+
+  // scroll sidebar item into view
+  document.getElementById('item-' + id)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+
+  // build popup
+  const lvlColor = {
+    'Начинающий':'#22c55e','Open Water':'#3b82f6','Advanced':'#f59e0b',
+    'Rescue+':'#ef4444','Фридайвинг':'#a78bfa'
+  }[p.level] || 'var(--gold)';
+
+  document.getElementById('popupContent').innerHTML = `
+    ${p.photo
+      ? `<img src="${p.photo}" alt="${p.name}" class="popup-img" onerror="this.outerHTML='<div class=popup-img-placeholder><svg viewBox=\\'0 0 24 24\\'><path d=\\'M3 11l19-9-9 19-2-8-8-2z\\'/></svg></div>'">`
+      : `<div class="popup-img-placeholder"><svg viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></div>`
+    }
+    <div class="popup-body">
+      <div class="popup-num">${p.id}</div>
+      <h2 class="popup-title">${p.name}</h2>
+      <div class="popup-meta">
+        <span class="popup-tag" style="color:${lvlColor};border-color:${lvlColor}33;background:${lvlColor}11">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          ${p.level}
+        </span>
+        <span class="popup-tag">
+          <svg viewBox="0 0 24 24"><path d="M12 22V2M2 12l10 10 10-10"/></svg>
+          ${p.depth}
+        </span>
+        <span class="popup-tag">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          ${p.duration}
+        </span>
+      </div>
+      <p class="popup-desc">${p.desc}</p>
+      <a href="index.html#booking" class="popup-btn">Записаться на этот маршрут →</a>
+    </div>
+  `;
+
+  document.getElementById('popupOverlay').classList.add('open');
+}
+
+// ─── CLOSE POPUP ───
+function closePopup() {
+  document.getElementById('popupOverlay').classList.remove('open');
+  document.querySelectorAll('.marker').forEach(m => m.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+  activeId = null;
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('popupOverlay')) closePopup();
+}
+
+// ─── CALIBRATION MODE ───
+function toggleCalib() {
+  calibMode = !calibMode;
+  const btn = document.getElementById('calibBtn');
+  const bar = document.getElementById('calibBar');
+  const con = document.getElementById('mapContainer');
+  btn.classList.toggle('active', calibMode);
+  bar.classList.toggle('on', calibMode);
+  con.style.cursor = calibMode ? 'crosshair' : 'default';
+}
+
+document.getElementById('mapContainer').addEventListener('click', function(e) {
+  if (!calibMode) return;
+  // don't intercept marker clicks
+  if (e.target.closest('.marker')) return;
+
+  const rect = this.getBoundingClientRect();
+  const x = ((e.clientX - rect.left) / rect.width  * 100).toFixed(1);
+  const y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1);
+
+  const coords = document.getElementById('calibCoords');
+  coords.textContent = `x: ${x}   y: ${y}`;
+
+  // flash feedback
+  coords.style.background = 'rgba(200,168,75,.4)';
+  setTimeout(() => coords.style.background = '', 400);
+
+  // copy to clipboard
+  navigator.clipboard?.writeText(`x: ${x}, y: ${y}`).catch(() => {});
+});
+
+// ─── LOAD LOCAL IMAGE (drag & drop helper) ───
+function loadLocalImage(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  const placeholder = document.getElementById('mapPlaceholder');
+  const container   = document.getElementById('mapContainer');
+
+  const img = document.createElement('img');
+  img.src   = url;
+  img.className = 'map-img';
+  img.id    = 'mapImg';
+  img.alt   = 'Карта маршрутов';
+  placeholder.replaceWith(img);
+
+  // re-render markers on top
+  renderMarkers();
+}
+
+// ─── DRAG & DROP on container ───
+const mc = document.getElementById('mapContainer');
+mc.addEventListener('dragover', e => e.preventDefault());
+mc.addEventListener('drop', e => {
+  e.preventDefault();
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    const fakeEvt = { target: { files: [file] } };
+    loadLocalImage(fakeEvt);
+  }
+});
+
+// ─── START ───
+init();
+</script>
+</body>
+</html>

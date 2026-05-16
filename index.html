@@ -325,6 +325,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:56px 0 32
       <a href="#team">Инструкторы</a>
       <a href="#prices">Цены</a>
       <a href="#reviews">Отзывы</a>
+      <a href="map.html" style="color:var(--gold);font-weight:600">🗺 Маршруты</a>
     </nav>
     <div class="nav-right">
       <span class="nav-phone">+7 (800) 123-45-67</span>
@@ -856,6 +857,30 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:56px 0 32
           <button type="submit" class="form-sub-btn" id="submitBtn">Отправить заявку →</button>
         </form>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP PROMO -->
+<section style="padding:100px 0;background:var(--bg2)">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center">
+      <div class="reveal">
+        <div class="tag">Маршруты погружений</div>
+        <h2 class="h2">10 уникальных точек на интерактивной карте</h2>
+        <div class="divider"></div>
+        <p class="sub">Изучи каждый маршрут до погружения: глубина, уровень подготовки, фото и описание — всё в одном месте.</p>
+        <a href="map.html" class="btn btn-gold" style="margin-top:32px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Открыть карту маршрутов
+        </a>
+      </div>
+      <a href="map.html" class="reveal d1" style="display:block;border-radius:20px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 48px rgba(0,0,0,.5);transition:.3s;position:relative">
+        <img src="map-bg.webp" alt="Карта маршрутов" style="width:100%;display:block">
+        <div style="position:absolute;inset:0;background:rgba(8,8,15,.3);display:flex;align-items:center;justify-content:center;opacity:0;transition:.3s" onmouseenter="this.style.opacity=1" onmouseleave="this.style.opacity=0">
+          <span style="background:rgba(8,8,15,.85);color:var(--gold);font-weight:700;font-size:15px;padding:14px 28px;border-radius:100px;border:1px solid rgba(200,168,75,.4)">Открыть карту →</span>
+        </div>
+      </a>
     </div>
   </div>
 </section>
