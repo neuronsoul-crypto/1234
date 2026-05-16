@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Дайвинг-Волшебник — Школа подводного плавания</title>
+  <meta name="description" content="Школа дайвинга «Дайвинг-Волшебник» — профессиональное обучение дайвингу, курсы PADI, погружения для начинающих и опытных дайверов." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ocean-deep:   #020d1a;
+      --ocean-dark:   #031a30;
+      --ocean-mid:    #0a3a5c;
+      --ocean-light:  #1565c0;
+      --cyan:         #00b4d8;
+      --cyan-light:   #48cae4;
+      --gold:         #f4a100;
+      --white:        #ffffff;
+      --gray-light:   #f0f4f8;
+      --gray:         #7a8fa6;
+      --text:         #1a2a3a;
+      --radius:       12px;
+      --shadow:       0 8px 32px rgba(0,0,0,.18);
+      --transition:   .35s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+
+    /* ── UTILITY ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px,4vw,44px); color: var(--ocean-dark); margin-bottom: 16px; }
+    .section-sub { font-size: 16px; color: var(--gray); max-width: 560px; line-height: 1.7; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 15px 34px; border-radius: 50px; font-family: inherit; font-weight: 700; font-size: 15px; cursor: pointer; text-decoration: none; transition: var(--transition); border: none; }
+    .btn-primary { background: linear-gradient(135deg,var(--cyan),var(--ocean-light)); color: #fff; box-shadow: 0 6px 24px rgba(0,180,216,.4); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,180,216,.55); }
+    .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.6); }
+    .btn-outline:hover { background: rgba(255,255,255,.12); border-color: #fff; }
+    .tag { display: inline-block; padding: 5px 14px; background: rgba(0,180,216,.12); color: var(--cyan); border-radius: 50px; font-size: 13px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; margin-bottom: 14px; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 18px 0;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+    nav.scrolled { background: rgba(2,13,26,.92); backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(0,0,0,.4); padding: 12px 0; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-icon { width: 44px; height: 44px; }
+    .logo-text { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; line-height: 1.1; }
+    .logo-text span { display: block; font-size: 11px; font-family: 'Montserrat', sans-serif; font-weight: 500; color: var(--cyan-light); letter-spacing: 1px; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; color: rgba(255,255,255,.8); font-size: 14px; font-weight: 500; transition: color var(--transition); }
+    .nav-links a:hover { color: var(--cyan-light); }
+    .nav-cta { background: var(--cyan); color: #fff; padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 14px; text-decoration: none; transition: var(--transition); white-space: nowrap; }
+    .nav-cta:hover { background: var(--cyan-light); transform: translateY(-1px); }
+    .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .burger span { display: block; width: 26px; height: 2px; background: #fff; border-radius: 2px; transition: var(--transition); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: url('https://images.unsplash.com/photo-1682687220067-dced9a881b56?w=1800&q=80') center/cover no-repeat;
+      position: relative;
+      display: flex; align-items: center;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(2,13,26,.88) 0%, rgba(3,26,48,.7) 55%, rgba(21,101,192,.35) 100%);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 720px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,180,216,.2); border: 1px solid rgba(0,180,216,.4); border-radius: 50px; padding: 8px 18px; margin-bottom: 28px; color: var(--cyan-light); font-size: 13px; font-weight: 600; letter-spacing: .5px; }
+    .hero-badge::before { content: ''; width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(1.3)} }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(38px,6vw,72px); color: #fff; line-height: 1.1; margin-bottom: 24px; }
+    .hero h1 em { font-style: italic; color: var(--cyan-light); }
+    .hero p { font-size: 18px; color: rgba(255,255,255,.78); line-height: 1.75; margin-bottom: 40px; max-width: 560px; }
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-stats { position: absolute; bottom: 48px; left: 0; right: 0; }
+    .hero-stats .container { display: flex; gap: 0; }
+    .stat { flex: 1; text-align: center; padding: 22px 16px; background: rgba(255,255,255,.07); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.1); }
+    .stat:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+    .stat:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+    .stat + .stat { border-left: none; }
+    .stat-num { font-size: 36px; font-weight: 800; color: var(--cyan-light); line-height: 1; }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,.65); margin-top: 6px; }
+    .scroll-hint { position: absolute; bottom: 140px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,.45); font-size: 12px; }
+    .scroll-hint::after { content:''; width:1px; height:40px; background:rgba(255,255,255,.25); animation: scrollLine 2s infinite; }
+    @keyframes scrollLine { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1)} 100%{transform:scaleY(0);transform-origin:bottom} }
+
+    /* ── WAVE DIVIDER ── */
+    .wave { display: block; width: 100%; line-height: 0; }
+
+    /* ── ABOUT ── */
+    .about { padding: 100px 0; background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .about-img-wrap { position: relative; }
+    .about-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 20px; box-shadow: var(--shadow); }
+    .about-badge { position: absolute; bottom: -24px; right: -24px; background: linear-gradient(135deg,var(--ocean-light),var(--cyan)); color: #fff; border-radius: 16px; padding: 22px 28px; box-shadow: 0 12px 32px rgba(21,101,192,.4); }
+    .about-badge strong { display: block; font-size: 42px; font-weight: 800; line-height: 1; }
+    .about-badge span { font-size: 13px; opacity: .85; }
+    .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px; }
+    .feature-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--gray-light); border-radius: var(--radius); font-size: 14px; font-weight: 600; color: var(--ocean-dark); }
+    .feature-item svg { flex-shrink: 0; color: var(--cyan); }
+
+    /* ── COURSES ── */
+    .courses { padding: 100px 0; background: var(--gray-light); }
+    .courses-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; gap: 24px; }
+    .courses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .course-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,.08); transition: var(--transition); }
+    .course-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .course-img { width: 100%; height: 210px; object-fit: cover; }
+    .course-body { padding: 28px; }
+    .course-level { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--cyan); margin-bottom: 10px; }
+    .course-title { font-size: 20px; font-weight: 700; color: var(--ocean-dark); margin-bottom: 10px; line-height: 1.3; }
+    .course-desc { font-size: 14px; color: var(--gray); line-height: 1.65; margin-bottom: 20px; }
+    .course-meta { display: flex; gap: 16px; padding-top: 16px; border-top: 1px solid #eee; }
+    .course-meta-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--gray); }
+    .course-meta-item svg { color: var(--cyan); }
+    .course-footer { display: flex; align-items: center; justify-content: space-between; padding: 20px 28px; background: var(--gray-light); }
+    .course-price { font-size: 22px; font-weight: 800; color: var(--ocean-dark); }
+    .course-price span { font-size: 13px; font-weight: 500; color: var(--gray); }
+
+    /* ── WHY US ── */
+    .why { padding: 100px 0; background: linear-gradient(135deg, var(--ocean-deep) 0%, var(--ocean-dark) 60%, var(--ocean-mid) 100%); position: relative; overflow: hidden; }
+    .why::before { content:''; position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1400&q=60') center/cover no-repeat; opacity:.08; }
+    .why .section-title { color: #fff; position: relative; }
+    .why .section-sub { color: rgba(255,255,255,.6); position: relative; }
+    .why-header { margin-bottom: 64px; }
+    .why-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; position: relative; }
+    .why-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 36px 28px; transition: var(--transition); backdrop-filter: blur(6px); }
+    .why-card:hover { background: rgba(0,180,216,.12); border-color: rgba(0,180,216,.4); transform: translateY(-4px); }
+    .why-icon { width: 60px; height: 60px; background: linear-gradient(135deg,rgba(0,180,216,.2),rgba(0,180,216,.05)); border: 1px solid rgba(0,180,216,.3); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 22px; }
+    .why-card h3 { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .why-card p { font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.65; }
+
+    /* ── INSTRUCTORS ── */
+    .instructors { padding: 100px 0; background: #fff; }
+    .instructors-header { text-align: center; margin-bottom: 60px; }
+    .instructors-header .section-sub { margin: 0 auto; }
+    .instructors-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+    .instructor-card { text-align: center; }
+    .instructor-photo { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; border: 4px solid var(--cyan-light); box-shadow: 0 8px 24px rgba(0,180,216,.25); }
+    .instructor-name { font-size: 20px; font-weight: 700; color: var(--ocean-dark); margin-bottom: 4px; }
+    .instructor-role { font-size: 14px; color: var(--cyan); font-weight: 600; margin-bottom: 12px; }
+    .instructor-bio { font-size: 14px; color: var(--gray); line-height: 1.65; margin-bottom: 20px; }
+    .instructor-certs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .cert { padding: 4px 12px; background: var(--gray-light); border-radius: 50px; font-size: 12px; font-weight: 600; color: var(--ocean-mid); }
+
+    /* ── GALLERY ── */
+    .gallery { padding: 100px 0; background: var(--gray-light); }
+    .gallery-header { margin-bottom: 48px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(4,1fr); grid-template-rows: repeat(2,220px); gap: 16px; }
+    .gallery-item { border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .gallery-item:hover img { transform: scale(1.07); }
+    .gallery-item::after { content:''; position:absolute; inset:0; background:rgba(0,0,0,.25); opacity:0; transition: var(--transition); }
+    .gallery-item:hover::after { opacity:1; }
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item.tall { grid-row: span 2; }
+
+    /* ── PRICES ── */
+    .prices { padding: 100px 0; background: #fff; }
+    .prices-header { text-align: center; margin-bottom: 60px; }
+    .prices-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; align-items: start; }
+    .price-card { border-radius: 24px; overflow: hidden; border: 2px solid #e8eef4; transition: var(--transition); }
+    .price-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .price-card.featured { border-color: var(--cyan); box-shadow: 0 8px 32px rgba(0,180,216,.2); }
+    .price-header { padding: 36px 32px 28px; background: #fff; }
+    .price-card.featured .price-header { background: linear-gradient(135deg,var(--ocean-dark),var(--ocean-mid)); }
+    .price-name { font-size: 20px; font-weight: 700; color: var(--ocean-dark); margin-bottom: 8px; }
+    .price-card.featured .price-name { color: #fff; }
+    .price-desc { font-size: 14px; color: var(--gray); }
+    .price-card.featured .price-desc { color: rgba(255,255,255,.65); }
+    .price-amount { font-size: 48px; font-weight: 800; color: var(--ocean-dark); line-height: 1; margin: 20px 0 4px; }
+    .price-card.featured .price-amount { color: var(--cyan-light); }
+    .price-period { font-size: 14px; color: var(--gray); }
+    .price-card.featured .price-period { color: rgba(255,255,255,.55); }
+    .price-body { padding: 28px 32px 36px; }
+    .price-features { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+    .price-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text); line-height: 1.5; }
+    .price-features li::before { content:''; display:block; width:18px; height:18px; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%2300b4d8'/%3E%3Cpath d='M6 10l3 3 5-5' stroke='%23fff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/cover; flex-shrink:0; margin-top:1px; }
+    .price-btn { display: block; text-align: center; padding: 15px; border-radius: 50px; font-weight: 700; font-size: 15px; text-decoration: none; transition: var(--transition); }
+    .price-btn-outline { border: 2px solid var(--ocean-light); color: var(--ocean-light); }
+    .price-btn-outline:hover { background: var(--ocean-light); color: #fff; }
+    .price-btn-fill { background: linear-gradient(135deg,var(--cyan),var(--ocean-light)); color: #fff; box-shadow: 0 6px 20px rgba(0,180,216,.35); }
+    .price-btn-fill:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,180,216,.5); }
+    .featured-badge { display: inline-block; background: var(--gold); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; padding: 4px 14px; border-radius: 50px; margin-bottom: 14px; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { padding: 100px 0; background: var(--gray-light); }
+    .testimonials-header { text-align: center; margin-bottom: 56px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+    .review-card { background: #fff; border-radius: 20px; padding: 32px; box-shadow: 0 4px 16px rgba(0,0,0,.07); transition: var(--transition); }
+    .review-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .stars { display: flex; gap: 3px; margin-bottom: 16px; }
+    .star { width: 18px; height: 18px; color: var(--gold); }
+    .review-text { font-size: 15px; color: var(--text); line-height: 1.7; margin-bottom: 24px; font-style: italic; }
+    .review-author { display: flex; align-items: center; gap: 14px; }
+    .review-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+    .review-name { font-weight: 700; font-size: 15px; color: var(--ocean-dark); }
+    .review-date { font-size: 13px; color: var(--gray); }
+
+    /* ── FAQ ── */
+    .faq { padding: 100px 0; background: #fff; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { border: 1px solid #e4eaf2; border-radius: var(--radius); overflow: hidden; }
+    .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; cursor: pointer; font-weight: 600; font-size: 15px; color: var(--ocean-dark); user-select: none; transition: background var(--transition); }
+    .faq-q:hover { background: var(--gray-light); }
+    .faq-icon { flex-shrink: 0; width: 24px; height: 24px; background: var(--gray-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+    .faq-item.open .faq-icon { background: var(--cyan); transform: rotate(45deg); }
+    .faq-icon svg { color: var(--gray); }
+    .faq-item.open .faq-icon svg { color: #fff; }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; font-size: 14px; color: var(--gray); line-height: 1.7; padding: 0 24px; }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 24px 20px; }
+    .faq-img { border-radius: 20px; overflow: hidden; }
+    .faq-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; }
+
+    /* ── CONTACT ── */
+    .contact { padding: 100px 0; background: linear-gradient(135deg, var(--ocean-deep) 0%, var(--ocean-dark) 100%); position: relative; overflow: hidden; }
+    .contact::before { content:''; position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1400&q=50') center/cover no-repeat; opacity:.07; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; position: relative; }
+    .contact .section-title { color: #fff; }
+    .contact .section-sub { color: rgba(255,255,255,.6); }
+    .contact-info { display: flex; flex-direction: column; gap: 24px; margin-top: 36px; }
+    .contact-item { display: flex; align-items: flex-start; gap: 16px; }
+    .contact-icon { width: 48px; height: 48px; background: rgba(0,180,216,.15); border: 1px solid rgba(0,180,216,.3); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-icon svg { color: var(--cyan); }
+    .contact-item-title { font-weight: 600; color: #fff; margin-bottom: 4px; font-size: 15px; }
+    .contact-item-val { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.5; }
+    .contact-item-val a { color: var(--cyan-light); text-decoration: none; }
+    .social-links { display: flex; gap: 12px; margin-top: 36px; }
+    .social-btn { width: 44px; height: 44px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.7); text-decoration: none; transition: var(--transition); font-size: 18px; }
+    .social-btn:hover { background: var(--cyan); border-color: var(--cyan); color: #fff; transform: translateY(-2px); }
+    .contact-form { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 24px; padding: 40px; backdrop-filter: blur(10px); }
+    .form-title { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .form-sub { font-size: 14px; color: rgba(255,255,255,.5); margin-bottom: 28px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .form-group label { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.7); }
+    .form-group input, .form-group select, .form-group textarea {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      border-radius: 10px; padding: 13px 16px; font-family: inherit; font-size: 14px;
+      color: #fff; transition: border var(--transition); outline: none; width: 100%;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,.35); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--cyan); }
+    .form-group select option { background: var(--ocean-dark); color: #fff; }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit { width: 100%; padding: 16px; background: linear-gradient(135deg,var(--cyan),var(--ocean-light)); color: #fff; border: none; border-radius: 50px; font-family: inherit; font-weight: 700; font-size: 16px; cursor: pointer; transition: var(--transition); margin-top: 8px; }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,180,216,.45); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--ocean-deep); padding: 60px 0 28px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-about p { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.7; margin: 16px 0 24px; }
+    .footer-title { font-size: 14px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.5); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--cyan-light); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.07); }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
+    .footer-copy a { color: rgba(255,255,255,.5); text-decoration: none; }
+
+    /* ── FLOATING CTA ── */
+    .float-cta { position: fixed; bottom: 32px; right: 32px; z-index: 99; display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+    .float-btn { display: flex; align-items: center; gap: 10px; padding: 14px 22px; background: var(--cyan); color: #fff; border-radius: 50px; font-weight: 700; font-size: 14px; text-decoration: none; box-shadow: 0 6px 20px rgba(0,180,216,.5); transition: var(--transition); }
+    .float-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,180,216,.6); }
+    .float-btn.phone { background: #25d366; box-shadow: 0 6px 20px rgba(37,211,102,.4); }
+    .float-btn.phone:hover { box-shadow: 0 10px 30px rgba(37,211,102,.5); }
+
+    /* ── ANIMATIONS ── */
+    .fade-in { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-delay-1 { transition-delay: .1s; }
+    .fade-in-delay-2 { transition-delay: .2s; }
+    .fade-in-delay-3 { transition-delay: .3s; }
+    .fade-in-delay-4 { transition-delay: .4s; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px) {
+      .courses-grid, .why-grid { grid-template-columns: repeat(2,1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .gallery-grid { grid-template-columns: repeat(3,1fr); }
+    }
+    @media(max-width:768px) {
+      .nav-links, .nav-cta { display: none; }
+      .burger { display: flex; }
+      .about-grid, .faq-grid, .contact-grid { grid-template-columns: 1fr; }
+      .about-badge { right: 0; bottom: -16px; }
+      .courses-grid, .instructors-grid, .prices-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: auto; }
+      .gallery-item.wide, .gallery-item.tall { grid-column: auto; grid-row: auto; }
+      .hero-stats .container { flex-direction: column; gap: 0; }
+      .stat { border-radius: 0; border-left: none; border-top: none; }
+      .stat:first-child { border-radius: var(--radius) var(--radius) 0 0; border-top: 1px solid rgba(255,255,255,.1); }
+      .stat:last-child { border-radius: 0 0 var(--radius) var(--radius); }
+      .form-row { grid-template-columns: 1fr; }
+      .courses-header { flex-direction: column; align-items: flex-start; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+    @media(max-width:480px) {
+      .why-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .float-cta { bottom: 20px; right: 16px; }
+      .hero-buttons { flex-direction: column; }
+    }
+
+    /* mobile nav */
+    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--ocean-deep); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-size: 22px; font-weight: 700; color: rgba(255,255,255,.85); text-decoration: none; transition: color var(--transition); }
+    .mobile-nav a:hover { color: var(--cyan-light); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; background: none; border: none; cursor: pointer; color: #fff; font-size: 32px; }
+  </style>
+</head>
+<body>
+
+<!-- ══ MOBILE NAV ══ -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose" aria-label="Закрыть">✕</button>
+  <a href="#about">О нас</a>
+  <a href="#courses">Курсы</a>
+  <a href="#prices">Цены</a>
+  <a href="#instructors">Инструкторы</a>
+  <a href="#contact">Контакты</a>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <svg class="logo-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="22" cy="22" r="22" fill="url(#lg1)"/>
+        <ellipse cx="22" cy="26" rx="10" ry="6" fill="rgba(255,255,255,.15)"/>
+        <path d="M14 22c2-4 6-7 8-7s6 3 8 7" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="22" cy="16" r="3" fill="white"/>
+        <path d="M18 30c0 0 2 2 4 2s4-2 4-2" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="28" cy="19" r="1.5" fill="rgba(255,255,255,.7)"/>
+        <circle cx="30" cy="23" r="1" fill="rgba(255,255,255,.5)"/>
+        <circle cx="26" cy="25" r="1" fill="rgba(255,255,255,.5)"/>
+        <defs>
+          <linearGradient id="lg1" x1="0" y1="0" x2="44" y2="44">
+            <stop offset="0%" stop-color="#0a3a5c"/>
+            <stop offset="100%" stop-color="#00b4d8"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="logo-text">
+        Дайвинг-Волшебник
+        <span>Школа подводного плавания</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">О нас</a></li>
+      <li><a href="#courses">Курсы</a></li>
+      <li><a href="#prices">Цены</a></li>
+      <li><a href="#instructors">Инструкторы</a></li>
+      <li><a href="#gallery">Галерея</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Записаться</a>
+    <button class="burger" id="burgerBtn" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">Официальный центр PADI</div>
+      <h1>Открой мир<br/><em>подводного волшебства</em></h1>
+      <p>Профессиональное обучение дайвингу для взрослых и детей. Погружения в бассейне и открытой воде, экспедиции, аренда снаряжения.</p>
+      <div class="hero-buttons">
+        <a href="#courses" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Выбрать курс
+        </a>
+        <a href="#about" class="btn btn-outline">Узнать больше</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">Листайте вниз</div>
+
+  <div class="hero-stats">
+    <div class="container">
+      <div class="stat">
+        <div class="stat-num">12+</div>
+        <div class="stat-label">лет опыта</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3 200+</div>
+        <div class="stat-label">обученных дайверов</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">18</div>
+        <div class="stat-label">курсов PADI</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4.9★</div>
+        <div class="stat-label">рейтинг школы</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap fade-in">
+        <img src="https://images.unsplash.com/photo-1682687221038-404670f09ef1?w=800&q=80" alt="Дайвинг под водой" class="about-img" />
+        <div class="about-badge">
+          <strong>12+</strong>
+          <span>лет в дайвинге</span>
+        </div>
+      </div>
+      <div class="fade-in fade-in-delay-1">
+        <div class="tag">О школе</div>
+        <h2 class="section-title">Ваш проводник в подводный мир</h2>
+        <p class="section-sub">«Дайвинг-Волшебник» — это не просто школа, это целое сообщество людей, влюблённых в море. Мы обучаем дайвингу с 2012 года и гордимся тысячами выпускников по всей стране.</p>
+        <p style="margin-top:16px;font-size:15px;color:var(--gray);line-height:1.75;">Наши инструкторы — сертифицированные PADI профессионалы с опытом погружений в Красном, Средиземном, Карибском морях и на Мальдивах. Мы используем современное оборудование ведущих брендов и строго соблюдаем международные стандарты безопасности.</p>
+        <div class="about-features">
+          <div class="feature-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Безопасность прежде всего
+          </div>
+          <div class="feature-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/></svg>
+            Малые группы (до 6 чел.)
+          </div>
+          <div class="feature-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            Бассейн + открытая вода
+          </div>
+          <div class="feature-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Сертификат PADI
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COURSES ══ -->
+<section class="courses" id="courses">
+  <div class="container">
+    <div class="courses-header">
+      <div>
+        <div class="tag">Программы обучения</div>
+        <h2 class="section-title">Курсы для любого уровня</h2>
+        <p class="section-sub">От первого погружения до уровня профессионального инструктора — у нас есть курс для вас.</p>
+      </div>
+      <a href="#prices" class="btn btn-primary" style="white-space:nowrap">Смотреть цены</a>
+    </div>
+    <div class="courses-grid">
+
+      <div class="course-card fade-in">
+        <img src="https://images.unsplash.com/photo-1559825481-12a05cc00344?w=600&q=80" alt="Пробное погружение" class="course-img" />
+        <div class="course-body">
+          <div class="course-level">Начинающий</div>
+          <h3 class="course-title">Discover Scuba Diving</h3>
+          <p class="course-desc">Первое знакомство с подводным миром под руководством инструктора. Никаких предварительных навыков не требуется.</p>
+          <div class="course-meta">
+            <div class="course-meta-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              1 день
+            </div>
+            <div class="course-meta-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              до 6 чел.
+            </div>
+          </div>
+        </div>
+        <div class="course-footer">
+          <div class="course-price">3 500 ₽ <span>/ чел.</span></div>
+          <a href="#contact" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Записаться</a>
+        </div>
+      </div>
+
+      <div class="course-card fade-in fade-in-delay-1">
+        <img src="https://images.unsplash.com/photo-1527004013197-933b32acee50?w=600&q=80" alt="Open Water курс" class="course-img" />
+        <div class="course-body">
+          <div class="course-level">Базовый</div>
+          <h3 class="course-title">PADI Open Water Diver</h3>
+          <p class="course-desc">Самый популярный сертификационный курс в мире. Вы получите международный сертификат, действующий на всю жизнь.</p>
+          <div class="course-meta">
+            <div class="course-meta-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              4–5 дней
+            </div>
+            <div class="course-meta-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              до 4 чел.
+            </div>
+          </div>
+        </div>
+        <div class="course-footer">
+          <div class="course-price">18 000 ₽ <span>/ чел.</span></div>
+          <a href="#contact" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Записаться</a>
+        </div>
+      </div>
+
+      <div class="course-card fade-in fade-in-delay-2">
+        <img src="https://images.unsplash.com/photo-1551244072-5d12893278bc?w=600&q=80" alt="Advanced курс" class="course-img" />
+        <div class="course-body">
+          <div class="course-level">Продвинутый</div>
+          <h3 class="course-title">PADI Advanced Open Water</h3>
+          <p class="course-desc">Расширьте горизонты: ночные погружения, навигация под водой, глубокий дайвинг и специальные дисциплины.</p>
+          <div class="course-meta">
+            <div class="course-meta-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              2–3 дня
+            </div>
+            <div class="course-meta-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              до 4 чел.
+            </div>
+          </div>
+        </div>
+        <div class="course-footer">
+          <div class="course-price">22 000 ₽ <span>/ чел.</span></div>
+          <a href="#contact" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Записаться</a>
+        </div>
+      </div>
+
+      <div class="course-card fade-in">
+        <img src="https://images.unsplash.com/photo-1601225998165-5d6ce9a4e29f?w=600&q=80" alt="Rescue Diver" class="course-img" />
+        <div class="course-body">
+          <div class="course-level">Спасатель</div>
+          <h3 class="course-title">PADI Rescue Diver</h3>
+          <p class="course-desc">Научитесь предотвращать и управлять проблемами под водой. Один из самых ценных курсов для любого дайвера.</p>
+          <div class="course-meta">
+            <div class="course-meta-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              3–5 дней
+            </div>
+            <div class="course-meta-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              до 4 чел.
+            </div>
+          </div>
+        </div>
+        <div class="course-footer">
+          <div class="course-price">28 000 ₽ <span>/ чел.</span></div>
+          <a href="#contact" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Записаться</a>
+        </div>
+      </div>
+
+      <div class="course-card fade-in fade-in-delay-1">
+        <img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=600&q=80" alt="Детский дайвинг" class="course-img" />
+        <div class="course-body">
+          <div class="course-level">Дети 8–15 лет</div>
+          <h3 class="course-title">PADI Bubblemaker / Seal Team</h3>
+          <p class="course-desc">Безопасное и весёлое знакомство детей с подводным миром. Занятия в бассейне с глубиной не более 2 метров.</p>
+          <div class="course-meta">
+            <div class="course-meta-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              1–2 дня
+            </div>
+            <div class="course-meta-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              до 4 чел.
+            </div>
+          </div>
+        </div>
+        <div class="course-footer">
+          <div class="course-price">4 500 ₽ <span>/ чел.</span></div>
+          <a href="#contact" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Записаться</a>
+        </div>
+      </div>
+
+      <div class="course-card fade-in fade-in-delay-2">
+        <img src="https://images.unsplash.com/photo-1626178793926-22b28830aa30?w=600&q=80" alt="Freediving" class="course-img" />
+        <div class="course-body">
+          <div class="course-level">Фридайвинг</div>
+          <h3 class="course-title">AIDA Freediving Level 1–2</h3>
+          <p class="course-desc">Погружение без акваланга. Медитация, задержка дыхания, знакомство с техникой расслабления и безопасности.</p>
+          <div class="course-meta">
+            <div class="course-meta-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              2–3 дня
+            </div>
+            <div class="course-meta-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              до 6 чел.
+            </div>
+          </div>
+        </div>
+        <div class="course-footer">
+          <div class="course-price">16 000 ₽ <span>/ чел.</span></div>
+          <a href="#contact" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Записаться</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY US ══ -->
+<section class="why">
+  <div class="container">
+    <div class="why-header">
+      <div class="tag" style="color:#7dd8f0;background:rgba(0,180,216,.15)">Наши преимущества</div>
+      <h2 class="section-title">Почему выбирают нас</h2>
+      <p class="section-sub">Мы создаём не просто обучение — мы создаём незабываемый опыт.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-in">
+        <div class="why-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00b4d8" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Безопасность</h3>
+        <p>Современное оборудование, регулярное ТО, страховка для каждого ученика, протоколы безопасности PADI.</p>
+      </div>
+      <div class="why-card fade-in fade-in-delay-1">
+        <div class="why-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00b4d8" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <h3>Профи-инструкторы</h3>
+        <p>Все инструкторы — сертифицированные PADI Master Scuba Diver Trainers с опытом 10+ лет.</p>
+      </div>
+      <div class="why-card fade-in fade-in-delay-2">
+        <div class="why-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00b4d8" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        </div>
+        <h3>Международный сертификат</h3>
+        <p>Сертификат PADI признаётся в 185 странах мира — ваши навыки работают везде.</p>
+      </div>
+      <div class="why-card fade-in fade-in-delay-3">
+        <div class="why-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00b4d8" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3>Малые группы</h3>
+        <p>Не более 4–6 человек в группе. Каждый получает индивидуальное внимание инструктора.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ INSTRUCTORS ══ -->
+<section class="instructors" id="instructors">
+  <div class="container">
+    <div class="instructors-header">
+      <div class="tag">Команда</div>
+      <h2 class="section-title">Наши инструкторы</h2>
+      <p class="section-sub">Опытные профессионалы, которые сделают ваше обучение безопасным и незабываемым.</p>
+    </div>
+    <div class="instructors-grid">
+      <div class="instructor-card fade-in">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" alt="Алексей Морозов" class="instructor-photo" />
+        <div class="instructor-name">Алексей Морозов</div>
+        <div class="instructor-role">Главный инструктор · PADI MSDT</div>
+        <p class="instructor-bio">Более 5 000 погружений, инструктор PADI с 2008 года. Специализация: технический дайвинг, ребризеры, подводная фотография.</p>
+        <div class="instructor-certs">
+          <span class="cert">PADI MSDT</span>
+          <span class="cert">EFR</span>
+          <span class="cert">Nitrox</span>
+        </div>
+      </div>
+      <div class="instructor-card fade-in fade-in-delay-1">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80" alt="Мария Лебедева" class="instructor-photo" />
+        <div class="instructor-name">Мария Лебедева</div>
+        <div class="instructor-role">Инструктор · PADI IDC Staff</div>
+        <p class="instructor-bio">Специалист по детскому дайвингу и фридайвингу. AIDA 3 ⭐, любитель морских черепах и коралловых рифов.</p>
+        <div class="instructor-certs">
+          <span class="cert">PADI IDC Staff</span>
+          <span class="cert">AIDA 3★</span>
+          <span class="cert">Junior</span>
+        </div>
+      </div>
+      <div class="instructor-card fade-in fade-in-delay-2">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80" alt="Дмитрий Волков" class="instructor-photo" />
+        <div class="instructor-name">Дмитрий Волков</div>
+        <div class="instructor-role">Инструктор · PADI Divemaster</div>
+        <p class="instructor-bio">Участник экспедиций на Байкал и Баренцево море. Специалист по холодноводному дайвингу и подводной видеосъёмке.</p>
+        <div class="instructor-certs">
+          <span class="cert">PADI DM</span>
+          <span class="cert">Drysuit</span>
+          <span class="cert">Ice Diving</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GALLERY ══ -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="gallery-header">
+      <div class="tag">Фотогалерея</div>
+      <h2 class="section-title">Моменты под водой</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide">
+        <img src="https://images.unsplash.com/photo-1682687220067-dced9a881b56?w=800&q=80" alt="Дайвинг" />
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=400&q=80" alt="Коралловый риф" />
+      </div>
+      <div class="gallery-item tall">
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&q=80" alt="Подводное фото" />
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=400&q=80" alt="Фридайвинг" />
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1601225998165-5d6ce9a4e29f?w=400&q=80" alt="Обучение" />
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1626178793926-22b28830aa30?w=400&q=80" alt="Море" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRICES ══ -->
+<section class="prices" id="prices">
+  <div class="container">
+    <div class="prices-header">
+      <div class="tag">Стоимость</div>
+      <h2 class="section-title">Прозрачные цены</h2>
+      <p class="section-sub" style="margin:0 auto">Все цены включают аренду снаряжения, учебные материалы и регистрацию в PADI.</p>
+    </div>
+    <div class="prices-grid">
+      <div class="price-card fade-in">
+        <div class="price-header">
+          <div class="price-name">Старт</div>
+          <div class="price-desc">Для тех, кто только начинает</div>
+          <div class="price-amount">3 500</div>
+          <div class="price-period">₽ за занятие</div>
+        </div>
+        <div class="price-body">
+          <ul class="price-features">
+            <li>Пробное погружение в бассейне</li>
+            <li>Аренда снаряжения включена</li>
+            <li>Инструктаж по безопасности</li>
+            <li>Подводные фото на память</li>
+          </ul>
+          <a href="#contact" class="price-btn price-btn-outline">Записаться</a>
+        </div>
+      </div>
+
+      <div class="price-card featured fade-in fade-in-delay-1">
+        <div class="price-header">
+          <div class="featured-badge">Популярный</div>
+          <div class="price-name">Open Water</div>
+          <div class="price-desc">Полный курс с сертификатом PADI</div>
+          <div class="price-amount">18 000</div>
+          <div class="price-period">₽ за полный курс</div>
+        </div>
+        <div class="price-body">
+          <ul class="price-features">
+            <li>5 занятий в бассейне</li>
+            <li>4 погружения в открытой воде</li>
+            <li>Электронные учебные материалы</li>
+            <li>Сертификат PADI (пожизненный)</li>
+            <li>Аренда снаряжения на весь курс</li>
+            <li>Страховка на время обучения</li>
+          </ul>
+          <a href="#contact" class="price-btn price-btn-fill">Записаться сейчас</a>
+        </div>
+      </div>
+
+      <div class="price-card fade-in fade-in-delay-2">
+        <div class="price-header">
+          <div class="price-name">Профи</div>
+          <div class="price-desc">Advanced + Rescue комплект</div>
+          <div class="price-amount">45 000</div>
+          <div class="price-period">₽ за оба курса</div>
+        </div>
+        <div class="price-body">
+          <ul class="price-features">
+            <li>PADI Advanced Open Water</li>
+            <li>PADI Rescue Diver</li>
+            <li>EFR (первая помощь)</li>
+            <li>2 сертификата PADI</li>
+            <li>Доступ к клубным погружениям</li>
+          </ul>
+          <a href="#contact" class="price-btn price-btn-outline">Записаться</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section class="testimonials" id="reviews">
+  <div class="container">
+    <div class="testimonials-header">
+      <div class="tag">Отзывы</div>
+      <h2 class="section-title">Что говорят наши ученики</h2>
+      <p class="section-sub" style="margin:0 auto">Более 3 200 довольных студентов по всей России и за рубежом.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="review-card fade-in">
+        <div class="stars">
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="review-text">«Прошла курс Open Water — это было лучшее решение в моей жизни! Алексей объяснил всё чётко и терпеливо. Уже записалась на Advanced. Рекомендую всем без исключения!»</p>
+        <div class="review-author">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Анна К." class="review-avatar" />
+          <div>
+            <div class="review-name">Анна К.</div>
+            <div class="review-date">Март 2025 · Open Water Diver</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card fade-in fade-in-delay-1">
+        <div class="stars">
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="review-text">«Привёл сына 9 лет. Мария просто волшебник с детьми — он уже на третьем занятии не хотел вылезать из воды. Теперь сам прошу записать меня на взрослый курс.»</p>
+        <div class="review-author">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" alt="Игорь С." class="review-avatar" />
+          <div>
+            <div class="review-name">Игорь С.</div>
+            <div class="review-date">Январь 2025 · Детский дайвинг</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card fade-in fade-in-delay-2">
+        <div class="stars">
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="review-text">«Дмитрий провёл нас на зимнее погружение подо льдом на Байкале — незабываемо! Профессиональная подготовка, отличная организация. Возвращаемся каждый год.»</p>
+        <div class="review-author">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80" alt="Екатерина М." class="review-avatar" />
+          <div>
+            <div class="review-name">Екатерина М.</div>
+            <div class="review-date">Февраль 2025 · Ice Diving</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-grid">
+      <div>
+        <div class="tag">Вопросы и ответы</div>
+        <h2 class="section-title" style="margin-bottom:40px">Часто задаваемые вопросы</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-q">
+              Нужно ли уметь плавать?
+              <div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div>
+            </div>
+            <div class="faq-a">Базовое умение держаться на воде обязательно — вы должны уметь проплыть 200 метров без остановки. Профессиональное плавание не требуется.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              С какого возраста можно записать ребёнка?
+              <div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div>
+            </div>
+            <div class="faq-a">Программа Bubblemaker доступна детям от 8 лет (глубина до 2 м). С 10 лет — Seal Team (до 4 м). Полный курс Open Water — с 15 лет.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              Нужна ли медицинская справка?
+              <div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div>
+            </div>
+            <div class="faq-a">Перед курсом необходимо заполнить медицинский вопросник PADI. При наличии хронических заболеваний потребуется справка от врача. Список противопоказаний мы вышлем по запросу.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              Снаряжение нужно покупать заранее?
+              <div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div>
+            </div>
+            <div class="faq-a">Нет — всё необходимое снаряжение включено в стоимость курса. Если захотите купить своё после обучения, поможем с выбором и дадим скидку партнёров.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              Как быстро получу сертификат PADI?
+              <div class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></div>
+            </div>
+            <div class="faq-a">Сразу по окончании курса вы получите временный сертификат, с которым уже можно нырять. Пластиковая карточка приходит в течение 3–5 рабочих дней.</div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-img fade-in">
+        <img src="https://images.unsplash.com/photo-1682687221038-404670f09ef1?w=700&q=80" alt="Дайвинг вопросы" style="height:560px;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="tag" style="color:#7dd8f0;background:rgba(0,180,216,.15)">Связаться с нами</div>
+        <h2 class="section-title">Запишитесь на занятие</h2>
+        <p class="section-sub">Оставьте заявку и мы свяжемся с вами в течение 1 часа, чтобы подобрать удобное время.</p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-title">Телефон</div>
+              <div class="contact-item-val"><a href="tel:+78001234567">+7 (800) 123-45-67</a> (бесплатно)</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-title">Email</div>
+              <div class="contact-item-val"><a href="mailto:info@дайвинг-волшебник.рф">info@дайвинг-волшебник.рф</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-title">Адрес бассейна</div>
+              <div class="contact-item-val">ул. Морская, 15, бассейн «Нептун»<br/>Вт–Вс: 09:00 – 21:00</div>
+            </div>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-btn" title="ВКонтакте">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21.547 7h-3.29a.743.743 0 00-.655.392s-1.312 2.416-1.734 3.23C14.734 12.813 14 12.49 14 11.3V7.423C14 6.37 13.286 6 12.353 6H9.764C9.144 6 8.777 6.47 8.777 6.47s3.34-.506 3.34 3.02v1.734c0 .806-.478.99-1.166.99C9.213 12.212 7.287 9.8 6.2 7.495A.832.832 0 005.43 7H2.087a.463.463 0 00-.472.493C1.615 7.931 5.86 17 11.8 17h1.397c.677 0 .803-.47.803-.47s.27-3.02 1.736-3.48C17.14 13.05 19.5 17.5 20.5 17.5h.2c1.4 0 1.4-1.4 1.4-1.4v-.01c-.3-1.6-4.7-7.086-4.7-7.086z"/></svg>
+          </a>
+          <a href="#" class="social-btn" title="Telegram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </a>
+          <a href="#" class="social-btn" title="WhatsApp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="#" class="social-btn" title="YouTube">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-title">Оставить заявку</div>
+        <div class="form-sub">Ответим в течение 1 часа в рабочее время</div>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ваше имя *</label>
+              <input type="text" placeholder="Иван Иванов" required />
+            </div>
+            <div class="form-group">
+              <label>Телефон *</label>
+              <input type="tel" placeholder="+7 (___) ___-__-__" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="example@mail.ru" />
+          </div>
+          <div class="form-group">
+            <label>Интересующий курс</label>
+            <select>
+              <option value="">Выберите курс...</option>
+              <option>Discover Scuba Diving (пробное)</option>
+              <option>PADI Open Water Diver</option>
+              <option>PADI Advanced Open Water</option>
+              <option>PADI Rescue Diver</option>
+              <option>Детский дайвинг (Bubblemaker)</option>
+              <option>Фридайвинг AIDA</option>
+              <option>Другое</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Сообщение</label>
+            <textarea placeholder="Ваши вопросы или пожелания..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Отправить заявку →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="#" class="logo">
+          <svg class="logo-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="22" cy="22" r="22" fill="url(#lg2)"/>
+            <ellipse cx="22" cy="26" rx="10" ry="6" fill="rgba(255,255,255,.15)"/>
+            <path d="M14 22c2-4 6-7 8-7s6 3 8 7" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="22" cy="16" r="3" fill="white"/>
+            <defs><linearGradient id="lg2" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="#0a3a5c"/><stop offset="100%" stop-color="#00b4d8"/></linearGradient></defs>
+          </svg>
+          <div class="logo-text">Дайвинг-Волшебник<span>Школа подводного плавания</span></div>
+        </a>
+        <p>Официальный центр PADI. Профессиональное обучение дайвингу с 2012 года. Более 3 200 выпускников по всей России.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn" title="ВКонтакте" style="width:36px;height:36px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.547 7h-3.29a.743.743 0 00-.655.392s-1.312 2.416-1.734 3.23C14.734 12.813 14 12.49 14 11.3V7.423C14 6.37 13.286 6 12.353 6H9.764C9.144 6 8.777 6.47 8.777 6.47s3.34-.506 3.34 3.02v1.734c0 .806-.478.99-1.166.99C9.213 12.212 7.287 9.8 6.2 7.495A.832.832 0 005.43 7H2.087a.463.463 0 00-.472.493C1.615 7.931 5.86 17 11.8 17h1.397c.677 0 .803-.47.803-.47s.27-3.02 1.736-3.48C17.14 13.05 19.5 17.5 20.5 17.5h.2c1.4 0 1.4-1.4 1.4-1.4v-.01c-.3-1.6-4.7-7.086-4.7-7.086z"/></svg>
+          </a>
+          <a href="#" class="social-btn" title="Telegram" style="width:36px;height:36px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </a>
+          <a href="#" class="social-btn" title="WhatsApp" style="width:36px;height:36px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Курсы</div>
+        <ul class="footer-links">
+          <li><a href="#courses">Discover Scuba Diving</a></li>
+          <li><a href="#courses">Open Water Diver</a></li>
+          <li><a href="#courses">Advanced Open Water</a></li>
+          <li><a href="#courses">Rescue Diver</a></li>
+          <li><a href="#courses">Детский дайвинг</a></li>
+          <li><a href="#courses">Фридайвинг</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">Навигация</div>
+        <ul class="footer-links">
+          <li><a href="#about">О школе</a></li>
+          <li><a href="#instructors">Инструкторы</a></li>
+          <li><a href="#gallery">Галерея</a></li>
+          <li><a href="#prices">Цены</a></li>
+          <li><a href="#reviews">Отзывы</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">Контакты</div>
+        <ul class="footer-links" style="gap:14px">
+          <li style="color:rgba(255,255,255,.5);font-size:14px;line-height:1.6">ул. Морская, 15<br/>Бассейн «Нептун»</li>
+          <li><a href="tel:+78001234567">+7 (800) 123-45-67</a></li>
+          <li><a href="mailto:info@дайвинг-волшебник.рф">info@дайвинг-волшебник.рф</a></li>
+          <li style="color:rgba(255,255,255,.5);font-size:14px">Вт–Вс: 09:00 – 21:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2012–2026 «Дайвинг-Волшебник». Все права защищены. | <a href="#">Политика конфиденциальности</a></div>
+      <div class="footer-copy">Официальный центр <a href="#">PADI</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ FLOATING CTA ══ -->
+<div class="float-cta">
+  <a href="https://wa.me/78001234567" class="float-btn phone" target="_blank">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    WhatsApp
+  </a>
+  <a href="#contact" class="float-btn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 00-2 2v14c0 1.1.9 2 2 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    Записаться
+  </a>
+</div>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Burger menu
+  const burger = document.getElementById('burgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileClose = document.getElementById('mobileClose');
+  burger.addEventListener('click', () => mobileNav.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+  // Intersection Observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '✓ Заявка отправлена!';
+    btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Отправить заявку →';
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 4000);
+  }
+</script>
+</body>
+</html>
