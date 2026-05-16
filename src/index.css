@@ -1,0 +1,72 @@
+:root {
+  --bg: #F9F5EC;
+  --bg-dark: #F0E8D0;
+  --gold: #C4952A;
+  --gold-light: #DDB96A;
+  --gold-pale: #F0DDA8;
+  --ocher: #B87333;
+  --dark: #0F0A03;
+  --text: #1E1408;
+  --muted: #7A6040;
+  --white: #FDFAF3;
+
+  --ff-serif: 'Cormorant Garamond', Georgia, serif;
+  --ff-sans: 'Raleway', sans-serif;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: var(--ff-sans);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+body.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: none;
+  font-family: var(--ff-sans);
+  border: none;
+  background: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+}
+
+/* Scroll clip reveal helper */
+.clip-reveal {
+  overflow: hidden;
+  display: block;
+}
