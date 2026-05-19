@@ -3,205 +3,247 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Косик — Главный кот Кипарисовой</title>
+  <title>КОСИК — Кот. Судак. Кипарисовая.</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 </head>
 <body>
 
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__paw">🐾</div>
+    <div class="preloader__text">Косик идёт...</div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__logo">КОСИК</div>
+    <div class="nav__links">
+      <a href="#about">История</a>
+      <a href="#owners">Хозяева</a>
+      <a href="#stories">Истории</a>
+      <a href="#suri">Сури</a>
+      <a href="#gallery">Фото</a>
+    </div>
+  </nav>
+
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero__paw hero__paw--tl">🐾</div>
-    <div class="hero__paw hero__paw--tr">🐾</div>
-    <div class="hero__inner">
-      <div class="hero__photo-wrap">
-        <img src="photos/kosik3.png" alt="Косик" class="hero__photo" />
-        <div class="hero__badge">Главный кот<br>ул. Кипарисовой</div>
-      </div>
-      <div class="hero__text">
-        <p class="hero__eyebrow">Добро пожаловать на мой сайт</p>
-        <h1 class="hero__title">Привет.<br>Я — <span>Косик.</span></h1>
-        <p class="hero__sub">Серый. Голубоглазый. Неотразимый.<br>Живу в Судаке и не жалею.</p>
-        <a href="#story" class="btn btn--primary">Читать мою историю</a>
+  <section class="hero" id="hero">
+    <div class="hero__bg">
+      <img src="photos/kosik3.png" alt="" class="hero__bg-img" />
+      <div class="hero__bg-overlay"></div>
+    </div>
+    <div class="hero__content">
+      <div class="hero__eyebrow reveal-char">Судак · ул. Кипарисовая</div>
+      <h1 class="hero__title">
+        <span class="hero__title-line" data-text="КО">КО</span><span class="hero__title-line hero__title-accent" data-text="СИК">СИК</span>
+      </h1>
+      <p class="hero__sub reveal-up">Кот. Философ. Владелец улицы.</p>
+      <div class="hero__scroll-hint reveal-up" style="--delay:.6s">
+        <span>Листай</span>
+        <div class="hero__scroll-line"></div>
       </div>
     </div>
-    <div class="hero__scroll">↓ листай вниз</div>
-  </section>
-
-  <!-- О СЕБЕ -->
-  <section class="about" id="story">
-    <div class="container">
-      <div class="section-label">Глава 1</div>
-      <h2 class="section-title">Немного о себе<br><em>(только хорошее)</em></h2>
-      <div class="about__grid">
-        <div class="about__text">
-          <p>Меня зовут Косик, и я живу на <strong>улице Кипарисовой в Судаке</strong> — самом правильном месте на планете. Здесь пахнет морем и хвоей, солнце светит столько, сколько нужно, и никто не мешает мне спать на тёплых плитках.</p>
-          <p>Я не бездомный. Я — <em>вольный кот с хорошими связями.</em> Разница принципиальная.</p>
-          <p>Каждый день на белой машине приезжают мои самые любимые люди — <strong>Рустам и Мария</strong>. Они всегда привозят что-нибудь вкусное. Я их слышу ещё за три квартала — у меня отличный слух и хорошая мотивация.</p>
-        </div>
-        <div class="about__photo-col">
-          <div class="photo-card photo-card--tilt-left">
-            <img src="photos/kosik2.png" alt="Косик думает" />
-            <div class="photo-card__caption">«Думаю о вечном»</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="stats-row">
-        <div class="stat-card">
-          <div class="stat-card__icon">🐟</div>
-          <div class="stat-card__num">2×</div>
-          <div class="stat-card__label">в день меня кормят</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card__icon">🌿</div>
-          <div class="stat-card__num">1</div>
-          <div class="stat-card__label">любимая улица в мире</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card__icon">🚗</div>
-          <div class="stat-card__num">белая</div>
-          <div class="stat-card__label">машина — мой сигнал</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card__icon">💙</div>
-          <div class="stat-card__num">1</div>
-          <div class="stat-card__label">подружка (Сури)</div>
-        </div>
+    <div class="hero__portrait">
+      <div class="hero__portrait-frame">
+        <img src="photos/kosik1.png" alt="Косик" />
       </div>
     </div>
   </section>
 
-  <!-- ХОЗЯЕВА -->
-  <section class="owners">
+  <!-- INTRO QUOTE -->
+  <section class="quote-section">
     <div class="container">
-      <div class="section-label">Глава 2</div>
-      <h2 class="section-title">Рустам и Мария<br><em>(мои люди)</em></h2>
-      <div class="owners__layout">
-        <div class="owners__card">
-          <div class="owners__avatar">🧔</div>
+      <blockquote class="big-quote reveal-up">
+        <p>«Я не потерявшийся.<br>Я <em>вольный</em>.»</p>
+        <cite>— Косик, каждый раз когда его об этом спрашивают</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about__sticky-img">
+      <img src="photos/kosik2.png" alt="Косик" class="parallax-img" />
+      <div class="about__img-caption">«Я думаю. Не мешайте.»</div>
+    </div>
+    <div class="about__content">
+      <div class="section-tag reveal-up">Глава первая</div>
+      <h2 class="section-heading reveal-up">Кто я<br><em>такой</em></h2>
+      <div class="about__text">
+        <p class="reveal-up" style="--delay:.1s">Меня зовут Косик. Я живу в Судаке, на улице <strong>Кипарисовой</strong> — единственном месте на земле, где кипарисы пахнут правильно, а плитка нагревается до нужной температуры.</p>
+        <p class="reveal-up" style="--delay:.2s">Серый. Голубоглазый. Решительный. Некоторые говорят «бездомный» — я говорю <em>«независимый»</em>. Юридически — свободный художник.</p>
+        <p class="reveal-up" style="--delay:.3s">Мой распорядок: рассвет встречаю на заборе, полдень провожу в тени кипариса, вечер резервирую для ужина. Система работает безупречно уже несколько лет.</p>
+      </div>
+      <div class="about__stats reveal-up" style="--delay:.4s">
+        <div class="mini-stat">
+          <div class="mini-stat__val">∞</div>
+          <div class="mini-stat__key">кипарисов на улице</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat__val">2×</div>
+          <div class="mini-stat__key">кормёжка в день</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat__val">1</div>
+          <div class="mini-stat__key">любимая улица</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="divider-line reveal-scale">
+    <span>🐾</span>
+  </div>
+
+  <!-- OWNERS -->
+  <section class="owners" id="owners">
+    <div class="container">
+      <div class="section-tag reveal-up">Глава вторая</div>
+      <h2 class="section-heading reveal-up">Рустам<br>и <em>Мария</em></h2>
+      <p class="owners__intro reveal-up">Есть люди, которые просто привозят еду. А есть <strong>Рустам и Мария</strong> — они приезжают на белой машине и привозят её каждый день. Это называется преданность. Я это ценю.</p>
+
+      <div class="owners__cards">
+        <div class="owner-card reveal-left">
+          <div class="owner-card__num">01</div>
+          <div class="owner-card__icon">🧔</div>
           <h3>Рустам</h3>
-          <p>Приезжает на белой машине. Открывает дверь раньше, чем я успею мяукнуть второй раз. Уважаю за профессионализм.</p>
-          <div class="owners__quote">«Косик, ты уже ждёшь?» — Рустам, каждый день</div>
+          <p>Слышу его машину за три квартала. Встаю. Потягиваюсь. Иду встречать — но не торопясь, чтобы не было видно, что я ждал.</p>
+          <div class="owner-card__quote">«Косик, ты уже тут?» — спрашивает каждый раз. Каждый раз.</div>
         </div>
-        <div class="owners__divider">❤️</div>
-        <div class="owners__card">
-          <div class="owners__avatar">👩‍🦰</div>
+        <div class="owner-card reveal-right">
+          <div class="owner-card__num">02</div>
+          <div class="owner-card__icon">👩‍🦰</div>
           <h3>Мария</h3>
-          <p>Знает, что я люблю больше всего. Гладит правильно — от головы к хвосту, без лишних слов. Высший класс.</p>
-          <div class="owners__quote">«Какой же ты красивый!» — Мария, тоже каждый день</div>
+          <p>Гладит правильно — от макушки к хвосту, без резких движений. Знает мои вкусы. Не задаёт лишних вопросов. Идеальный человек.</p>
+          <div class="owner-card__quote">«Какой же ты красивый!» — это не обсуждается.</div>
         </div>
       </div>
-      <p class="owners__note">Они ездят на белой машине, и когда я слышу её звук — встаю, потягиваюсь и иду встречать. Не потому что должен. Просто… хочется.</p>
+
+      <div class="white-car reveal-up">
+        <div class="white-car__icon">🚗</div>
+        <p>Белая машина — это мой <strong>рефлекс</strong>. Услышал звук двигателя — встал. Всё остальное происходит само собой.</p>
+      </div>
     </div>
   </section>
 
-  <!-- ИСТОРИИ -->
+  <!-- STORIES -->
   <section class="stories" id="stories">
     <div class="container">
-      <div class="section-label">Глава 3</div>
-      <h2 class="section-title">Истории из моей жизни<br><em>(как всё было на самом деле)</em></h2>
+      <div class="section-tag reveal-up">Глава третья</div>
+      <h2 class="section-heading reveal-up">Истории<br><em>из первых лап</em></h2>
+    </div>
 
-      <div class="story-grid">
+    <div class="stories__track">
 
-        <article class="story-card story-card--wide">
-          <div class="story-card__emoji">🌅</div>
-          <div class="story-card__content">
-            <h3>Рассвет на Кипарисовой</h3>
-            <p>Однажды я проснулся в четыре утра и решил посмотреть рассвет. Взобрался на самый высокий забор и сидел там час. Море было розовым. Небо — оранжевым. Кипарисы стояли как всегда — молчаливые и важные.</p>
-            <p>Потом пришёл Рустам с едой. Я сделал вид, что просто случайно оказался у ворот. Нельзя, чтобы люди знали, что ты сентиментальный.</p>
-          </div>
-        </article>
+      <article class="story reveal-up" style="--delay:0s">
+        <div class="story__num">001</div>
+        <div class="story__emoji">🌅</div>
+        <h3 class="story__title">Рассвет</h3>
+        <p class="story__text">В пять утра я взобрался на самый высокий забор Кипарисовой. Море было розовым. Небо — оранжевым. Кипарисы стояли как всегда — молчаливые, важные. Я сидел и думал о вечном.</p>
+        <p class="story__text">Потом пришёл Рустам. Я сделал вид, что просто мимо шёл. Нельзя, чтобы люди знали о твоей чувствительности.</p>
+      </article>
 
-        <article class="story-card">
-          <div class="story-card__emoji">🐦</div>
-          <div class="story-card__content">
-            <h3>Голубь с претензиями</h3>
-            <p>На нашей улице есть голубь, который думает, что он тут главный. Я смотрю на него. Он смотрит на меня. Мы оба знаем, чем это закончится.</p>
-            <p>Он улетел. Я остался. Справедливость восстановлена.</p>
-          </div>
-        </article>
+      <article class="story reveal-up" style="--delay:.1s">
+        <div class="story__num">002</div>
+        <div class="story__emoji">🐦</div>
+        <h3 class="story__title">Голубь</h3>
+        <p class="story__text">На углу улицы живёт голубь, который думает, что он тут главный. Мы смотрим друг на друга уже три года. Он улетает первым. Всегда.</p>
+        <p class="story__text">Я не гоняюсь за ним. Зачем? Само всё понятно.</p>
+      </article>
 
-        <article class="story-card">
-          <div class="story-card__emoji">🌧️</div>
-          <div class="story-card__content">
-            <h3>Дождь — это личное оскорбление</h3>
-            <p>В ноябре иногда идёт дождь. Я сижу у порога, смотрю на воду с неба и думаю: «Кто это одобрил?» Дождь не отвечает. Неуважение.</p>
-            <p>Мария открыла дверь и дала миску прямо в сухом месте. Хорошая женщина.</p>
-          </div>
-        </article>
+      <article class="story reveal-up" style="--delay:.2s">
+        <div class="story__num">003</div>
+        <div class="story__emoji">🌧️</div>
+        <h3 class="story__title">Дождь</h3>
+        <p class="story__text">Дождь — это личное оскорбление. Я сижу у двери и смотрю на небо с выражением «кто это одобрил?». Небо не отвечает. Неуважение.</p>
+        <p class="story__text">Мария открыла дверь и поставила миску в сухом месте. Хорошая женщина. Всё понимает без слов.</p>
+      </article>
 
-        <article class="story-card story-card--wide">
-          <div class="story-card__emoji">🐟</div>
-          <div class="story-card__content">
-            <h3>Великое рыбное событие</h3>
-            <p>Однажды Рустам привёз рыбу. Настоящую. Не из пакетика, а настоящую крымскую рыбу. Я съел всё. Потом подумал и мяукнул ещё раз — вдруг осталось?</p>
-            <p>Не осталось. Но сам факт того, что я спросил — это был жест вежливости с моей стороны. Воспитание.</p>
-          </div>
-        </article>
+      <article class="story reveal-up" style="--delay:.3s">
+        <div class="story__num">004</div>
+        <div class="story__emoji">🐟</div>
+        <h3 class="story__title">Рыба</h3>
+        <p class="story__text">Однажды Рустам привёз настоящую крымскую рыбу. Не из пакетика — настоящую. Я съел всё. Потом мяукнул ещё раз — вдруг осталось.</p>
+        <p class="story__text">Не осталось. Но я спросил — это был жест вежливости. Воспитание не пропьёшь.</p>
+      </article>
 
-        <article class="story-card">
-          <div class="story-card__emoji">😴</div>
-          <div class="story-card__content">
-            <h3>Философия сна</h3>
-            <p>Люди спрашивают: «Косик, почему ты так много спишь?» Я отвечаю взглядом, который значит: «А почему вы так мало?»</p>
-            <p>Сон — это работа. Серьёзная работа.</p>
-          </div>
-        </article>
+      <article class="story reveal-up" style="--delay:.4s">
+        <div class="story__num">005</div>
+        <div class="story__emoji">😴</div>
+        <h3 class="story__title">Сон</h3>
+        <p class="story__text">Люди спрашивают: «Косик, зачем ты так много спишь?» Я смотрю на них взглядом, который значит: «А зачем вы так мало?»</p>
+        <p class="story__text">Сон — это работа. Очень серьёзная работа. Попробуйте поспать 16 часов — поймёте.</p>
+      </article>
 
-        <article class="story-card">
-          <div class="story-card__emoji">🌿</div>
-          <div class="story-card__content">
-            <h3>Кипарис — мой кипарис</h3>
-            <p>На углу улицы растёт большой кипарис. Я пометил его своим запахом в 2019 году. С тех пор — мой. Никаких споров.</p>
-            <p>Другие коты знают это. Кипарис тоже знает. Все уважают.</p>
-          </div>
-        </article>
+      <article class="story reveal-up" style="--delay:.5s">
+        <div class="story__num">006</div>
+        <div class="story__emoji">🌿</div>
+        <h3 class="story__title">Кипарис</h3>
+        <p class="story__text">На углу улицы растёт большой кипарис. Я пометил его несколько лет назад. С тех пор — мой. Безоговорочно.</p>
+        <p class="story__text">Другие коты знают об этом. Кипарис тоже знает. Все всё понимают. Мира на Кипарисовой.</p>
+      </article>
 
-      </div>
     </div>
   </section>
 
-  <!-- СУРИ -->
-  <section class="suri" id="suri">
-    <div class="container">
-      <div class="section-label">Глава 4</div>
-      <h2 class="section-title">Сури<br><em>(не спрашивайте)</em></h2>
-      <div class="suri__layout">
-        <div class="suri__text">
-          <p>Есть одна кошка. Зовут её <strong>Сури</strong>. Она рыжая и невозможная.</p>
-          <p>Мы встретились у мусорного бака (романтика, я знаю). Она делала вид, что не замечает меня. Я делал вид, что мне всё равно. Мы оба врали.</p>
-          <p>Теперь мы иногда греемся вместе на одной плитке. Это ничего не значит. Просто плитка тёплая. <em>И она не мешает.</em></p>
-          <div class="suri__quote">«Сури, ты тут?» — я, в глубине души. Каждый день.</div>
+  <!-- SURI -->
+  <section class="suri-section" id="suri">
+    <div class="suri-section__bg"></div>
+    <div class="suri-section__inner">
+      <div class="suri-section__text">
+        <div class="section-tag reveal-up">Глава четвёртая</div>
+        <h2 class="section-heading reveal-up">Сури</h2>
+        <p class="suri-section__sub reveal-up"><em>(не спрашивайте)</em></p>
+        <div class="suri-section__body">
+          <p class="reveal-up" style="--delay:.1s">Есть одна кошка. Зовут её <strong>Сури</strong>. Серая. Зеленоглазая. Кричит через стекло с таким видом, будто это всё из-за меня. Наверное, так и есть.</p>
+          <p class="reveal-up" style="--delay:.2s">Мы встретились на Кипарисовой. Она делала вид, что не замечает меня. Я делал вид, что мне всё равно. Мы оба были нечестны.</p>
+          <p class="reveal-up" style="--delay:.3s">Теперь иногда греемся на одной плитке. Это <em>ничего не значит</em>. Просто плитка широкая.</p>
+          <blockquote class="suri-quote reveal-up" style="--delay:.4s">
+            «Сури, ты тут?» — спрашиваю я. В глубине души. Каждый день.
+          </blockquote>
         </div>
-        <div class="suri__photo-placeholder">
-          <div class="suri__placeholder-inner">
-            <div class="suri__placeholder-icon">🐱</div>
-            <p>Фото Сури появится здесь<br>когда она соизволит позировать</p>
-          </div>
+      </div>
+      <div class="suri-section__photo reveal-right">
+        <div class="suri-photo-frame">
+          <img src="photos/suri.png" alt="Сури" />
+          <div class="suri-photo-caption">Сури. Мнение у неё всегда есть.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ГАЛЕРЕЯ -->
+  <!-- GALLERY -->
   <section class="gallery" id="gallery">
     <div class="container">
-      <div class="section-label">Фотографии</div>
-      <h2 class="section-title">Моя галерея<br><em>(только лучшие кадры)</em></h2>
-      <div class="gallery__grid">
-        <div class="gallery__item gallery__item--main">
-          <img src="photos/kosik1.png" alt="Косик приветствует" />
-          <div class="gallery__caption">«Ну наконец-то. Где вы ходите?»</div>
+      <div class="section-tag reveal-up">Архив</div>
+      <h2 class="section-heading reveal-up">Галерея<br><em>избранное</em></h2>
+    </div>
+    <div class="gallery__grid">
+      <div class="gallery__cell gallery__cell--tall reveal-up">
+        <img src="photos/kosik1.png" alt="Косик" />
+        <div class="gallery__overlay">
+          <p>«Ну наконец-то. Где вы ходили?»</p>
         </div>
-        <div class="gallery__item">
-          <img src="photos/kosik2.png" alt="Косик думает" />
-          <div class="gallery__caption">«Думаю, стоит ли вам доверять»</div>
+      </div>
+      <div class="gallery__cell reveal-up" style="--delay:.15s">
+        <img src="photos/kosik2.png" alt="Косик" />
+        <div class="gallery__overlay">
+          <p>«Думаю, стоит ли вам доверять»</p>
         </div>
-        <div class="gallery__item">
-          <img src="photos/kosik3.png" alt="Косик смотрит" />
-          <div class="gallery__caption">«Принесли еду? Нет? Тогда зачем пришли?»</div>
+      </div>
+      <div class="gallery__cell reveal-up" style="--delay:.3s">
+        <img src="photos/kosik3.png" alt="Косик" />
+        <div class="gallery__overlay">
+          <p>«Принесли еду? Нет? Тогда зачем?»</p>
+        </div>
+      </div>
+      <div class="gallery__cell reveal-up" style="--delay:.45s">
+        <img src="photos/suri.png" alt="Сури" />
+        <div class="gallery__overlay">
+          <p>Сури. Слов не нужно.</p>
         </div>
       </div>
     </div>
@@ -210,13 +252,17 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
-      <div class="footer__paw">🐾</div>
-      <p class="footer__title">Косик</p>
-      <p class="footer__sub">Судак, ул. Кипарисовая<br>Работаю без выходных. Сплю без выходных.</p>
-      <p class="footer__love">С любовью кормят: <strong>Рустам и Мария</strong></p>
-      <p class="footer__copy">© 2024 Косик. Все права защищены лично мной.</p>
+      <div class="footer__top reveal-up">
+        <div class="footer__title">КОСИК</div>
+        <div class="footer__tagline">Судак · ул. Кипарисовая · С любовью кормят Рустам и Мария</div>
+      </div>
+      <div class="footer__bottom reveal-up" style="--delay:.2s">
+        <p>© Косик. Все права защищены лично мной и моими синими глазами.</p>
+        <p class="footer__suri">Посвящается Сури 🐱</p>
+      </div>
     </div>
   </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>
