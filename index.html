@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мария-Николь • Творческая лаборатория Ай-Никола</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── ПЕРЕМЕННЫЕ ────────────────────────────────────────────── */
+    :root {
+      --bg:         #FAF9F4;
+      --cream:      #F0EAD6;
+      --cream-dark: #E4DACC;
+      --gold:       #8A7D52;
+      --gold-light: #C4BC8A;
+      --gold-pale:  #E8E2C8;
+      --olive:      #4A5240;
+      --olive-mid:  #6B7C5E;
+      --olive-light:#A0B090;
+      --lavender:   #9A8BB5;
+      --lavender-l: #C8BDD8;
+      --text:       #1C1812;
+      --text-mid:   #3A3328;
+      --text-light: #6C6458;
+      --border:     #D4CCBA;
+      --radius:     12px;
+      --fs-hero:    clamp(3.5rem, 10vw, 9rem);
+      --fs-h2:      clamp(2rem, 5vw, 3.8rem);
+      --fs-h3:      clamp(1.3rem, 3vw, 2rem);
+    }
+
+    /* ─── RESET ────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: default;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ─── НАВИГАЦИЯ ─────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+    }
+    .nav.scrolled {
+      background: rgba(250, 249, 244, 0.92);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--olive);
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .nav-links a {
+      color: var(--text-mid);
+      position: relative;
+      padding-bottom: 2px;
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.4rem;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      border-radius: 50px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .nav-cta:hover { background: var(--gold); color: #fff; }
+
+    /* ─── HERO ──────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(160deg, var(--bg) 0%, var(--cream) 60%, #e8e0cc 100%);
+    }
+    .hero-bg-texture {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(138,125,82,0.07) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(154,139,181,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Botanical SVG декорации */
+    .bot {
+      position: absolute;
+      pointer-events: none;
+      will-change: transform;
+    }
+    .bot-cypress-l {
+      left: -2%;
+      bottom: 0;
+      width: clamp(120px, 14vw, 200px);
+      opacity: 0.85;
+      transform-origin: bottom center;
+    }
+    .bot-cypress-r {
+      right: 3%;
+      bottom: 0;
+      width: clamp(90px, 10vw, 160px);
+      opacity: 0.7;
+      transform-origin: bottom center;
+    }
+    .bot-lavender-l {
+      left: 6%;
+      bottom: 8%;
+      width: clamp(80px, 9vw, 140px);
+      opacity: 0.9;
+      animation: sway 5s ease-in-out infinite alternate;
+    }
+    .bot-lavender-r {
+      right: 8%;
+      bottom: 10%;
+      width: clamp(60px, 7vw, 110px);
+      opacity: 0.85;
+      animation: sway 6s ease-in-out 1s infinite alternate;
+    }
+    .bot-rosemary {
+      left: 15%;
+      top: 15%;
+      width: clamp(60px, 7vw, 100px);
+      opacity: 0.6;
+      animation: sway 7s ease-in-out 0.5s infinite alternate;
+    }
+    .bot-juniper {
+      right: 14%;
+      top: 18%;
+      width: clamp(70px, 8vw, 120px);
+      opacity: 0.65;
+      animation: sway 6.5s ease-in-out 2s infinite alternate;
+    }
+    .bot-flower {
+      left: 25%;
+      bottom: 18%;
+      width: clamp(50px, 5vw, 80px);
+      opacity: 0.55;
+      animation: float 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes sway {
+      from { transform: rotate(-3deg) translateX(-4px); }
+      to   { transform: rotate(3deg)  translateX(4px);  }
+    }
+    @keyframes float {
+      from { transform: translateY(0) rotate(-2deg); }
+      to   { transform: translateY(-12px) rotate(2deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 2rem;
+    }
+    .hero-eyebrow {
+      font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.3s;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: var(--fs-hero);
+      font-weight: 300;
+      line-height: 0.9;
+      color: var(--olive);
+      letter-spacing: -0.02em;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.55s;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-line {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 2rem auto;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.8s;
+    }
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.5vw, 1.6rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-light);
+      letter-spacing: 0.05em;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1s;
+    }
+    .hero-lab {
+      margin-top: 1.5rem;
+      display: inline-block;
+      font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--olive-mid);
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1.2s;
+    }
+    .hero-lab span { color: var(--gold); }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1.5s;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50%       { opacity: 1;   transform: scaleY(1.1); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── СЕКЦИИ ОБЩИЕ ──────────────────────────────────────────── */
+    section { position: relative; overflow: hidden; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .section-label::before {
+      content: '';
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: var(--fs-h2);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--olive);
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 2px;
+      margin: 1.5rem 0;
+    }
+
+    /* ─── REVEAL АНИМАЦИИ ───────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+    .reveal-delay-4 { transition-delay: 0.6s; }
+
+    /* ─── О МАРИИ-НИКОЛЬ ────────────────────────────────────────── */
+    #about {
+      padding: 8rem 0;
+      background: var(--bg);
+    }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-card {
+      background: var(--cream);
+      border-radius: 20px;
+      aspect-ratio: 3/4;
+      max-height: 540px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .about-card-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem;
+      text-align: center;
+    }
+    .about-monogram {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 7rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .about-card-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .about-tag {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      background: var(--olive);
+      color: var(--gold-light);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.6;
+    }
+    .about-text h2 { margin-bottom: 1rem; }
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--text-mid);
+      margin-bottom: 1.2rem;
+    }
+    .about-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 0.4rem;
+    }
+    /* Botanical декор about */
+    .about-bot {
+      position: absolute;
+      pointer-events: none;
+    }
+    .about-bot-tl {
+      top: -3rem; left: -3rem;
+      width: 100px;
+      opacity: 0.5;
+      animation: sway 7s ease-in-out infinite alternate;
+    }
+    .about-bot-br {
+      bottom: 0; right: -2rem;
+      width: 80px;
+      opacity: 0.45;
+      animation: sway 6s ease-in-out 1s infinite alternate;
+    }
+
+    /* ─── ЛАБОРАТОРИЯ АЙ-НИКОЛА ─────────────────────────────────── */
+    #lab {
+      padding: 8rem 0;
+      background: linear-gradient(135deg, var(--olive) 0%, #2E3B28 100%);
+      position: relative;
+    }
+    .lab-bg-bot {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 40%;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+    .lab-bg-bot-l {
+      position: absolute;
+      top: 0; left: 0;
+      width: 25%;
+      opacity: 0.07;
+      pointer-events: none;
+    }
+    .lab-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .lab-header .section-label { color: var(--gold-light); }
+    .lab-header .section-label::before { background: var(--gold-light); }
+    .lab-header .section-title { color: #fff; }
+    .lab-header .section-title em { color: var(--gold-light); }
+    .lab-header .divider { background: linear-gradient(90deg, var(--gold-light), transparent); }
+    .lab-desc {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.75);
+      margin: 1.5rem 0 2.5rem;
+    }
+    .lab-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .lab-pillar {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .lab-pillar:hover {
+      background: rgba(196, 188, 138, 0.12);
+      border-color: rgba(196, 188, 138, 0.3);
+    }
+    .lab-pillar-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+    }
+    .lab-pillar-text h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 0.3rem;
+    }
+    .lab-pillar-text p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.6);
+    }
+    .lab-quote-block {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(196,188,138,0.2);
+      border-left: 3px solid var(--gold-light);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 2rem 2rem;
+      margin-top: 2rem;
+    }
+    .lab-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .lab-quote-author {
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+    }
+    .lab-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .lab-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 1.8rem 1.5rem;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .lab-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.1); }
+    .lab-card:last-child { grid-column: 1 / -1; }
+    .lab-card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--gold-light);
+      opacity: 0.4;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .lab-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .lab-card p {
+      font-size: 0.83rem;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ─── ЛЕКЦИИ ────────────────────────────────────────────────── */
+    #lectures {
+      padding: 8rem 0;
+      background: var(--bg);
+    }
+    .lectures-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .lectures-header .section-label {
+      justify-content: center;
+    }
+    .lectures-header .section-label::before { display: none; }
+    .lectures-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+    .lecture-card {
+      background: var(--cream);
+      border: 1px solid var(--cream-dark);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s, box-shadow 0.35s;
+      cursor: pointer;
+    }
+    .lecture-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .lecture-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(74,82,64,0.12); }
+    .lecture-card:hover::before { transform: scaleX(1); }
+    .lecture-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.2rem;
+    }
+    .lecture-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .lecture-month {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 0.2rem;
+    }
+    .lecture-badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      border-radius: 50px;
+    }
+    .badge-upcoming { background: var(--gold-pale); color: var(--gold); }
+    .badge-soon     { background: rgba(154,139,181,0.15); color: var(--lavender); }
+    .badge-new      { background: rgba(74,82,64,0.1); color: var(--olive); }
+    .lecture-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 0.7rem;
+    }
+    .lecture-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+    .lecture-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .lecture-place {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+    .lecture-place svg { width: 12px; height: 12px; }
+    .btn-link {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.3s;
+    }
+    .btn-link:hover { gap: 0.8rem; }
+    .lecture-card-bot {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 80px;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+
+    /* ─── СТАТЬИ ────────────────────────────────────────────────── */
+    #articles {
+      padding: 8rem 0;
+      background: var(--cream);
+      position: relative;
+    }
+    .articles-bg-bot {
+      position: absolute;
+      top: 0; right: 0;
+      width: 30%;
+      opacity: 0.07;
+      pointer-events: none;
+    }
+    .articles-inner {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .articles-col-header { margin-bottom: 3rem; }
+    .article-featured {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--cream-dark);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .article-featured:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(74,82,64,0.1); }
+    .article-featured-thumb {
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--olive-light), var(--olive));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .article-featured-thumb-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(255,255,255,0.9);
+      text-align: center;
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+    .article-featured-body { padding: 2rem; }
+    .article-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: var(--gold-pale);
+      padding: 0.3rem 0.75rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+    }
+    .article-featured-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 0.8rem;
+    }
+    .article-featured-text {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+    .article-meta {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+    .articles-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .article-row {
+      background: #fff;
+      padding: 1.4rem 1.6rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      transition: background 0.25s;
+      cursor: pointer;
+    }
+    .article-row:hover { background: var(--gold-pale); }
+    .article-row-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--gold-light);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 2rem;
+    }
+    .article-row-body {}
+    .article-row-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    .article-row-date {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── МЕРОПРИЯТИЯ ───────────────────────────────────────────── */
+    #events {
+      padding: 8rem 0;
+      background: var(--bg);
+      position: relative;
+    }
+    .events-bot {
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 200px;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+    .events-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .events-header .section-label { justify-content: center; }
+    .events-header .section-label::before { display: none; }
+    .events-timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .events-timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--border) 10%, var(--border) 90%, transparent);
+      transform: translateX(-50%);
+    }
+    .event-item {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      gap: 0;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+    .event-item:nth-child(even) .event-card { grid-column: 3; }
+    .event-item:nth-child(even) .event-dot  { grid-column: 2; }
+    .event-item:nth-child(even) .event-side { grid-column: 1; grid-row: 1; }
+    .event-dot {
+      grid-column: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+    .event-dot-inner {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px var(--gold-pale), 0 0 0 8px rgba(138,125,82,0.1);
+      transition: transform 0.3s;
+    }
+    .event-item:hover .event-dot-inner { transform: scale(1.4); }
+    .event-card {
+      grid-column: 3;
+      background: var(--cream);
+      border: 1px solid var(--cream-dark);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .event-item:nth-child(odd) .event-card { margin-left: 1.5rem; }
+    .event-item:nth-child(even) .event-card {
+      grid-column: 1;
+      margin-right: 1.5rem;
+      text-align: right;
+    }
+    .event-item:nth-child(even) .event-side { text-align: left; }
+    .event-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(74,82,64,0.1); }
+    .event-date-chip {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--gold-pale);
+      color: var(--gold);
+      padding: 0.25rem 0.7rem;
+      border-radius: 50px;
+      margin-bottom: 0.8rem;
+    }
+    .event-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .event-desc { font-size: 0.83rem; line-height: 1.6; color: var(--text-light); }
+    .event-side {
+      grid-column: 1;
+      padding: 0 1.5rem;
+      opacity: 0;
+    }
+
+    /* ─── МЕРЧ ──────────────────────────────────────────────────── */
+    #merch {
+      padding: 8rem 0;
+      background: var(--cream);
+      position: relative;
+    }
+    .merch-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .merch-header .section-label { justify-content: center; }
+    .merch-header .section-label::before { display: none; }
+    .merch-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .merch-card {
+      border-radius: 20px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--cream-dark);
+      transition: transform 0.35s, box-shadow 0.35s;
+      cursor: pointer;
+    }
+    .merch-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(74,82,64,0.13); }
+    .merch-thumb {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .merch-thumb-1 { background: linear-gradient(135deg, var(--gold-pale), var(--cream-dark)); }
+    .merch-thumb-2 { background: linear-gradient(135deg, rgba(154,139,181,0.15), rgba(154,139,181,0.35)); }
+    .merch-thumb-3 { background: linear-gradient(135deg, rgba(74,82,64,0.1), rgba(74,82,64,0.2)); }
+    .merch-thumb-4 { background: linear-gradient(135deg, var(--cream), var(--cream-dark)); }
+    .merch-icon { font-size: 3.5rem; }
+    .merch-body { padding: 1.2rem; }
+    .merch-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+    .merch-sub { font-size: 0.78rem; color: var(--text-light); margin-bottom: 0.8rem; }
+    .merch-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .merch-bot-decor {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 70%;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+    .merch-cta {
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--olive);
+      color: var(--gold-light);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+    .btn-primary:hover {
+      background: #2E3B28;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(46,59,40,0.3);
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s, transform 0.3s;
+    }
+    .btn-outline:hover { background: var(--gold); color: #fff; transform: translateY(-2px); }
+
+    /* ─── КОНТАКТЫ ──────────────────────────────────────────────── */
+    #contact {
+      padding: 8rem 0;
+      background: linear-gradient(160deg, var(--bg) 0%, var(--cream) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-bg-bot {
+      position: absolute;
+      bottom: -2rem; right: -2rem;
+      width: 35%;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .contact-text .section-title { margin-bottom: 1.5rem; }
+    .contact-text p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--text-mid);
+      margin-bottom: 2rem;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 2.5rem;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      transition: color 0.3s;
+    }
+    .contact-link:hover { color: var(--gold); }
+    .contact-link-icon {
+      width: 36px; height: 36px;
+      background: var(--gold-pale);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+    .contact-link:hover .contact-link-icon { background: var(--gold-pale); }
+    .contact-link-icon svg { width: 16px; height: 16px; }
+    .contact-form-card {
+      background: #fff;
+      border: 1px solid var(--cream-dark);
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(74,82,64,0.06);
+    }
+    .contact-form-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--olive);
+      margin-bottom: 1.5rem;
+    }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(138,125,82,0.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-submit { width: 100%; justify-content: center; cursor: pointer; border: none; font-family: 'Raleway', sans-serif; }
+
+    /* ─── FOOTER ────────────────────────────────────────────────── */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.5);
+      padding: 3rem 0;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+    .footer-sub {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-copy { font-size: 0.75rem; }
+
+    /* ─── MOBILE ────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .about-inner { grid-template-columns: 1fr; }
+      .lab-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .lab-cards { grid-template-columns: 1fr; }
+      .lab-card:last-child { grid-column: auto; }
+      .articles-inner { grid-template-columns: 1fr; }
+      .events-timeline::before { left: 20px; }
+      .event-item { grid-template-columns: 40px 1fr; }
+      .event-item:nth-child(even) .event-card { grid-column: 2; text-align: left; }
+      .event-item:nth-child(odd)  .event-card { grid-column: 2; margin-left: 1rem; }
+      .event-dot { grid-column: 1; }
+      .event-side { display: none; }
+      .merch-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav { padding: 1rem 1.5rem; }
+      .nav-cta { display: none; }
+      section { padding: 5rem 0; }
+      .merch-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ─── НАВИГАЦИЯ ────────────────────────────────────────────────── -->
+<nav class="nav" id="nav">
+  <div class="nav-logo">Ай&#8209;<span>Никола</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">О&nbsp;проекте</a></li>
+    <li><a href="#lab">Лаборатория</a></li>
+    <li><a href="#lectures">Лекции</a></li>
+    <li><a href="#articles">Статьи</a></li>
+    <li><a href="#events">События</a></li>
+    <li><a href="#merch">Мерч</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Связаться</a>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero-bg-texture"></div>
+
+  <!-- Кипарисы -->
+  <div class="bot bot-cypress-l" id="parallax-1">
+    <svg viewBox="0 0 80 260" xmlns="http://www.w3.org/2000/svg">
+      <rect x="36" y="210" width="8" height="50" fill="#4A3A22" rx="2"/>
+      <ellipse cx="40" cy="155" rx="24" ry="75" fill="#2E3B28" opacity="0.9"/>
+      <ellipse cx="40" cy="130" rx="19" ry="60" fill="#3A4E32" opacity="0.85"/>
+      <ellipse cx="40" cy="105" rx="14" ry="45" fill="#4A6040" opacity="0.8"/>
+      <ellipse cx="40" cy="80"  rx="10" ry="35" fill="#5A7050" opacity="0.75"/>
+    </svg>
+  </div>
+  <div class="bot bot-cypress-r" id="parallax-2">
+    <svg viewBox="0 0 60 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="27" y="160" width="6" height="40" fill="#4A3A22" rx="2"/>
+      <ellipse cx="30" cy="118" rx="18" ry="58" fill="#2E3B28" opacity="0.85"/>
+      <ellipse cx="30" cy="97"  rx="14" ry="46" fill="#3A4E32" opacity="0.8"/>
+      <ellipse cx="30" cy="76"  rx="10" ry="34" fill="#4A6040" opacity="0.75"/>
+    </svg>
+  </div>
+
+  <!-- Лаванда слева -->
+  <div class="bot bot-lavender-l">
+    <svg viewBox="0 0 80 160" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(10,0)">
+        <line x1="30" y1="155" x2="30" y2="55" stroke="#6B7C5E" stroke-width="2.5" stroke-linecap="round"/>
+        <ellipse cx="30" cy="38" rx="5" ry="22" fill="#8A7AB0"/>
+        <line x1="30" y1="110" x2="14" y2="90" stroke="#6B7C5E" stroke-width="1.8" stroke-linecap="round"/>
+        <ellipse cx="14" cy="78" rx="4" ry="16" fill="#9A8BB5" transform="rotate(-20 14 78)"/>
+        <line x1="30" y1="100" x2="46" y2="80" stroke="#6B7C5E" stroke-width="1.8" stroke-linecap="round"/>
+        <ellipse cx="46" cy="68" rx="4" ry="16" fill="#9A8BB5" transform="rotate(20 46 68)"/>
+        <line x1="30" y1="125" x2="8"  y2="112" stroke="#6B7C5E" stroke-width="1.5" stroke-linecap="round"/>
+        <ellipse cx="8"  cy="104" rx="3" ry="12" fill="#B8A9C9" transform="rotate(-30 8 104)"/>
+        <line x1="30" y1="120" x2="52" y2="108" stroke="#6B7C5E" stroke-width="1.5" stroke-linecap="round"/>
+        <ellipse cx="52" cy="100" rx="3" ry="12" fill="#B8A9C9" transform="rotate(30 52 100)"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Лаванда справа -->
+  <div class="bot bot-lavender-r">
+    <svg viewBox="0 0 70 140" xmlns="http://www.w3.org/2000/svg">
+      <line x1="35" y1="135" x2="35" y2="45" stroke="#6B7C5E" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="35" cy="30" rx="4" ry="18" fill="#8A7AB0"/>
+      <line x1="35" y1="90" x2="18" y2="72" stroke="#6B7C5E" stroke-width="1.5" stroke-linecap="round"/>
+      <ellipse cx="18" cy="62" rx="3.5" ry="14" fill="#9A8BB5" transform="rotate(-18 18 62)"/>
+      <line x1="35" y1="85" x2="52" y2="68" stroke="#6B7C5E" stroke-width="1.5" stroke-linecap="round"/>
+      <ellipse cx="52" cy="58" rx="3.5" ry="14" fill="#9A8BB5" transform="rotate(18 52 58)"/>
+    </svg>
+  </div>
+
+  <!-- Розмарин -->
+  <div class="bot bot-rosemary">
+    <svg viewBox="0 0 90 120" xmlns="http://www.w3.org/2000/svg">
+      <path d="M45 115 Q40 90 30 65 Q20 45 10 30" stroke="#5A6E4A" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M45 115 Q50 90 60 65 Q70 45 80 30" stroke="#5A6E4A" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M45 90 Q30 78 18 72" stroke="#6B7C5E" stroke-width="1.5" fill="none"/>
+      <path d="M45 75 Q60 63 72 57" stroke="#6B7C5E" stroke-width="1.5" fill="none"/>
+      <path d="M35 65 Q22 53 12 48" stroke="#6B7C5E" stroke-width="1.5" fill="none"/>
+      <path d="M55 60 Q68 48 78 43" stroke="#6B7C5E" stroke-width="1.5" fill="none"/>
+      <!-- листья -->
+      <ellipse cx="16" cy="28" rx="6" ry="2.5" fill="#4A6040" transform="rotate(-45 16 28)"/>
+      <ellipse cx="30" cy="63" rx="5" ry="2" fill="#4A6040" transform="rotate(-30 30 63)"/>
+      <ellipse cx="60" cy="58" rx="5" ry="2" fill="#4A6040" transform="rotate(30 60 58)"/>
+      <ellipse cx="74" cy="28" rx="5" ry="2.5" fill="#4A6040" transform="rotate(45 74 28)"/>
+      <ellipse cx="12" cy="47" rx="4" ry="2" fill="#5A7050" transform="rotate(-35 12 47)"/>
+      <ellipse cx="78" cy="42" rx="4" ry="2" fill="#5A7050" transform="rotate(35 78 42)"/>
+    </svg>
+  </div>
+
+  <!-- Можжевельник -->
+  <div class="bot bot-juniper">
+    <svg viewBox="0 0 110 140" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55 135 L55 55" stroke="#5A4A2A" stroke-width="3" stroke-linecap="round"/>
+      <path d="M55 55 Q35 35 10 40" stroke="#4A6040" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M55 70 Q75 50 100 55" stroke="#4A6040" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M55 85 Q30 70 8 78" stroke="#5A7050" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <path d="M55 95 Q78 80 100 85" stroke="#5A7050" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <path d="M55 105 Q35 96 20 100" stroke="#6B8060" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <!-- ягоды -->
+      <circle cx="10" cy="40" r="5" fill="#2E3B28"/>
+      <circle cx="10" cy="40" r="3" fill="#3A5032"/>
+      <circle cx="100" cy="55" r="5" fill="#2E3B28"/>
+      <circle cx="100" cy="55" r="3" fill="#3A5032"/>
+      <circle cx="8"  cy="78" r="4" fill="#2E3B28"/>
+      <circle cx="100" cy="85" r="4" fill="#2E3B28"/>
+      <circle cx="20" cy="100" r="3.5" fill="#3A5032"/>
+    </svg>
+  </div>
+
+  <!-- Ладанник (цветок) -->
+  <div class="bot bot-flower">
+    <svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="95" x2="40" y2="50" stroke="#6B7C5E" stroke-width="2" stroke-linecap="round"/>
+      <!-- 5 лепестков -->
+      <ellipse cx="40" cy="28" rx="10" ry="16" fill="#F5F0E8" stroke="#D4CCBA" stroke-width="0.5" transform="rotate(0 40 44)"/>
+      <ellipse cx="40" cy="28" rx="10" ry="16" fill="#F5F0E8" stroke="#D4CCBA" stroke-width="0.5" transform="rotate(72 40 44)"/>
+      <ellipse cx="40" cy="28" rx="10" ry="16" fill="#F5F0E8" stroke="#D4CCBA" stroke-width="0.5" transform="rotate(144 40 44)"/>
+      <ellipse cx="40" cy="28" rx="10" ry="16" fill="#F5F0E8" stroke="#D4CCBA" stroke-width="0.5" transform="rotate(216 40 44)"/>
+      <ellipse cx="40" cy="28" rx="10" ry="16" fill="#F5F0E8" stroke="#D4CCBA" stroke-width="0.5" transform="rotate(288 40 44)"/>
+      <circle cx="40" cy="44" r="7" fill="#C4BC8A"/>
+      <circle cx="40" cy="44" r="4" fill="#8A7D52"/>
+    </svg>
+  </div>
+
+  <!-- Основной текст -->
+  <div class="hero-content">
+    <p class="hero-eyebrow">Культура Крыма • Исследования • Творчество</p>
+    <h1 class="hero-name">Мария&#8209;<em>Николь</em></h1>
+    <div class="hero-line"></div>
+    <p class="hero-subtitle">исследователь, культуролог, хранитель крымского наследия</p>
+    <p class="hero-lab">Основатель лаборатории <span>Ай-Никола</span></p>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Листать</span>
+  </div>
+</section>
+
+<!-- ─── О МАРИИ-НИКОЛЬ ───────────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-inner">
+
+      <div class="about-visual reveal-left">
+        <div class="about-card">
+          <!-- Декор лаванда верхний левый -->
+          <div class="about-bot about-bot-tl">
+            <svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
+              <line x1="40" y1="95" x2="40" y2="35" stroke="#6B7C5E" stroke-width="2" stroke-linecap="round"/>
+              <ellipse cx="40" cy="20" rx="4" ry="18" fill="#8A7AB0"/>
+              <line x1="40" y1="65" x2="22" y2="48" stroke="#6B7C5E" stroke-width="1.5" fill="none"/>
+              <ellipse cx="22" cy="38" rx="3" ry="13" fill="#9A8BB5" transform="rotate(-20 22 38)"/>
+              <line x1="40" y1="60" x2="58" y2="44" stroke="#6B7C5E" stroke-width="1.5" fill="none"/>
+              <ellipse cx="58" cy="34" rx="3" ry="13" fill="#9A8BB5" transform="rotate(20 58 34)"/>
+            </svg>
+          </div>
+          <!-- Декор розмарин правый нижний -->
+          <div class="about-bot about-bot-br">
+            <svg viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+              <path d="M30 85 Q25 65 15 42 Q8 28 5 15" stroke="#5A6E4A" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <path d="M30 85 Q35 65 45 42 Q52 28 55 15" stroke="#5A6E4A" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <ellipse cx="5"  cy="12" rx="5" ry="2" fill="#4A6040" transform="rotate(-40 5 12)"/>
+              <ellipse cx="55" cy="12" rx="5" ry="2" fill="#4A6040" transform="rotate(40 55 12)"/>
+              <ellipse cx="14" cy="40" rx="4" ry="2" fill="#5A7050" transform="rotate(-30 14 40)"/>
+              <ellipse cx="46" cy="40" rx="4" ry="2" fill="#5A7050" transform="rotate(30 46 40)"/>
+            </svg>
+          </div>
+          <div class="about-card-inner">
+            <div class="about-monogram">М-Н</div>
+            <p class="about-card-label">Мария-Николь</p>
+          </div>
+        </div>
+        <div class="about-tag">
+          Крым<br/>Культура<br/>Наследие
+        </div>
+      </div>
+
+      <div class="about-text">
+        <div class="reveal">
+          <div class="section-label">О проекте</div>
+          <h2 class="section-title">Голос<br/><em>крымской</em><br/>культуры</h2>
+          <div class="divider"></div>
+        </div>
+        <p class="reveal reveal-delay-1">
+          Меня зовут Мария-Николь. Я исследую, сохраняю и продвигаю уникальное культурное наследие Крыма — его искусство, историю, традиции и природу.
+        </p>
+        <p class="reveal reveal-delay-2">
+          Крым — это особое место, где переплетаются цивилизации, языки и художественные традиции. Через лекции, статьи и творческие проекты я делаю это богатство доступным для каждого.
+        </p>
+        <div class="about-stats reveal reveal-delay-3">
+          <div>
+            <div class="stat-num">50+</div>
+            <div class="stat-label">Лекций</div>
+          </div>
+          <div>
+            <div class="stat-num">30+</div>
+            <div class="stat-label">Статей</div>
+          </div>
+          <div>
+            <div class="stat-num">5 лет</div>
+            <div class="stat-label">Исследований</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── ЛАБОРАТОРИЯ АЙ-НИКОЛА ────────────────────────────────────── -->
+<section id="lab">
+  <!-- Декор: большой кипарис справа -->
+  <div class="lab-bg-bot">
+    <svg viewBox="0 0 120 400" xmlns="http://www.w3.org/2000/svg">
+      <rect x="55" y="320" width="10" height="80" fill="#ffffff" rx="2"/>
+      <ellipse cx="60" cy="230" rx="35" ry="115" fill="#ffffff"/>
+      <ellipse cx="60" cy="185" rx="27" ry="92" fill="#ffffff"/>
+      <ellipse cx="60" cy="145" rx="20" ry="72" fill="#ffffff"/>
+      <ellipse cx="60" cy="105" rx="14" ry="55" fill="#ffffff"/>
+    </svg>
+  </div>
+  <!-- Декор: можжевельник слева -->
+  <div class="lab-bg-bot-l">
+    <svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M80 195 L80 80" stroke="#fff" stroke-width="4"/>
+      <path d="M80 80 Q50 50 10 60" stroke="#fff" stroke-width="2.5" fill="none"/>
+      <path d="M80 100 Q110 70 150 80" stroke="#fff" stroke-width="2.5" fill="none"/>
+      <path d="M80 120 Q45 105 15 115" stroke="#fff" stroke-width="2" fill="none"/>
+      <path d="M80 135 Q115 120 145 128" stroke="#fff" stroke-width="2" fill="none"/>
+      <circle cx="10" cy="60" r="7" fill="#ffffff"/>
+      <circle cx="150" cy="80" r="7" fill="#ffffff"/>
+      <circle cx="15" cy="115" r="6" fill="#ffffff"/>
+      <circle cx="145" cy="128" r="6" fill="#ffffff"/>
+    </svg>
+  </div>
+
+  <div class="container">
+    <div class="lab-inner">
+      <div>
+        <div class="lab-header reveal">
+          <div class="section-label">Главный проект</div>
+          <h2 class="section-title">Творческая<br/>лаборатория<br/><em>Ай-Никола</em></h2>
+          <div class="divider"></div>
+        </div>
+        <p class="lab-desc reveal reveal-delay-1">
+          Лаборатория Ай-Никола — это пространство, где исследование встречается с творчеством. Мы изучаем культурный ландшафт Крыма и делаем его живым: через истории, образы и диалог.
+        </p>
+        <div class="lab-pillars">
+          <div class="lab-pillar reveal reveal-delay-2">
+            <div class="lab-pillar-icon">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="18" stroke="#C4BC8A" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <path d="M12 26 Q20 10 28 26" stroke="#C4BC8A" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <circle cx="20" cy="20" r="4" fill="#C4BC8A"/>
+              </svg>
+            </div>
+            <div class="lab-pillar-text">
+              <h4>Исследования</h4>
+              <p>Научные и культурологические исследования крымского наследия — от флоры до фресок</p>
+            </div>
+          </div>
+          <div class="lab-pillar reveal reveal-delay-3">
+            <div class="lab-pillar-icon">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="8" width="24" height="24" rx="4" stroke="#C4BC8A" stroke-width="1.5"/>
+                <path d="M14 20 H26 M20 14 V26" stroke="#C4BC8A" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="lab-pillar-text">
+              <h4>Просветительство</h4>
+              <p>Лекции, воркшопы и публичные беседы о культуре, искусстве и природе Крыма</p>
+            </div>
+          </div>
+          <div class="lab-pillar reveal reveal-delay-4">
+            <div class="lab-pillar-icon">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 32 Q14 18 20 22 Q26 26 32 12" stroke="#C4BC8A" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <circle cx="8"  cy="32" r="3" fill="#C4BC8A"/>
+                <circle cx="32" cy="12" r="3" fill="#C4BC8A"/>
+              </svg>
+            </div>
+            <div class="lab-pillar-text">
+              <h4>Арт-практики</h4>
+              <p>Творческие проекты, мерч и арт-объекты, вдохновлённые крымскими эндемиками и мотивами</p>
+            </div>
+          </div>
+        </div>
+        <div class="lab-quote-block reveal" style="transition-delay:0.7s">
+          <p class="lab-quote">«Крым — это текст, написанный тысячелетиями. Я только учусь его читать вслух»</p>
+          <span class="lab-quote-author">— Мария-Николь</span>
+        </div>
+      </div>
+
+      <div class="lab-cards reveal-right">
+        <div class="lab-card">
+          <div class="lab-card-num">01</div>
+          <h4>Культурный ландшафт</h4>
+          <p>Изучение взаимосвязи природного и культурного в крымском пространстве</p>
+        </div>
+        <div class="lab-card">
+          <div class="lab-card-num">02</div>
+          <h4>Живые традиции</h4>
+          <p>Фольклор, ремёсла и устное наследие народов полуострова</p>
+        </div>
+        <div class="lab-card" style="transition-delay:0.15s">
+          <div class="lab-card-num">03</div>
+          <h4>Современное искусство</h4>
+          <p>Диалог между крымской идентичностью и современными художественными языками</p>
+        </div>
+        <div class="lab-card" style="transition-delay:0.3s">
+          <div class="lab-card-num">04</div>
+          <h4>Ботаническое наследие</h4>
+          <p>Крымские эндемики как символы и образы в культуре, науке и дизайне</p>
+        </div>
+        <div class="lab-card" style="transition-delay:0.45s">
+          <div class="lab-card-num">05</div>
+          <h4>Публичные программы</h4>
+          <p>Мероприятия, выставки и коллаборации, открытые для всех, кто любит Крым</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ЛЕКЦИИ ───────────────────────────────────────────────────── -->
+<section id="lectures">
+  <div class="container">
+    <div class="lectures-header reveal">
+      <div class="section-label">Анонсы лекций</div>
+      <h2 class="section-title">Предстоящие<br/><em>лекции</em></h2>
+      <div class="divider" style="margin: 1.5rem auto;"></div>
+    </div>
+
+    <div class="lectures-grid">
+      <div class="lecture-card reveal">
+        <div class="lecture-card-top">
+          <div>
+            <div class="lecture-date">14</div>
+            <div class="lecture-month">Июня 2026</div>
+          </div>
+          <span class="lecture-badge badge-upcoming">Анонс</span>
+        </div>
+        <h3 class="lecture-title">Крымский можжевельник: тысячелетний свидетель истории</h3>
+        <p class="lecture-desc">Как реликтовый можжевельник стал символом крымского пейзажа и хранителем памяти о прошлом. Лекция с фотографиями и иллюстрациями.</p>
+        <div class="lecture-footer">
+          <span class="lecture-place">
+            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 1.5C5.51 1.5 3.5 3.51 3.5 6c0 3.75 4.5 8.5 4.5 8.5s4.5-4.75 4.5-8.5c0-2.49-2.01-4.5-4.5-4.5z" stroke="currentColor" stroke-width="1.2"/>
+              <circle cx="8" cy="6" r="1.5" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+            Онлайн / Симферополь
+          </span>
+          <a href="#" class="btn-link">Записаться →</a>
+        </div>
+        <div class="lecture-card-bot">
+          <svg viewBox="0 0 80 140" xmlns="http://www.w3.org/2000/svg">
+            <rect x="36" y="110" width="8" height="30" fill="#4A5240" rx="2"/>
+            <ellipse cx="40" cy="80" rx="24" ry="55" fill="#4A5240"/>
+            <ellipse cx="40" cy="62" rx="18" ry="42" fill="#4A5240"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="lecture-card reveal reveal-delay-1">
+        <div class="lecture-card-top">
+          <div>
+            <div class="lecture-date">28</div>
+            <div class="lecture-month">Июня 2026</div>
+          </div>
+          <span class="lecture-badge badge-soon">Скоро</span>
+        </div>
+        <h3 class="lecture-title">Лаванда и ладанник: ароматы крымского предгорья</h3>
+        <p class="lecture-desc">Ботанические и культурные истории крымских эндемиков. Как растения становились мотивами в живописи, поэзии и ремёслах полуострова.</p>
+        <div class="lecture-footer">
+          <span class="lecture-place">
+            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 1.5C5.51 1.5 3.5 3.51 3.5 6c0 3.75 4.5 8.5 4.5 8.5s4.5-4.75 4.5-8.5c0-2.49-2.01-4.5-4.5-4.5z" stroke="currentColor" stroke-width="1.2"/>
+              <circle cx="8" cy="6" r="1.5" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+            Ялта • Культурный центр
+          </span>
+          <a href="#" class="btn-link">Записаться →</a>
+        </div>
+      </div>
+
+      <div class="lecture-card reveal reveal-delay-2">
+        <div class="lecture-card-top">
+          <div>
+            <div class="lecture-date">12</div>
+            <div class="lecture-month">Июля 2026</div>
+          </div>
+          <span class="lecture-badge badge-new">Новая</span>
+        </div>
+        <h3 class="lecture-title">Крымская архитектура между Востоком и Западом</h3>
+        <p class="lecture-desc">Путешествие сквозь архитектурные стили Крыма — от генуэзских крепостей до татарских дворцов и советского курортного модернизма.</p>
+        <div class="lecture-footer">
+          <span class="lecture-place">
+            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 1.5C5.51 1.5 3.5 3.51 3.5 6c0 3.75 4.5 8.5 4.5 8.5s4.5-4.75 4.5-8.5c0-2.49-2.01-4.5-4.5-4.5z" stroke="currentColor" stroke-width="1.2"/>
+              <circle cx="8" cy="6" r="1.5" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+            Онлайн • Zoom
+          </span>
+          <a href="#" class="btn-link">Записаться →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="merch-cta reveal" style="margin-top:3rem">
+      <a href="#" class="btn-outline">Все лекции →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── СТАТЬИ ───────────────────────────────────────────────────── -->
+<section id="articles">
+  <div class="articles-bg-bot">
+    <svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 295 Q90 240 70 180 Q50 130 20 80 Q10 55 5 25" stroke="#4A5240" stroke-width="3" fill="none"/>
+      <path d="M100 295 Q110 240 130 180 Q150 130 180 80 Q190 55 195 25" stroke="#4A5240" stroke-width="3" fill="none"/>
+      <path d="M100 220 Q65 200 30 210" stroke="#4A5240" stroke-width="2.5" fill="none"/>
+      <path d="M100 200 Q135 180 170 190" stroke="#4A5240" stroke-width="2.5" fill="none"/>
+      <ellipse cx="25" cy="25" rx="14" ry="6" fill="#4A5240" transform="rotate(-40 25 25)"/>
+      <ellipse cx="175" cy="25" rx="14" ry="6" fill="#4A5240" transform="rotate(40 175 25)"/>
+    </svg>
+  </div>
+  <div class="container">
+    <div class="articles-inner">
+      <div>
+        <div class="articles-col-header reveal">
+          <div class="section-label">Публикации</div>
+          <h2 class="section-title">Статьи о<br/>культуре<br/><em>Крыма</em></h2>
+          <div class="divider"></div>
+        </div>
+        <div class="article-featured reveal reveal-delay-1">
+          <div class="article-featured-thumb">
+            <!-- Декоративный кипарис в превью -->
+            <svg style="position:absolute;right:2rem;bottom:0;width:70px;opacity:0.3" viewBox="0 0 60 200" xmlns="http://www.w3.org/2000/svg">
+              <rect x="27" y="160" width="6" height="40" fill="#fff" rx="2"/>
+              <ellipse cx="30" cy="118" rx="18" ry="58" fill="#fff"/>
+              <ellipse cx="30" cy="97"  rx="14" ry="46" fill="#fff"/>
+            </svg>
+            <p class="article-featured-thumb-text">Код<br/>крымского<br/>ландшафта</p>
+          </div>
+          <div class="article-featured-body">
+            <span class="article-tag">Культурология</span>
+            <h3 class="article-featured-title">Как природа Крыма формирует его культурный код</h3>
+            <p class="article-featured-text">Горы, море и степь — не просто фон. Они — соавторы крымской культуры. В этой статье я исследую, как ландшафт полуострова определял жизненный уклад, мифологию и художественные традиции его обитателей на протяжении тысячелетий.</p>
+            <div class="article-meta">
+              <span>15 мая 2026</span>
+              <span>10 мин чтения</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="articles-col-header reveal" style="margin-top:6rem">
+          <div class="section-label">Последние</div>
+        </div>
+        <div class="articles-list reveal reveal-delay-1">
+          <div class="article-row">
+            <div class="article-row-num">01</div>
+            <div class="article-row-body">
+              <div class="article-row-title">Виноградная лоза и крымская живопись XIX века</div>
+              <div class="article-row-date">2 мая 2026</div>
+            </div>
+          </div>
+          <div class="article-row">
+            <div class="article-row-num">02</div>
+            <div class="article-row-body">
+              <div class="article-row-title">Орнаменты крымских татар: геометрия и смыслы</div>
+              <div class="article-row-date">18 апреля 2026</div>
+            </div>
+          </div>
+          <div class="article-row">
+            <div class="article-row-num">03</div>
+            <div class="article-row-body">
+              <div class="article-row-title">Генуэзские крепости: камень как летопись</div>
+              <div class="article-row-date">5 апреля 2026</div>
+            </div>
+          </div>
+          <div class="article-row">
+            <div class="article-row-num">04</div>
+            <div class="article-row-body">
+              <div class="article-row-title">Кипарисовая аллея: эстетика крымского юга</div>
+              <div class="article-row-date">22 марта 2026</div>
+            </div>
+          </div>
+          <div class="article-row">
+            <div class="article-row-num">05</div>
+            <div class="article-row-body">
+              <div class="article-row-title">Греческое наследие Херсонеса</div>
+              <div class="article-row-date">10 марта 2026</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem" class="reveal reveal-delay-2">
+          <a href="#" class="btn-link" style="color:var(--gold);font-size:0.8rem;font-weight:600;letter-spacing:0.12em">Читать все статьи →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── МЕРОПРИЯТИЯ ──────────────────────────────────────────────── -->
+<section id="events">
+  <!-- Декор лаванды -->
+  <div class="events-bot">
+    <svg viewBox="0 0 100 300" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="295" x2="50" y2="80" stroke="#4A5240" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="50" cy="55"  rx="8" ry="30" fill="#4A5240"/>
+      <line x1="50" y1="180" x2="25" y2="145" stroke="#4A5240" stroke-width="2.5" stroke-linecap="round"/>
+      <ellipse cx="25" cy="128" rx="6" ry="23" fill="#4A5240" transform="rotate(-20 25 128)"/>
+      <line x1="50" y1="165" x2="75" y2="132" stroke="#4A5240" stroke-width="2.5" stroke-linecap="round"/>
+      <ellipse cx="75" cy="115" rx="6" ry="23" fill="#4A5240" transform="rotate(20 75 115)"/>
+      <line x1="50" y1="215" x2="15" y2="190" stroke="#4A5240" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="15" cy="177" rx="5" ry="18" fill="#4A5240" transform="rotate(-30 15 177)"/>
+      <line x1="50" y1="205" x2="85" y2="182" stroke="#4A5240" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="85" cy="169" rx="5" ry="18" fill="#4A5240" transform="rotate(30 85 169)"/>
+    </svg>
+  </div>
+  <div class="container">
+    <div class="events-header reveal">
+      <div class="section-label">Афиша</div>
+      <h2 class="section-title">Предстоящие<br/><em>события</em></h2>
+      <div class="divider" style="margin: 1.5rem auto;"></div>
+    </div>
+    <div class="events-timeline">
+      <div class="event-item reveal">
+        <div class="event-dot"><div class="event-dot-inner"></div></div>
+        <div class="event-card">
+          <span class="event-date-chip">14 июня 2026</span>
+          <h4 class="event-title">Лекция: Крымский можжевельник</h4>
+          <p class="event-desc">Онлайн-встреча для всех, кто интересуется природой и культурой Крыма</p>
+        </div>
+        <div class="event-side"></div>
+      </div>
+      <div class="event-item reveal reveal-delay-1">
+        <div class="event-dot"><div class="event-dot-inner"></div></div>
+        <div class="event-card">
+          <span class="event-date-chip">21 июня 2026</span>
+          <h4 class="event-title">Презентация: Мерч Ай-Никола</h4>
+          <p class="event-desc">Премьера ботанической коллекции — принты с крымскими эндемиками</p>
+        </div>
+        <div class="event-side"></div>
+      </div>
+      <div class="event-item reveal reveal-delay-2">
+        <div class="event-dot"><div class="event-dot-inner"></div></div>
+        <div class="event-card">
+          <span class="event-date-chip">28 июня 2026</span>
+          <h4 class="event-title">Лекция: Лаванда и ладанник</h4>
+          <p class="event-desc">Ялта, Культурный центр — ароматы и образы крымского предгорья</p>
+        </div>
+        <div class="event-side"></div>
+      </div>
+      <div class="event-item reveal reveal-delay-3">
+        <div class="event-dot"><div class="event-dot-inner"></div></div>
+        <div class="event-card">
+          <span class="event-date-chip">12 июля 2026</span>
+          <h4 class="event-title">Лекция: Архитектура Крыма</h4>
+          <p class="event-desc">Онлайн — путешествие по архитектурным стилям полуострова</p>
+        </div>
+        <div class="event-side"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── МЕРЧ ─────────────────────────────────────────────────────── -->
+<section id="merch">
+  <div class="container">
+    <div class="merch-header reveal">
+      <div class="section-label">Магазин</div>
+      <h2 class="section-title">Мерч<br/><em>Ай-Никола</em></h2>
+      <div class="divider" style="margin: 1.5rem auto;"></div>
+      <p style="max-width:500px;margin:0 auto;font-size:0.95rem;line-height:1.8;color:var(--text-light)">
+        Предметы, вдохновлённые крымскими эндемиками — для тех, кто любит полуостров не только сердцем, но и глазами
+      </p>
+    </div>
+    <div class="merch-grid">
+      <div class="merch-card reveal">
+        <div class="merch-thumb merch-thumb-1">
+          <div style="text-align:center;position:relative;z-index:1">
+            <svg width="80" height="100" viewBox="0 0 80 140" xmlns="http://www.w3.org/2000/svg">
+              <rect x="36" y="110" width="8" height="30" fill="#8A7D52" rx="2"/>
+              <ellipse cx="40" cy="78" rx="22" ry="58" fill="#8A7D52" opacity="0.7"/>
+              <ellipse cx="40" cy="60" rx="17" ry="46" fill="#8A7D52" opacity="0.85"/>
+              <ellipse cx="40" cy="42" rx="12" ry="34" fill="#8A7D52"/>
+            </svg>
+          </div>
+          <div class="merch-bot-decor">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <circle cx="50" cy="50" r="45" stroke="#8A7D52" stroke-width="0.5" stroke-dasharray="3 3"/>
+            </svg>
+          </div>
+        </div>
+        <div class="merch-body">
+          <div class="merch-name">Принт «Кипарис»</div>
+          <div class="merch-sub">Постер А3 • Шелкография</div>
+          <div class="merch-price">850 ₽</div>
+        </div>
+      </div>
+
+      <div class="merch-card reveal reveal-delay-1">
+        <div class="merch-thumb merch-thumb-2">
+          <svg width="70" height="110" viewBox="0 0 80 160" xmlns="http://www.w3.org/2000/svg">
+            <line x1="40" y1="155" x2="40" y2="55" stroke="#8A7AB0" stroke-width="3" stroke-linecap="round"/>
+            <ellipse cx="40" cy="38" rx="7" ry="26" fill="#9A8BB5"/>
+            <line x1="40" y1="110" x2="20" y2="86" stroke="#8A7AB0" stroke-width="2" fill="none"/>
+            <ellipse cx="20" cy="72" rx="5" ry="19" fill="#9A8BB5" transform="rotate(-20 20 72)"/>
+            <line x1="40" y1="99" x2="60" y2="76" stroke="#8A7AB0" stroke-width="2" fill="none"/>
+            <ellipse cx="60" cy="62" rx="5" ry="19" fill="#9A8BB5" transform="rotate(20 60 62)"/>
+          </svg>
+        </div>
+        <div class="merch-body">
+          <div class="merch-name">Сумка «Лаванда»</div>
+          <div class="merch-sub">Эко-хлопок • Ботанический принт</div>
+          <div class="merch-price">1 200 ₽</div>
+        </div>
+      </div>
+
+      <div class="merch-card reveal reveal-delay-2">
+        <div class="merch-thumb merch-thumb-3">
+          <svg width="80" height="90" viewBox="0 0 110 120" xmlns="http://www.w3.org/2000/svg">
+            <path d="M55 115 L55 45" stroke="#4A5240" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M55 45 Q32 26 8 35" stroke="#4A5240" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M55 60 Q78 42 102 50" stroke="#4A5240" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M55 78 Q28 65 6 72" stroke="#4A5240" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M55 88 Q80 76 104 82" stroke="#4A5240" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <circle cx="8"  cy="35" r="6" fill="#2E3B28"/>
+            <circle cx="102" cy="50" r="6" fill="#2E3B28"/>
+            <circle cx="6"  cy="72" r="5" fill="#2E3B28"/>
+            <circle cx="104" cy="82" r="5" fill="#2E3B28"/>
+          </svg>
+        </div>
+        <div class="merch-body">
+          <div class="merch-name">Блокнот «Можжевельник»</div>
+          <div class="merch-sub">А5 • Крафт • 120 страниц</div>
+          <div class="merch-price">650 ₽</div>
+        </div>
+      </div>
+
+      <div class="merch-card reveal reveal-delay-3">
+        <div class="merch-thumb merch-thumb-4">
+          <svg width="70" height="70" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+            <!-- Ладанник 5 лепестков -->
+            <ellipse cx="45" cy="22" rx="12" ry="20" fill="#F5F0E8" stroke="#C4BC8A" stroke-width="1" transform="rotate(0  45 45)"/>
+            <ellipse cx="45" cy="22" rx="12" ry="20" fill="#F5F0E8" stroke="#C4BC8A" stroke-width="1" transform="rotate(72  45 45)"/>
+            <ellipse cx="45" cy="22" rx="12" ry="20" fill="#F5F0E8" stroke="#C4BC8A" stroke-width="1" transform="rotate(144 45 45)"/>
+            <ellipse cx="45" cy="22" rx="12" ry="20" fill="#F5F0E8" stroke="#C4BC8A" stroke-width="1" transform="rotate(216 45 45)"/>
+            <ellipse cx="45" cy="22" rx="12" ry="20" fill="#F5F0E8" stroke="#C4BC8A" stroke-width="1" transform="rotate(288 45 45)"/>
+            <circle cx="45" cy="45" r="10" fill="#C4BC8A"/>
+            <circle cx="45" cy="45" r="6"  fill="#8A7D52"/>
+          </svg>
+        </div>
+        <div class="merch-body">
+          <div class="merch-name">Открытка «Ладанник»</div>
+          <div class="merch-sub">Набор 5 шт • Акварель</div>
+          <div class="merch-price">350 ₽</div>
+        </div>
+      </div>
+    </div>
+    <div class="merch-cta reveal">
+      <a href="#contact" class="btn-primary">Заказать мерч →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── КОНТАКТЫ ─────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="contact-bg-bot">
+    <svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 295 L100 75" stroke="#4A5240" stroke-width="4"/>
+      <ellipse cx="100" cy="48" rx="12" ry="36" fill="#4A5240"/>
+      <path d="M100 75 Q60 48 18 58" stroke="#4A5240" stroke-width="3" fill="none"/>
+      <path d="M100 100 Q140 74 182 84" stroke="#4A5240" stroke-width="3" fill="none"/>
+      <path d="M100 128 Q55 110 15 120" stroke="#4A5240" stroke-width="2.5" fill="none"/>
+      <path d="M100 148 Q145 132 185 140" stroke="#4A5240" stroke-width="2.5" fill="none"/>
+      <circle cx="18" cy="58" r="9" fill="#4A5240"/>
+      <circle cx="182" cy="84" r="9" fill="#4A5240"/>
+      <circle cx="15" cy="120" r="7" fill="#4A5240"/>
+      <circle cx="185" cy="140" r="7" fill="#4A5240"/>
+    </svg>
+  </div>
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <div class="reveal">
+          <div class="section-label">Контакты</div>
+          <h2 class="section-title">Давайте<br/>говорить<br/>о <em>Крыме</em></h2>
+          <div class="divider"></div>
+        </div>
+        <p class="reveal reveal-delay-1">
+          Я рада рассказам, вопросам и коллаборациям. Если хотите пригласить меня на лекцию, поговорить о совместном проекте или просто поделиться любовью к Крыму — пишите.
+        </p>
+        <div class="contact-links reveal reveal-delay-2">
+          <a href="mailto:hello@ay-nikola.ru" class="contact-link">
+            <div class="contact-link-icon">
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="4" width="12" height="9" rx="1.5" stroke="var(--gold)" stroke-width="1.2"/>
+                <path d="M2 5.5 L8 9.5 L14 5.5" stroke="var(--gold)" stroke-width="1.2"/>
+              </svg>
+            </div>
+            hello@ay-nikola.ru
+          </a>
+          <a href="https://t.me/ay_nikola" class="contact-link">
+            <div class="contact-link-icon">
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 2.5 L1.5 7.5 L5.5 8.5 L7.5 13.5 L10 10 L13 11.5 Z" stroke="var(--gold)" stroke-width="1.2" stroke-linejoin="round"/>
+                <path d="M5.5 8.5 L9.5 5.5" stroke="var(--gold)" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            Telegram: @ay_nikola
+          </a>
+          <a href="https://instagram.com/ay.nikola" class="contact-link">
+            <div class="contact-link-icon">
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="12" height="12" rx="3" stroke="var(--gold)" stroke-width="1.2"/>
+                <circle cx="8" cy="8" r="3" stroke="var(--gold)" stroke-width="1.2"/>
+                <circle cx="11.5" cy="4.5" r="0.8" fill="var(--gold)"/>
+              </svg>
+            </div>
+            Instagram: @ay.nikola
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form-card reveal-right">
+        <h3 class="contact-form-title">Написать Марии-Николь</h3>
+        <form onsubmit="handleForm(event)">
+          <div class="form-group">
+            <label>Ваше имя</label>
+            <input type="text" placeholder="Как вас зовут?" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com" />
+          </div>
+          <div class="form-group">
+            <label>Тема</label>
+            <select>
+              <option>Приглашение на лекцию</option>
+              <option>Совместный проект</option>
+              <option>Заказ мерча</option>
+              <option>Вопрос о Крыме</option>
+              <option>Другое</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Сообщение</label>
+            <textarea placeholder="Расскажите о вашем запросе..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit">Отправить →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">Ай-Никола</div>
+    <div class="footer-sub">Творческая лаборатория • Культура Крыма</div>
+    <ul class="footer-links">
+      <li><a href="#about">О проекте</a></li>
+      <li><a href="#lab">Лаборатория</a></li>
+      <li><a href="#lectures">Лекции</a></li>
+      <li><a href="#articles">Статьи</a></li>
+      <li><a href="#events">События</a></li>
+      <li><a href="#merch">Мерч</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Мария-Николь • Творческая лаборатория Ай-Никола</div>
+  </div>
+</footer>
+
+<!-- ─── JS ───────────────────────────────────────────────────────── -->
+<script>
+  // Навбар при скролле
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // IntersectionObserver для reveal-анимаций
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+  // Параллакс кипарисов в hero
+  const p1 = document.getElementById('parallax-1');
+  const p2 = document.getElementById('parallax-2');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (p1) p1.style.transform = `translateY(${y * 0.18}px)`;
+    if (p2) p2.style.transform = `translateY(${y * 0.12}px)`;
+  }, { passive: true });
+
+  // Форма
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    const orig = btn.textContent;
+    btn.textContent = 'Отправлено ✓';
+    btn.style.background = 'var(--olive-mid)';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = orig;
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 3000);
+  }
+
+  // Плавная прокрутка по якорям
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
