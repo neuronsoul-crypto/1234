@@ -1,91 +1,94 @@
-// Preloader
-window.addEventListener('load', () => {
-  const preloader = document.getElementById('preloader');
-  setTimeout(() => preloader.classList.add('hidden'), 800);
+// ===== NAV: solid on scroll =====
+const nav = document.querySelector('nav');
+const onScroll = () => nav && nav.classList.toggle('solid', window.scrollY > 20);
+onScroll();
+window.addEventListener('scroll', onScroll);
+
+// ===== MOBILE MENU =====
+const burger = document.querySelector('.burger');
+const mobilePanel = document.querySelector('.mobile-panel');
+if (burger && mobilePanel) {
+  burger.addEventListener('click', () => mobilePanel.classList.toggle('open'));
+  mobilePanel.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => mobilePanel.classList.remove('open'))
+  );
+}
+
+// ===== SERVICE TABS =====
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabPanels = document.querySelectorAll('.tab-panel');
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabBtns.forEach(b => b.classList.remove('active'));
+    tabPanels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
 });
 
-// Nav scroll effect
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
+// ===== FAQ ACCORDION =====
+document.querySelectorAll('.faq-item').forEach(item => {
+  const q = item.querySelector('.faq-q');
+  const a = item.querySelector('.faq-a');
+  q.addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(other => {
+      if (other !== item) {
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = null;
+      }
+    });
+    item.classList.toggle('open', !isOpen);
+    a.style.maxHeight = !isOpen ? a.scrollHeight + 'px' : null;
+  });
+});
 
-// Scroll reveal with IntersectionObserver
-const revealEls = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale');
+// ===== CONTACT / WAITLIST FORMS -> TELEGRAM DEEP LINK =====
+const TELEGRAM_USERNAME = 'markova_biomed'; // TODO: заменить на реальный ник Галины в Telegram
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('revealed');
-      observer.unobserve(entry.target);
+function buildTelegramMessage(fields) {
+  return Object.entries(fields)
+    .filter(([, v]) => v && String(v).trim())
+    .map(([k, v]) => `${k}: ${v}`)
+    .join('\n');
+}
+
+document.querySelectorAll('form[data-lead-form]').forEach(form => {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const fields = {};
+    data.forEach((value, key) => { fields[key] = value; });
+
+    const text = buildTelegramMessage(fields);
+    const encoded = encodeURIComponent(text);
+
+    const successBlock = form.parentElement.querySelector('.form-success');
+    if (successBlock) {
+      form.style.display = 'none';
+      successBlock.classList.add('show');
     }
+
+    const link = document.createElement('a');
+    link.href = `https://t.me/${TELEGRAM_USERNAME}?text=${encoded}`;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-revealEls.forEach(el => observer.observe(el));
-
-// Subtle parallax on about sticky image
-const aboutImg = document.querySelector('.about__sticky-img img');
-if (aboutImg) {
-  const aboutSection = document.querySelector('.about');
-  window.addEventListener('scroll', () => {
-    const rect = aboutSection.getBoundingClientRect();
-    const progress = -rect.top / (rect.height - window.innerHeight);
-    const clamped = Math.max(0, Math.min(1, progress));
-    aboutImg.style.transform = `scale(1.08) translateY(${clamped * 40}px)`;
-  }, { passive: true });
-}
-
-// Hero char reveal eyebrow
-const eyebrow = document.querySelector('.hero__eyebrow');
-if (eyebrow) {
-  const text = eyebrow.textContent;
-  eyebrow.textContent = '';
-  eyebrow.style.opacity = '1';
-  [...text].forEach((ch, i) => {
-    const span = document.createElement('span');
-    span.textContent = ch;
-    span.style.cssText = `
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(8px);
-      animation: charReveal .4s ease ${.4 + i * .03}s forwards;
-    `;
-    eyebrow.appendChild(span);
-  });
-}
-
-// Inject charReveal keyframe
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes charReveal {
-    to { opacity: 1; transform: translateY(0); }
-  }
-`;
-document.head.appendChild(style);
-
-// Cursor trail (subtle paw prints on click)
-document.addEventListener('click', (e) => {
-  const paw = document.createElement('div');
-  paw.textContent = '🐾';
-  paw.style.cssText = `
-    position: fixed;
-    left: ${e.clientX - 12}px;
-    top: ${e.clientY - 12}px;
-    font-size: 1.2rem;
-    pointer-events: none;
-    z-index: 9998;
-    animation: pawFade .8s ease forwards;
-  `;
-  document.body.appendChild(paw);
-  setTimeout(() => paw.remove(), 800);
 });
 
-const pawStyle = document.createElement('style');
-pawStyle.textContent = `
-  @keyframes pawFade {
-    0%   { opacity: .9; transform: scale(1) rotate(-20deg); }
-    100% { opacity: 0; transform: scale(1.5) translateY(-20px) rotate(-10deg); }
-  }
-`;
-document.head.appendChild(pawStyle);
+// ===== REVEAL ON SCROLL =====
+const revealEls = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window && revealEls.length) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+}
