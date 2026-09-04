@@ -1,268 +1,630 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>КОСИК — Кот. Судак. Кипарисовая.</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Галина Маркова — нейронутрициолог. Метаболомика и клиническая биохимия</title>
+<meta name="description" content="Галина Маркова — нейронутрициолог, специалист по метаболомике и клинической биохимии. Персональные протоколы питания и БАДов на основе анализов. Онлайн-консультации.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- PRELOADER -->
-  <div class="preloader" id="preloader">
-    <div class="preloader__paw">🐾</div>
-    <div class="preloader__text">Косик идёт...</div>
+<!-- ================= NAV ================= -->
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark">ГМ</span>
+      <span>Галина Маркова<small>нейронутрициолог</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#about">Обо мне</a>
+      <a href="#services">Услуги</a>
+      <a href="#journey">Как это устроено</a>
+      <a href="#courses">Курсы</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contact">Контакты</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-ghost btn-sm">Задать вопрос</a>
+      <a href="#contact" class="btn btn-primary btn-sm">Записаться</a>
+    </div>
+    <button class="burger" aria-label="Меню"><span></span></button>
   </div>
+</nav>
 
-  <!-- NAV -->
-  <nav class="nav" id="nav">
-    <div class="nav__logo">КОСИК</div>
-    <div class="nav__links">
-      <a href="#about">История</a>
-      <a href="#owners">Хозяева</a>
-      <a href="#stories">Истории</a>
-      <a href="#suri">Сури</a>
-      <a href="#gallery">Фото</a>
-    </div>
-  </nav>
+<div class="mobile-panel">
+  <a href="#about">Обо мне</a>
+  <a href="#services">Услуги</a>
+  <a href="#journey">Как это устроено</a>
+  <a href="#courses">Курсы</a>
+  <a href="#reviews">Отзывы</a>
+  <a href="#contact">Контакты</a>
+  <a href="#contact" class="btn btn-primary">Записаться на консультацию</a>
+</div>
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero__bg">
-      <img src="photos/kosik3.png" alt="" class="hero__bg-img" />
-      <div class="hero__bg-overlay"></div>
-    </div>
-    <div class="hero__content">
-      <div class="hero__eyebrow reveal-char">Судак · ул. Кипарисовая</div>
-      <h1 class="hero__title">
-        <span class="hero__title-line" data-text="КО">КО</span><span class="hero__title-line hero__title-accent" data-text="СИК">СИК</span>
-      </h1>
-      <p class="hero__sub reveal-up">Кот. Философ. Владелец улицы.</p>
-      <div class="hero__scroll-hint reveal-up" style="--delay:.6s">
-        <span>Листай</span>
-        <div class="hero__scroll-line"></div>
+<div id="top"></div>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Нейронутрициология · Метаболомика</span>
+      <h1>Работаю с <em>метаболизмом</em>,<br>а не только с симптомами</h1>
+      <p class="hero-sub">Персональные протоколы питания, БАДов и коррекции образа жизни на основе ваших анализов — биохимии, а не догадок. Для женщин, которые чувствуют, что организм работает на пределе, и для мам детей с особыми потребностями.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Записаться на консультацию</a>
+        <a href="#services" class="btn btn-ghost">Посмотреть услуги и цены</a>
+      </div>
+      <div class="hero-trust">
+        <div><b>7+ лет</b><span>практики в нутрициологии</span></div>
+        <div><b>500+</b><span>клиентских кейсов</span></div>
+        <div><b>Сеченовский</b><span>университет, кафедра питания</span></div>
+        <div><b>Stanford</b><span>курс по нейрометаболизму</span></div>
       </div>
     </div>
-    <div class="hero__portrait">
-      <div class="hero__portrait-frame">
-        <img src="photos/kosik1.png" alt="Косик" />
+    <div class="hero-visual reveal">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="80" stroke="#5B7A63" stroke-width="1" stroke-dasharray="2 6" opacity=".5"/>
+        <path d="M60 60 C 90 40, 110 160, 140 140" stroke="#5B7A63" stroke-width="2.5" fill="none"/>
+        <path d="M60 140 C 90 160, 110 40, 140 60" stroke="#B9825A" stroke-width="2.5" fill="none"/>
+        <circle cx="60" cy="60" r="6" fill="#5B7A63"/>
+        <circle cx="140" cy="140" r="6" fill="#5B7A63"/>
+        <circle cx="60" cy="140" r="6" fill="#B9825A"/>
+        <circle cx="140" cy="60" r="6" fill="#B9825A"/>
+        <circle cx="100" cy="100" r="6" fill="#C4A05C"/>
+        <circle cx="80" cy="82" r="3.5" fill="#5B7A63"/>
+        <circle cx="120" cy="118" r="3.5" fill="#5B7A63"/>
+        <circle cx="80" cy="118" r="3.5" fill="#B9825A"/>
+        <circle cx="120" cy="82" r="3.5" fill="#B9825A"/>
+      </svg>
+      <div class="hero-badge">
+        <span class="dot"></span>
+        <span><b>Метаболическая карта</b>Митохондрии · метилирование · нейромедиаторы</span>
       </div>
     </div>
-  </section>
-
-  <!-- INTRO QUOTE -->
-  <section class="quote-section">
-    <div class="container">
-      <blockquote class="big-quote reveal-up">
-        <p>«Я не потерявшийся.<br>Я <em>вольный</em>.»</p>
-        <cite>— Косик, каждый раз когда его об этом спрашивают</cite>
-      </blockquote>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="about__sticky-img">
-      <img src="photos/kosik2.png" alt="Косик" class="parallax-img" />
-      <div class="about__img-caption">«Я думаю. Не мешайте.»</div>
-    </div>
-    <div class="about__content">
-      <div class="section-tag reveal-up">Глава первая</div>
-      <h2 class="section-heading reveal-up">Кто я<br><em>такой</em></h2>
-      <div class="about__text">
-        <p class="reveal-up" style="--delay:.1s">Меня зовут Косик. Я живу в Судаке, на улице <strong>Кипарисовой</strong> — единственном месте на земле, где кипарисы пахнут правильно, а плитка нагревается до нужной температуры.</p>
-        <p class="reveal-up" style="--delay:.2s">Серый. Голубоглазый. Решительный. Некоторые говорят «бездомный» — я говорю <em>«независимый»</em>. Юридически — свободный художник.</p>
-        <p class="reveal-up" style="--delay:.3s">Мой распорядок: рассвет встречаю на заборе, полдень провожу в тени кипариса, вечер резервирую для ужина. Система работает безупречно уже несколько лет.</p>
-      </div>
-      <div class="about__stats reveal-up" style="--delay:.4s">
-        <div class="mini-stat">
-          <div class="mini-stat__val">∞</div>
-          <div class="mini-stat__key">кипарисов на улице</div>
-        </div>
-        <div class="mini-stat">
-          <div class="mini-stat__val">2×</div>
-          <div class="mini-stat__key">кормёжка в день</div>
-        </div>
-        <div class="mini-stat">
-          <div class="mini-stat__val">1</div>
-          <div class="mini-stat__key">любимая улица</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DIVIDER -->
-  <div class="divider-line reveal-scale">
-    <span>🐾</span>
   </div>
+</header>
 
-  <!-- OWNERS -->
-  <section class="owners" id="owners">
-    <div class="container">
-      <div class="section-tag reveal-up">Глава вторая</div>
-      <h2 class="section-heading reveal-up">Рустам<br>и <em>Мария</em></h2>
-      <p class="owners__intro reveal-up">Есть люди, которые просто привозят еду. А есть <strong>Рустам и Мария</strong> — они приезжают на белой машине и привозят её каждый день. Это называется преданность. Я это ценю.</p>
+<!-- ================= STATS ================= -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stat"><b>7+</b><span>лет практики</span></div>
+    <div class="stat"><b>500+</b><span>клиентских кейсов</span></div>
+    <div class="stat"><b>100%</b><span>онлайн-формат, из любой точки мира</span></div>
+    <div class="stat"><b>20+</b><span>протоколов и алгоритмов в библиотеке</span></div>
+  </div>
+</section>
 
-      <div class="owners__cards">
-        <div class="owner-card reveal-left">
-          <div class="owner-card__num">01</div>
-          <div class="owner-card__icon">🧔</div>
-          <h3>Рустам</h3>
-          <p>Слышу его машину за три квартала. Встаю. Потягиваюсь. Иду встречать — но не торопясь, чтобы не было видно, что я ждал.</p>
-          <div class="owner-card__quote">«Косик, ты уже тут?» — спрашивает каждый раз. Каждый раз.</div>
-        </div>
-        <div class="owner-card reveal-right">
-          <div class="owner-card__num">02</div>
-          <div class="owner-card__icon">👩‍🦰</div>
-          <h3>Мария</h3>
-          <p>Гладит правильно — от макушки к хвосту, без резких движений. Знает мои вкусы. Не задаёт лишних вопросов. Идеальный человек.</p>
-          <div class="owner-card__quote">«Какой же ты красивый!» — это не обсуждается.</div>
-        </div>
-      </div>
-
-      <div class="white-car reveal-up">
-        <div class="white-car__icon">🚗</div>
-        <p>Белая машина — это мой <strong>рефлекс</strong>. Услышал звук двигателя — встал. Всё остальное происходит само собой.</p>
+<!-- ================= ABOUT ================= -->
+<section class="section" id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <div class="about-photo">
+        <span class="initials">ГМ</span>
+        <div class="about-photo-note">Место для портретного фото Галины — добавим после фотосессии</div>
       </div>
     </div>
-  </section>
+    <div>
+      <span class="eyebrow">Обо мне</span>
+      <h2>Галина Маркова, нейронутрициолог</h2>
+      <p class="lede" style="margin-top:16px">Практикующий нейронутрициолог с фундаментальным уклоном в метаболомику и клиническую биохимию. Более 7 лет помогаю разбираться не с симптомами, а с их биохимическими причинами.</p>
 
-  <!-- STORIES -->
-  <section class="stories" id="stories">
-    <div class="container">
-      <div class="section-tag reveal-up">Глава третья</div>
-      <h2 class="section-heading reveal-up">Истории<br><em>из первых лап</em></h2>
-    </div>
+      <div class="about-quote">«Ваша усталость, срывы и ощущение, что организм работает на пределе, — это не характер и не лень. Чаще всего это дефициты, нарушения метилирования или дисбаланс нейромедиаторов, которые можно найти и скорректировать».</div>
 
-    <div class="stories__track">
-
-      <article class="story reveal-up" style="--delay:0s">
-        <div class="story__num">001</div>
-        <div class="story__emoji">🌅</div>
-        <h3 class="story__title">Рассвет</h3>
-        <p class="story__text">В пять утра я взобрался на самый высокий забор Кипарисовой. Море было розовым. Небо — оранжевым. Кипарисы стояли как всегда — молчаливые, важные. Я сидел и думал о вечном.</p>
-        <p class="story__text">Потом пришёл Рустам. Я сделал вид, что просто мимо шёл. Нельзя, чтобы люди знали о твоей чувствительности.</p>
-      </article>
-
-      <article class="story reveal-up" style="--delay:.1s">
-        <div class="story__num">002</div>
-        <div class="story__emoji">🐦</div>
-        <h3 class="story__title">Голубь</h3>
-        <p class="story__text">На углу улицы живёт голубь, который думает, что он тут главный. Мы смотрим друг на друга уже три года. Он улетает первым. Всегда.</p>
-        <p class="story__text">Я не гоняюсь за ним. Зачем? Само всё понятно.</p>
-      </article>
-
-      <article class="story reveal-up" style="--delay:.2s">
-        <div class="story__num">003</div>
-        <div class="story__emoji">🌧️</div>
-        <h3 class="story__title">Дождь</h3>
-        <p class="story__text">Дождь — это личное оскорбление. Я сижу у двери и смотрю на небо с выражением «кто это одобрил?». Небо не отвечает. Неуважение.</p>
-        <p class="story__text">Мария открыла дверь и поставила миску в сухом месте. Хорошая женщина. Всё понимает без слов.</p>
-      </article>
-
-      <article class="story reveal-up" style="--delay:.3s">
-        <div class="story__num">004</div>
-        <div class="story__emoji">🐟</div>
-        <h3 class="story__title">Рыба</h3>
-        <p class="story__text">Однажды Рустам привёз настоящую крымскую рыбу. Не из пакетика — настоящую. Я съел всё. Потом мяукнул ещё раз — вдруг осталось.</p>
-        <p class="story__text">Не осталось. Но я спросил — это был жест вежливости. Воспитание не пропьёшь.</p>
-      </article>
-
-      <article class="story reveal-up" style="--delay:.4s">
-        <div class="story__num">005</div>
-        <div class="story__emoji">😴</div>
-        <h3 class="story__title">Сон</h3>
-        <p class="story__text">Люди спрашивают: «Косик, зачем ты так много спишь?» Я смотрю на них взглядом, который значит: «А зачем вы так мало?»</p>
-        <p class="story__text">Сон — это работа. Очень серьёзная работа. Попробуйте поспать 16 часов — поймёте.</p>
-      </article>
-
-      <article class="story reveal-up" style="--delay:.5s">
-        <div class="story__num">006</div>
-        <div class="story__emoji">🌿</div>
-        <h3 class="story__title">Кипарис</h3>
-        <p class="story__text">На углу улицы растёт большой кипарис. Я пометил его несколько лет назад. С тех пор — мой. Безоговорочно.</p>
-        <p class="story__text">Другие коты знают об этом. Кипарис тоже знает. Все всё понимают. Мира на Кипарисовой.</p>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- SURI -->
-  <section class="suri-section" id="suri">
-    <div class="suri-section__bg"></div>
-    <div class="suri-section__inner">
-      <div class="suri-section__text">
-        <div class="section-tag reveal-up">Глава четвёртая</div>
-        <h2 class="section-heading reveal-up">Сури</h2>
-        <p class="suri-section__sub reveal-up"><em>(не спрашивайте)</em></p>
-        <div class="suri-section__body">
-          <p class="reveal-up" style="--delay:.1s">Есть одна кошка. Зовут её <strong>Сури</strong>. Серая. Зеленоглазая. Кричит через стекло с таким видом, будто это всё из-за меня. Наверное, так и есть.</p>
-          <p class="reveal-up" style="--delay:.2s">Мы встретились на Кипарисовой. Она делала вид, что не замечает меня. Я делал вид, что мне всё равно. Мы оба были нечестны.</p>
-          <p class="reveal-up" style="--delay:.3s">Теперь иногда греемся на одной плитке. Это <em>ничего не значит</em>. Просто плитка широкая.</p>
-          <blockquote class="suri-quote reveal-up" style="--delay:.4s">
-            «Сури, ты тут?» — спрашиваю я. В глубине души. Каждый день.
-          </blockquote>
+      <div class="credentials">
+        <div class="credential">
+          <span class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3L2 8l10 5 10-5-10-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5" stroke="currentColor" stroke-width="1.6"/></svg>
+          </span>
+          <div>
+            <b>Первый МГМУ им. И.М. Сеченова</b>
+            <span>Кафедра питания и токсикологии, квалификация «Нутрициолог»</span>
+          </div>
         </div>
-      </div>
-      <div class="suri-section__photo reveal-right">
-        <div class="suri-photo-frame">
-          <img src="photos/suri.png" alt="Сури" />
-          <div class="suri-photo-caption">Сури. Мнение у неё всегда есть.</div>
+        <div class="credential">
+          <span class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.6 5.5L21 8.5l-4.5 4.2 1 6.3L12 16l-5.5 3 1-6.3L3 8.5l6.4-1L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </span>
+          <div>
+            <b>Stanford University</b>
+            <span>Курс по персонализированному питанию и нейрометаболизму</span>
+          </div>
+        </div>
+        <div class="credential">
+          <span class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 3h6l1 4H8l1-4z" stroke="currentColor" stroke-width="1.6"/><path d="M5 7h14l-1.2 12.2A2 2 0 0 1 15.8 21H8.2a2 2 0 0 1-2-1.8L5 7z" stroke="currentColor" stroke-width="1.6"/><path d="M9 11v6M12 11v6M15 11v6" stroke="currentColor" stroke-width="1.6"/></svg>
+          </span>
+          <div>
+            <b>Клиническая биохимия и нутригенетика</b>
+            <span>Дополнительные сертификаты функциональной диагностики — вузы РФ и зарубежные программы</span>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- GALLERY -->
-  <section class="gallery" id="gallery">
-    <div class="container">
-      <div class="section-tag reveal-up">Архив</div>
-      <h2 class="section-heading reveal-up">Галерея<br><em>избранное</em></h2>
+<!-- ================= AUDIENCE ================= -->
+<section class="section" style="padding-top:0" id="audience">
+  <div class="wrap">
+    <div class="section-head center reveal" style="margin-left:auto;margin-right:auto">
+      <span class="eyebrow" style="justify-content:center;display:flex">С кем я работаю</span>
+      <h2>Для тех, кто устал искать ответы у разных врачей</h2>
     </div>
-    <div class="gallery__grid">
-      <div class="gallery__cell gallery__cell--tall reveal-up">
-        <img src="photos/kosik1.png" alt="Косик" />
-        <div class="gallery__overlay">
-          <p>«Ну наконец-то. Где вы ходили?»</p>
-        </div>
+    <div class="audience-grid">
+      <div class="audience-card reveal">
+        <span class="tag">Частные клиентки</span>
+        <h3>Мамы особенных детей и женщины с гормональными нарушениями</h3>
+        <p style="margin-top:12px">Вы живёте в режиме 24/7 — реабилитации, врачи, терапии, школа. Или столкнулись с СПКЯ, эндометриозом, миомами, бесплодием, ранним климаксом — и уже перепробовали гормональные препараты, но проблема возвращается.</p>
+        <ul>
+          <li>Разбираем биохимические причины истощения: дефициты магния, В12, коэнзима Q10, дисбаланс дофамина и серотонина</li>
+          <li>Параллельно можем разобрать биохимию ребёнка — митохондриальную функцию, нейровоспаление, усвоение нутриентов, микробиоту</li>
+          <li>Даю простые, реализуемые схемы — понимаю, что на сложные диеты нет ни сил, ни времени</li>
+        </ul>
       </div>
-      <div class="gallery__cell reveal-up" style="--delay:.15s">
-        <img src="photos/kosik2.png" alt="Косик" />
-        <div class="gallery__overlay">
-          <p>«Думаю, стоит ли вам доверять»</p>
-        </div>
-      </div>
-      <div class="gallery__cell reveal-up" style="--delay:.3s">
-        <img src="photos/kosik3.png" alt="Косик" />
-        <div class="gallery__overlay">
-          <p>«Принесли еду? Нет? Тогда зачем?»</p>
-        </div>
-      </div>
-      <div class="gallery__cell reveal-up" style="--delay:.45s">
-        <img src="photos/suri.png" alt="Сури" />
-        <div class="gallery__overlay">
-          <p>Сури. Слов не нужно.</p>
-        </div>
+      <div class="audience-card reveal">
+        <span class="tag">B2B · Специалисты</span>
+        <h3>Нутрициологи, врачи и коучи по здоровью</h3>
+        <p style="margin-top:12px">Неврологи, эндокринологи, гинекологи, функциональные специалисты и коучи, которые хотят перестать гадать с дозировками и научиться работать со сложными случаями осознанно и безопасно.</p>
+        <ul>
+          <li>Учитесь читать органические кислоты и аминокислоты</li>
+          <li>Безопасно работаете с пациентами на полипрагмазии</li>
+          <li>Берёте сложные кейсы — дети, аутизм, нейровоспаление — с готовыми протоколами</li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__top reveal-up">
-        <div class="footer__title">КОСИК</div>
-        <div class="footer__tagline">Судак · ул. Кипарисовая · С любовью кормят Рустам и Мария</div>
+<!-- ================= SERVICES ================= -->
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Услуги и цены</span>
+      <h2>Формат работы под ваш запрос</h2>
+      <p class="lede" style="margin-top:14px">От разового разбора одного анализа до полного сопровождения на несколько месяцев. Все консультации — онлайн, по видеосвязи.</p>
+    </div>
+
+    <div class="tabs reveal">
+      <button class="tab-btn active" data-tab="tab-personal">Частным клиентам</button>
+      <button class="tab-btn" data-tab="tab-b2b">Специалистам (B2B)</button>
+      <button class="tab-btn" data-tab="tab-selflearn">Самостоятельное изучение</button>
+    </div>
+
+    <!-- PERSONAL -->
+    <div class="tab-panel active" id="tab-personal">
+      <div class="service-card reveal">
+        <div>
+          <h3 class="name">Экспресс-разбор анализа</h3>
+          <p class="desc">Разбираем один анализ или группу — например ОАК + ОАМ или липидный профиль. Быстрый формат для точечного вопроса.</p>
+        </div>
+        <div class="meta">
+          <div class="price">2 500 ₽</div>
+          <a href="#contact" class="btn btn-clay btn-sm">Записаться</a>
+        </div>
       </div>
-      <div class="footer__bottom reveal-up" style="--delay:.2s">
-        <p>© Косик. Все права защищены лично мной и моими синими глазами.</p>
-        <p class="footer__suri">Посвящается Сури 🐱</p>
+
+      <div class="service-card reveal">
+        <div>
+          <h3 class="name">«Биохимия под микроскопом»</h3>
+          <div class="desc">Персонализированная консультация: заполняете анкету и присылаете анализы за 6–12 месяцев.
+            <ul>
+              <li>Созвон 60–90 минут — строим вашу метаболическую карту, находим слабые звенья (митохондрии, метилирование, детоксикация, нейромедиаторы)</li>
+              <li>Формулируем гипотезу и определяем, каких анализов не хватает</li>
+              <li>Письменный протокол: недостающие анализы, базовые нутриенты с дозировками, первые шаги в питании, ссылки на исследования</li>
+            </ul>
+          </div>
+          <span class="badge-bonus">Входит в стоимость «Ведения», если продолжите после консультации</span>
+        </div>
+        <div class="meta">
+          <div class="price">15 000 ₽<small>уточняется при записи</small></div>
+          <a href="#contact" class="btn btn-clay btn-sm">Записаться</a>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div>
+          <h3 class="name">«Метаболический куратор» — ведение 1 месяц</h3>
+          <div class="desc">Тариф «Старт». Для тех, кому нужна не разовая консультация, а результат и динамика.
+            <ul>
+              <li>Вводная консультация 90 минут</li>
+              <li>Чат в мессенджере для быстрых вопросов (ответ в течение 24 часов, кроме выходных)</li>
+              <li>Коррекция протокола через 2 недели (созвон 20–30 минут)</li>
+              <li>Итоговый отчёт: что сдвинулось и что планируем дальше</li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="price">45 000 ₽<small>включая первую консультацию</small></div>
+          <a href="#contact" class="btn btn-clay btn-sm">Записаться</a>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div>
+          <h3 class="name">«Метаболический куратор» — ведение 3 месяца</h3>
+          <div class="desc">Тариф «Глубокое восстановление». Всё из тарифа «Старт», плюс:
+            <ul>
+              <li>5 полноценных встреч (60–90 минут) с расшифровкой новых анализов</li>
+              <li>Еженедельный контроль состояния — голосовые/текстовые чек-ины</li>
+              <li>Разбор метаболомики и органических кислот при наличии анализов</li>
+              <li>Выходной протокол для самостоятельного поддержания результата</li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="price">60 000 ₽<small>или 20 000 ₽ / мес</small></div>
+          <a href="#contact" class="btn btn-clay btn-sm">Записаться</a>
+        </div>
       </div>
     </div>
-  </footer>
 
-  <script src="script.js"></script>
+    <!-- B2B -->
+    <div class="tab-panel" id="tab-b2b">
+      <div class="service-card reveal">
+        <div>
+          <h3 class="name">Разовая супервизия — разбор одного кейса</h3>
+          <p class="desc">Присылаете анамнез и анализы пациента. За час разбираем биохимическую гипотезу — вы получаете готовый протокол коррекции и шаблон для похожих случаев.</p>
+        </div>
+        <div class="meta">
+          <div class="price">10 000 ₽</div>
+          <a href="#contact" class="btn btn-clay btn-sm">Записаться</a>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div>
+          <h3 class="name">Клуб-мастермайнд «Школа метаболомики», 3 месяца</h3>
+          <div class="desc">
+            <ul>
+              <li>Еженедельные групповые встречи в Zoom по 2 часа — разбираем ваши и мои сложные кейсы</li>
+              <li>Закрытый Telegram-чат для обсуждения и быстрых вопросов</li>
+              <li>Доступ к библиотеке протоколов: дефициты, лекарственные взаимодействия, нейровоспаление</li>
+              <li>Домашние задания с проверкой ваших назначений</li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="price">80 000 ₽<small>или 30 000 ₽ / мес</small></div>
+          <a href="#contact" class="btn btn-clay btn-sm">Записаться</a>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div>
+          <h3 class="name">Индивидуальное наставничество «Под ключ», 6 месяцев</h3>
+          <div class="desc">Полное погружение в метаболомику. Вход только по собеседованию.
+            <ul>
+              <li>Личные встречи раз в 2 недели (60 минут) — только ваши пациенты</li>
+              <li>Проверка всех ваших протоколов перед выдачей клиенту</li>
+              <li>Более 20 готовых шаблонов интерпретации анализов</li>
+              <li>Сертификат о прохождении наставничества с рекомендацией</li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta">
+          <div class="price">100 000 ₽<small>рассрочка на 3 месяца</small></div>
+          <a href="#contact" class="btn btn-clay btn-sm">Оставить заявку</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SELF LEARN -->
+    <div class="tab-panel" id="tab-selflearn">
+      <div class="service-card reveal">
+        <div>
+          <h3 class="name">Мини-курсы</h3>
+          <p class="desc">Готовые записанные программы без обратной связи — для тех, кто хочет получить знания, но пока не готов к наставничеству. <span class="badge-soon" style="margin-left:6px">Скоро</span></p>
+        </div>
+        <div class="meta">
+          <div class="price">от 5 000 ₽<small>до 20 000 ₽</small></div>
+          <a href="#courses" class="btn btn-ghost btn-sm">Узнать первым</a>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div>
+          <h3 class="name">Библиотека метаболических гайдов</h3>
+          <p class="desc">Мои лучшие алгоритмы и шпаргалки — по дефицитам, интерпретации анализов, коррекции протоколов. <span class="badge-soon" style="margin-left:6px">Скоро</span></p>
+        </div>
+        <div class="meta">
+          <div class="price">от 900 ₽<small>до 3 000 ₽</small></div>
+          <a href="#courses" class="btn btn-ghost btn-sm">Узнать первым</a>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <div>
+          <h3 class="name">Бесплатные чек-листы и мини-гайды</h3>
+          <p class="desc">Компактные материалы с той же ценностью, что и в платном контенте — чтобы попробовать подход и захотеть продолжить.</p>
+        </div>
+        <div class="meta">
+          <div class="price">Бесплатно</div>
+          <a href="#contact" class="btn btn-clay btn-sm">Получить</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= JOURNEY ================= -->
+<section class="section" id="journey" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Путь клиента</span>
+      <h2>Как проходит работа</h2>
+    </div>
+    <div class="journey">
+      <div class="journey-line"></div>
+      <div class="journey-step reveal">
+        <div class="journey-num">1</div>
+        <div><h3>Заявка</h3><p>Оставляете заявку на сайте или пишете в Telegram — коротко о вашем запросе.</p></div>
+      </div>
+      <div class="journey-step reveal">
+        <div class="journey-num">2</div>
+        <div><h3>Анкета и анализы</h3><p>Заполняете подробную анкету и присылаете анализы за последние 6–12 месяцев — подскажу, какие именно нужны.</p></div>
+      </div>
+      <div class="journey-step reveal">
+        <div class="journey-num">3</div>
+        <div><h3>Созвон 60–90 минут</h3><p>Строим вашу метаболическую карту, находим слабые звенья и формулируем гипотезу вместе.</p></div>
+      </div>
+      <div class="journey-step reveal">
+        <div class="journey-num">4</div>
+        <div><h3>Письменный протокол</h3><p>Получаете конкретные шаги: недостающие анализы, нутриенты с дозировками, изменения в питании, ссылки на исследования.</p></div>
+      </div>
+      <div class="journey-step reveal">
+        <div class="journey-num">5</div>
+        <div><h3>Сопровождение и коррекция</h3><p>При выборе «Ведения» — регулярные созвоны, чат для быстрых вопросов и коррекция протокола по динамике.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head center reveal" style="margin-left:auto;margin-right:auto">
+      <span class="eyebrow" style="justify-content:center;display:flex">Частые вопросы</span>
+      <h2>Прежде чем вы решитесь написать</h2>
+    </div>
+    <div style="max-width:760px;margin:0 auto">
+      <div class="faq-item">
+        <div class="faq-q"><span>Это не «развод» с БАДами?</span><span class="plus"></span></div>
+        <div class="faq-a"><p>Я не продаю БАДы напрямую и не работаю с маркетплейсами — там слишком много подделок. Я подбираю и рекомендую конкретные препараты и дозировки на основе ваших анализов, а покупка идёт через проверенных партнёров. Каждая рекомендация опирается на биохимию, а не на общий список «для всех».</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Я уже была у гинекологов/эндокринологов, ничего не помогло. Чем вы отличаетесь?</span><span class="plus"></span></div>
+        <div class="faq-a"><p>Я не заменяю врача, а работаю на уровне, который часто остаётся за кадром стандартного приёма, — метаболизм, микронутриенты, нейромедиаторы, детоксикация. Мы ищем биохимические причины, которые объясняют, почему симптом возвращается снова.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>У меня нет времени на сложные диеты и протоколы</span><span class="plus"></span></div>
+        <div class="faq-a"><p>Понимаю — особенно если вы мама ребёнка, которому нужен постоянный уход. Я даю простые, реализуемые шаги, а не 20-страничный план. Приоритизируем то, что даст эффект быстрее всего.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Онлайн-консультация действительно работает?</span><span class="plus"></span></div>
+        <div class="faq-a"><p>Да — вся моя практика построена на онлайн-формате. Анализы и подробная анкета дают полную картину, а видеозвонок позволяет разобрать всё так же детально, как очно.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Это дорого. Есть более доступный вход?</span><span class="plus"></span></div>
+        <div class="faq-a"><p>Да — можно начать с экспресс-разбора одного анализа за 2 500 ₽ или с бесплатных чек-листов и гайдов, чтобы познакомиться с подходом до полноценной консультации.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section class="section" id="reviews" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="section-head center reveal" style="margin-left:auto;margin-right:auto">
+      <span class="eyebrow" style="justify-content:center;display:flex">Отзывы</span>
+      <h2>Что говорят клиентки</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p>«Впервые за три года мне объяснили не «пейте витамины», а конкретно — каких показателей не хватает и почему. Через полтора месяца ушла постоянная усталость, которую я списывала на быт с ребёнком».</p>
+        <div class="testi-person">
+          <div class="testi-avatar">М</div>
+          <div><b>Мария, 34 года</b><span>мама ребёнка с РАС</span></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p>«Проходила гормональную терапию два года без результата. Галина показала связь между циклом и дефицитами, которые никто раньше не проверял. Цикл впервые за долгое время стал регулярным».</p>
+        <div class="testi-person">
+          <div class="testi-avatar">Е</div>
+          <div><b>Екатерина, 37 лет</b><span>СПКЯ</span></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p>«Как практикующему нутрициологу мне не хватало глубины в биохимии. После мастермайнда стала увереннее вести сложные случаи и перестала бояться назначений на полипрагмазии».</p>
+        <div class="testi-person">
+          <div class="testi-avatar">А</div>
+          <div><b>Анна, нутрициолог</b><span>участница мастермайнда</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="testi-note">Эти истории — иллюстративные примеры на основе реальных запросов клиентов. Галина, здесь стоит заменить их на цитаты из ваших 10–15 отзывов.</p>
+  </div>
+</section>
+
+<!-- ================= COURSES TEASER ================= -->
+<section class="section" id="courses">
+  <div class="wrap">
+    <div class="courses-banner reveal">
+      <div>
+        <span class="eyebrow">Скоро · Предзапуск</span>
+        <h2>Школа метаболомики для wellness-специалистов</h2>
+        <p>Программа для нутрициологов, коучей и врачей, которые хотят перестать гадать с дозировками и научиться работать со сложной биохимией системно. Запуск — ориентировочно через полгода.</p>
+        <ul class="courses-list">
+          <li>Разовые гайды и записанные мини-курсы</li>
+          <li>Менторская программа с разбором ваших кейсов</li>
+          <li>Библиотека протоколов и алгоритмов</li>
+        </ul>
+        <a href="courses.html" class="btn btn-clay">Узнать первым и попасть в лист ожидания</a>
+      </div>
+      <div class="courses-side">
+        <b>~6 мес</b>
+        <span>до запуска программы</span>
+        <a href="courses.html" class="btn btn-ghost btn-block" style="border-color:rgba(255,255,255,.3);color:#fff">Подробнее о курсе</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BLOG ================= -->
+<section class="section" id="blog" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="section-head center reveal" style="margin-left:auto;margin-right:auto">
+      <span class="eyebrow" style="justify-content:center;display:flex">Блог</span>
+      <h2>Статьи о питании, биохимии и здоровье</h2>
+      <p class="lede" style="margin-top:14px">Новая статья выходит примерно раз в неделю. Пока полноценный блог на сайте готовится — самые свежие материалы публикую в Telegram-канале.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card reveal">
+        <div class="blog-thumb">
+          <span class="blog-cat">Метаболизм</span>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="1.4" opacity=".5"/><circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="1.4"/></svg>
+        </div>
+        <div class="blog-body">
+          <h3>Дефицит магния: почему усталость — это не «просто устала»</h3>
+          <p>Как биохимические маркеры помогают увидеть скрытый дефицит раньше, чем он станет диагнозом.</p>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-thumb">
+          <span class="blog-cat">Гормоны</span>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M7 3c0 6 10 6 10 12s-10 6-10 12" stroke="currentColor" stroke-width="1.4"/></svg>
+        </div>
+        <div class="blog-body">
+          <h3>СПКЯ и питание: что действительно влияет на цикл</h3>
+          <p>Разбираем, какие нутриенты и протоколы имеют доказанную связь с гормональным балансом.</p>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-thumb">
+          <span class="blog-cat">Для специалистов</span>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M4 19V5a2 2 0 0 1 2-2h11l3 3v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="1.4"/></svg>
+        </div>
+        <div class="blog-body">
+          <h3>Как читать органические кислоты в анализе мочи</h3>
+          <p>Базовый алгоритм интерпретации для нутрициологов и врачей функциональной медицины.</p>
+        </div>
+      </div>
+    </div>
+    <div class="blog-foot">
+      <p>Все статьи и разборы кейсов — в Telegram-канале Галины</p>
+      <a href="https://t.me/markova_biomed" target="_blank" rel="noopener" class="btn btn-ghost">Читать в Telegram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="contact reveal">
+      <div class="contact-info">
+        <span class="eyebrow">Контакты</span>
+        <h2>Запишитесь на консультацию</h2>
+        <p style="margin-top:14px">Заполните форму — я свяжусь с вами в Telegram в течение суток, чтобы согласовать формат и время созвона.</p>
+        <ul class="contact-list">
+          <li>
+            <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z" stroke="currentColor" stroke-width="1.5"/></svg></span>
+            <div><b>+7 921 095-02-20</b><span>Телефон</span></div>
+          </li>
+          <li>
+            <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="currentColor" stroke-width="1.5"/><path d="m4 6 8 7 8-7" stroke="currentColor" stroke-width="1.5"/></svg></span>
+            <div><b>markovabiomed@gmail.com</b><span>Email</span></div>
+          </li>
+          <li>
+            <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m21 3-7.6 18-3-8-8-3L21 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span>
+            <div><b>@markova_biomed</b><span>Telegram — самый быстрый способ связаться</span></div>
+          </li>
+        </ul>
+        <div class="contact-social">
+          <a href="https://t.me/markova_biomed" target="_blank" rel="noopener" class="social-btn" aria-label="Telegram">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="m21 3-7.6 18-3-8-8-3L21 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <form data-lead-form>
+          <div class="field">
+            <label for="name">Имя</label>
+            <input id="name" name="Имя" type="text" placeholder="Как к вам обращаться" required>
+          </div>
+          <div class="field">
+            <label for="contact-way">Telegram или телефон</label>
+            <input id="contact-way" name="Контакт" type="text" placeholder="@username или +7 ..." required>
+          </div>
+          <div class="field">
+            <label for="service">Что интересует</label>
+            <select id="service" name="Услуга">
+              <option>Экспресс-разбор анализа</option>
+              <option>«Биохимия под микроскопом»</option>
+              <option>Ведение 1 месяц</option>
+              <option>Ведение 3 месяца</option>
+              <option>Для специалистов (B2B)</option>
+              <option>Пока не знаю, нужна консультация</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">Коротко о вашем запросе</label>
+            <textarea id="message" name="Сообщение" placeholder="Что беспокоит, какие анализы уже есть на руках"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Записаться на консультацию</button>
+          <p class="form-note">Кнопка откроет чат в Telegram с готовым сообщением — просто отправьте его</p>
+        </form>
+        <div class="form-success">
+          <div class="check">✓</div>
+          <h3>Открываем Telegram…</h3>
+          <p style="margin-top:8px">Если чат не открылся автоматически, напишите напрямую: <a href="https://t.me/markova_biomed" target="_blank" rel="noopener" style="color:var(--sage-dark);font-weight:600">@markova_biomed</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <span class="logo-mark">ГМ</span>
+          <span>Галина Маркова<small>нейронутрициолог</small></span>
+        </a>
+        <p>Метаболомика и клиническая биохимия на службе персонального питания. Работаю онлайн — из любой точки мира.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Разделы</h4>
+        <a href="#about">Обо мне</a>
+        <a href="#services">Услуги и цены</a>
+        <a href="#journey">Как это устроено</a>
+        <a href="#reviews">Отзывы</a>
+      </div>
+      <div class="footer-col">
+        <h4>Связаться</h4>
+        <a href="#contact">Записаться на консультацию</a>
+        <a href="courses.html">Курсы — лист ожидания</a>
+        <a href="https://t.me/markova_biomed" target="_blank" rel="noopener">Telegram</a>
+        <a href="mailto:markovabiomed@gmail.com">markovabiomed@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Галина Маркова. Все права защищены.</span>
+      <span>Материалы сайта носят информационный характер и не заменяют консультацию врача.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
