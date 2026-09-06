@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Барбургер — Админка</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f3ede0;color:#241408;min-height:100vh}
+:root{
+  --wood:#3c2415; --wood-dark:#241408; --gold:#d79b3d; --gold-light:#f0c26e;
+  --red:#a6273a; --good:#3f7a4d; --paper:#fffaf0; --line:#e6d8ba; --muted:#7a6a56;
+}
+a{color:inherit}
+
+header{background:linear-gradient(155deg,#123a24,#0b2a1c);padding:18px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.h-brand{display:flex;align-items:center;gap:12px}
+.h-brand .dot{width:38px;height:38px;border-radius:10px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;color:var(--wood-dark);font-size:18px}
+.h-title{font-family:'Anton',sans-serif;color:#fdf6e6;font-size:16px;letter-spacing:.5px;text-transform:uppercase;line-height:1.2}
+.h-title small{display:block;font-family:'Inter',sans-serif;font-size:11px;font-weight:400;color:rgba(253,246,230,.6);text-transform:none;letter-spacing:0;margin-top:2px}
+.h-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{font-size:13px;font-weight:600;padding:10px 18px;border-radius:100px;border:none;cursor:pointer;transition:.2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn-gold{background:linear-gradient(180deg,var(--gold-light),var(--gold));color:var(--wood-dark);box-shadow:0 8px 18px rgba(215,155,61,.35)}
+.btn-gold:hover{transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,.1);color:#fdf6e6;border:1.5px solid rgba(255,255,255,.25)}
+.btn-ghost:hover{background:rgba(255,255,255,.18)}
+
+main{max-width:1080px;margin:0 auto;padding:28px 20px 70px}
+.empty{background:var(--paper);border-radius:14px;padding:40px;text-align:center;color:var(--muted)}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:26px}
+.tile{background:var(--paper);border-radius:14px;padding:20px;border:1px solid var(--line)}
+.tile .v{font-family:'Anton',sans-serif;font-size:30px;color:var(--wood-dark)}
+.tile .l{font-size:12px;color:var(--muted);margin-top:4px}
+.tile.nps .v{color:var(--good)}
+
+.panel{background:var(--paper);border-radius:14px;padding:24px;border:1px solid var(--line);margin-bottom:20px}
+.panel h2{font-family:'Anton',sans-serif;font-size:16px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+
+.bar-row{margin-bottom:12px}
+.bar-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+.bar-top .n{color:var(--muted)}
+.bar-track{height:9px;background:#ece2c9;border-radius:6px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:6px}
+.bar-fill.red{background:linear-gradient(90deg,var(--red),#c9455c)}
+.bar-fill.good{background:linear-gradient(90deg,var(--good),#5aa06a)}
+
+.rating-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
+.rating-row .name{font-size:14px;flex:1}
+.rating-row .avg{font-family:'Anton',sans-serif;font-size:20px;color:var(--wood-dark);width:46px;text-align:right}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);white-space:nowrap}
+tbody tr:hover{background:#fbf4e2}
+.table-wrap{overflow-x:auto}
+.cell-wide{max-width:220px;white-space:pre-wrap}
+
+.pager{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:16px;font-size:13px}
+.pager button{background:var(--paper);border:1.5px solid var(--line);border-radius:8px;padding:7px 14px;cursor:pointer;font-size:13px}
+.pager button:disabled{opacity:.4;cursor:default}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-brand">
+    <div class="dot">Б</div>
+    <div class="h-title">Барбургер · Админка<small>Результаты анкеты гостей</small></div>
+  </div>
+  <div class="h-actions">
+    <a class="btn btn-gold" href="/api/admin/export.xlsx">⬇ Скачать в Excel</a>
+    <button class="btn btn-ghost" id="logoutBtn">Выйти</button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="empty" id="loading">Загрузка данных…</div>
+</main>
+
+<script>
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+function barRows(obj, total, colorClass){
+  var entries = Object.entries(obj);
+  return entries.map(function(pair){
+    var k = pair[0], v = pair[1];
+    var pct = total ? Math.round((v/total)*100) : 0;
+    return '<div class="bar-row"><div class="bar-top"><span>'+esc(k)+'</span><span class="n">'+v+' ('+pct+'%)</span></div><div class="bar-track"><div class="bar-fill '+(colorClass||'')+'" style="width:'+pct+'%"></div></div></div>';
+  }).join('');
+}
+
+function renderSummary(s){
+  var html = '';
+  html += '<div class="tiles">'
+    + '<div class="tile"><div class="v">'+s.total+'</div><div class="l">Всего анкет</div></div>'
+    + '<div class="tile"><div class="v">'+(s.ratings.taste.avg ?? '—')+'</div><div class="l">Вкус блюд</div></div>'
+    + '<div class="tile"><div class="v">'+(s.ratings.value.avg ?? '—')+'</div><div class="l">Цена / качество</div></div>'
+    + '<div class="tile"><div class="v">'+(s.ratings.range.avg ?? '—')+'</div><div class="l">Ассортимент</div></div>'
+    + '<div class="tile"><div class="v">'+(s.ratings.design.avg ?? '—')+'</div><div class="l">Дизайн меню</div></div>'
+    + '<div class="tile nps"><div class="v">'+(s.nps.score ?? '—')+(s.nps.score!=null?'%':'')+'</div><div class="l">NPS-индекс</div></div>'
+    + '</div>';
+
+  html += '<div class="panel"><h2>Средние оценки по 5-балльной шкале</h2>'
+    + ['taste','value','range','design'].map(function(k){
+        var names = {taste:'Вкус блюд', value:'Цена / качество', range:'Ассортимент', design:'Дизайн меню'};
+        var r = s.ratings[k];
+        return '<div class="rating-row"><div class="name">'+names[k]+'</div><div class="avg">'+(r.avg ?? '—')+'</div></div>'
+          + barRows(r.dist, s.total);
+      }).join('<div style="height:14px"></div>')
+    + '</div>';
+
+  html += '<div class="panel"><h2>NPS · готовность рекомендовать (1-10)</h2>'
+    + '<div class="rating-row"><div class="name">Средний балл</div><div class="avg">'+(s.nps.avg ?? '—')+'</div></div>'
+    + barRows(s.nps.dist, s.nps.respondents, 'good')
+    + '</div>';
+
+  html += '<div class="grid2">'
+    + '<div class="panel"><h2>Пол</h2>'+barRows(s.gender, s.total)+'</div>'
+    + '<div class="panel"><h2>Возраст</h2>'+barRows(s.age, s.total)+'</div>'
+    + '<div class="panel"><h2>Время визита</h2>'+barRows(s.visit_time, s.total)+'</div>'
+    + '<div class="panel"><h2>Откуда гости</h2>'+barRows(s.origin, s.total)+'</div>'
+    + '<div class="panel"><h2>С кем пришли</h2>'+barRows(s.company, s.total)+'</div>'
+    + '<div class="panel"><h2>Размер порций</h2>'+barRows(s.portion_size, s.total)+'</div>'
+    + '</div>';
+
+  html += '<div class="panel"><h2>Что понравилось из ассортимента</h2>'+barRows(s.favorites, s.total, 'red')+'</div>';
+
+  return html;
+}
+
+var PAGE_SIZE = 20;
+var currentPage = 0;
+var allResponses = [];
+
+function renderTablePage(){
+  var start = currentPage * PAGE_SIZE;
+  var pageItems = allResponses.slice(start, start + PAGE_SIZE);
+  var rows = pageItems.map(function(r, i){
+    return '<tr>'
+      + '<td>'+(start+i+1)+'</td>'
+      + '<td>'+esc(new Date(r.submitted_at).toLocaleString('ru-RU'))+'</td>'
+      + '<td>'+esc(r.gender)+'</td>'
+      + '<td>'+esc(r.age)+'</td>'
+      + '<td>'+esc(r.visit_time)+'</td>'
+      + '<td>'+esc(r.origin)+(r.origin_city?(' — '+esc(r.origin_city)):'')+'</td>'
+      + '<td>'+esc(r.company)+'</td>'
+      + '<td>'+(r.rate_taste ?? '')+'</td>'
+      + '<td>'+(r.rate_value ?? '')+'</td>'
+      + '<td>'+(r.rate_range ?? '')+'</td>'
+      + '<td>'+(r.rate_design ?? '')+'</td>'
+      + '<td>'+esc(r.portion_size)+'</td>'
+      + '<td>'+esc((r.favorites||[]).join(', '))+'</td>'
+      + '<td class="cell-wide">'+esc(r.menu_wishes)+'</td>'
+      + '<td class="cell-wide">'+esc(r.comments)+'</td>'
+      + '<td>'+(r.nps ?? '')+'</td>'
+      + '</tr>';
+  }).join('');
+
+  var totalPages = Math.max(1, Math.ceil(allResponses.length / PAGE_SIZE));
+  document.getElementById('tableBody').innerHTML = rows || '<tr><td colspan="16" style="text-align:center;color:#7a6a56;padding:24px">Анкет пока нет</td></tr>';
+  document.getElementById('pageInfo').textContent = 'Стр. '+(currentPage+1)+' из '+totalPages;
+  document.getElementById('prevPage').disabled = currentPage === 0;
+  document.getElementById('nextPage').disabled = currentPage >= totalPages - 1;
+}
+
+function renderTablePanel(){
+  return '<div class="panel"><h2>Все ответы ('+allResponses.length+')</h2>'
+    + '<div class="table-wrap"><table><thead><tr>'
+    + '<th>#</th><th>Дата</th><th>Пол</th><th>Возраст</th><th>Визит</th><th>Откуда</th><th>С кем</th>'
+    + '<th>Вкус</th><th>Цена/кач.</th><th>Ассорт.</th><th>Дизайн</th><th>Порции</th><th>Понравилось</th>'
+    + '<th>Пожелания</th><th>Комментарии</th><th>NPS</th>'
+    + '</tr></thead><tbody id="tableBody"></tbody></table></div>'
+    + '<div class="pager"><button id="prevPage">← Назад</button><span id="pageInfo"></span><button id="nextPage">Вперёд →</button></div>'
+    + '</div>';
+}
+
+function load(){
+  Promise.all([
+    fetch('/api/admin/summary').then(function(r){ if(r.status===401) throw {auth:true}; return r.json(); }),
+    fetch('/api/admin/responses').then(function(r){ if(r.status===401) throw {auth:true}; return r.json(); }),
+  ]).then(function(results){
+    var summary = results[0].summary;
+    allResponses = results[1].responses;
+    var main = document.getElementById('main');
+    if(summary.total === 0){
+      main.innerHTML = '<div class="empty">Пока нет ни одной заполненной анкеты.</div>';
+      return;
+    }
+    main.innerHTML = renderSummary(summary) + renderTablePanel();
+    currentPage = 0;
+    renderTablePage();
+    document.getElementById('prevPage').addEventListener('click', function(){ if(currentPage>0){ currentPage--; renderTablePage(); } });
+    document.getElementById('nextPage').addEventListener('click', function(){ currentPage++; renderTablePage(); });
+  }).catch(function(e){
+    if(e && e.auth){ window.location.href = 'login.html'; return; }
+    document.getElementById('main').innerHTML = '<div class="empty">Не удалось загрузить данные. Обновите страницу.</div>';
+  });
+}
+
+document.getElementById('logoutBtn').addEventListener('click', function(){
+  fetch('/api/admin/logout', {method:'POST'}).then(function(){ window.location.href = 'login.html'; });
+});
+
+load();
+</script>
+</body>
+</html>
