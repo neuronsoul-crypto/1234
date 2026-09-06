@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Барбургер — Анкета гостя</title>
+<meta name="description" content="Помогите нам стать лучше — анкета гостя ресторана Барбургер.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#efe6d8;color:#2b1d12;-webkit-font-smoothing:antialiased;padding:40px 16px;min-height:100vh}
+:root{
+  --wood:#3c2415;
+  --wood-dark:#2b1a0e;
+  --amber:#c8862b;
+  --amber-light:#e0a94f;
+  --cream:#fbf4e6;
+  --ink:#2b1d12;
+  --muted:#7a6a56;
+  --line:#e2d3b8;
+  --good:#4d7c4d;
+  --r:14px;
+}
+.page{max-width:760px;margin:0 auto}
+
+/* header / logo */
+.brand{background:var(--wood);background-image:linear-gradient(160deg,var(--wood) 0%,var(--wood-dark) 100%);border-radius:var(--r) var(--r) 0 0;padding:34px 28px 30px;text-align:center;position:relative;overflow:hidden}
+.brand::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 15% 20%,rgba(200,134,43,.12),transparent 40%),radial-gradient(circle at 85% 80%,rgba(200,134,43,.1),transparent 40%)}
+.brand-mark{position:relative;display:inline-flex;flex-direction:column;align-items:center;gap:6px}
+.brand-icon{width:56px;height:56px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.brand-icon svg{width:30px;height:30px;fill:var(--wood-dark)}
+.brand-name{font-family:'Oswald',sans-serif;font-size:30px;font-weight:700;letter-spacing:3px;color:var(--amber-light);text-transform:uppercase;margin-top:10px}
+.brand-sub{font-size:11px;letter-spacing:4px;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:2px}
+
+.intro{background:var(--cream);padding:26px 28px 8px;text-align:center;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.intro h1{font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:var(--ink)}
+.intro p{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.6}
+
+form{background:var(--cream);border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0 0 var(--r) var(--r);padding:8px 28px 36px;box-shadow:0 20px 50px rgba(43,26,14,.12)}
+
+.section{padding:26px 0;border-top:1px solid var(--line)}
+.section:first-of-type{border-top:none}
+.section-title{font-family:'Oswald',sans-serif;font-size:16px;font-weight:600;color:var(--ink);margin-bottom:16px;line-height:1.4}
+.section-hint{font-size:12px;color:var(--muted);font-weight:400;margin-top:2px}
+
+/* profile grid */
+.profile-box{border:1.5px solid var(--line);border-radius:12px;padding:20px;background:#fffdf9}
+.profile-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pf-col label.q{display:block;font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:10px;text-transform:uppercase;letter-spacing:.4px}
+
+.opt-list{display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;align-items:center;gap:9px;cursor:pointer;font-size:14px;color:var(--ink)}
+.opt input{accent-color:var(--amber);width:17px;height:17px;flex-shrink:0;cursor:pointer}
+.opt span{line-height:1.35}
+
+.opt-row{display:flex;flex-wrap:wrap;gap:10px 22px}
+
+.other-input{margin-top:8px;width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:13px;font-family:inherit;background:#fff;color:var(--ink)}
+.other-input:focus{outline:none;border-color:var(--amber)}
+.other-input:disabled{background:#f2ede2;color:var(--muted)}
+
+/* rating scale */
+.scale-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 0;flex-wrap:wrap}
+.scale-label{font-size:14px;color:var(--ink);flex:1;min-width:220px}
+.scale-nums{display:flex;gap:8px}
+.scale-nums label{position:relative}
+.scale-nums input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
+.scale-nums span{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);font-size:13px;font-weight:600;color:var(--muted);transition:.15s}
+.scale-nums input:checked + span{background:var(--amber);border-color:var(--amber);color:#fff}
+.scale-nums input:focus-visible + span{outline:2px solid var(--amber-light);outline-offset:2px}
+.scale-caps{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:14px}
+
+textarea{width:100%;min-height:90px;padding:14px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;color:var(--ink);resize:vertical;background:#fffdf9}
+textarea:focus{outline:none;border-color:var(--amber)}
+textarea::placeholder{color:#b3a288}
+
+/* nps scale */
+.nps-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between}
+.nps-row label{position:relative;flex:1;min-width:30px}
+.nps-row input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.nps-row span{display:flex;align-items:center;justify-content:center;height:42px;border-radius:9px;border:1.5px solid var(--line);font-size:14px;font-weight:600;color:var(--muted);transition:.15s}
+.nps-row input:checked + span{background:var(--good);border-color:var(--good);color:#fff}
+.nps-row input:focus-visible + span{outline:2px solid var(--amber-light);outline-offset:2px}
+.nps-caps{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:10px}
+
+.submit-wrap{margin-top:30px;text-align:center}
+.submit-btn{font-family:'Oswald',sans-serif;letter-spacing:1px;text-transform:uppercase;background:var(--amber);color:var(--wood-dark);border:none;padding:16px 46px;border-radius:100px;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 10px 26px rgba(200,134,43,.4);transition:.2s}
+.submit-btn:hover{background:var(--amber-light);transform:translateY(-2px);box-shadow:0 14px 32px rgba(200,134,43,.5)}
+.submit-note{font-size:12px;color:var(--muted);margin-top:14px}
+
+.required-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:6px}
+
+/* thank you */
+.thanks{display:none;background:var(--cream);border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0 0 var(--r) var(--r);padding:70px 30px;text-align:center}
+.thanks.show{display:block}
+.thanks-icon{width:70px;height:70px;border-radius:50%;background:var(--good);display:flex;align-items:center;justify-content:center;margin:0 auto 22px}
+.thanks-icon svg{width:34px;height:34px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.thanks h2{font-family:'Oswald',sans-serif;font-size:24px;color:var(--ink);margin-bottom:10px}
+.thanks p{font-size:14px;color:var(--muted);max-width:400px;margin:0 auto}
+
+@media(max-width:640px){
+  .profile-grid{grid-template-columns:1fr 1fr;gap:22px}
+  .scale-row{flex-direction:column;align-items:flex-start}
+  .brand-name{font-size:24px;letter-spacing:2px}
+}
+@media(max-width:420px){
+  .profile-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="brand">
+    <div class="brand-mark">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24"><path d="M4 10a8 8 0 0 1 16 0v1H4v-1zm-1 3h18a1 1 0 0 1 1 1 5 5 0 0 1-5 5H9a5 5 0 0 1-5-5 1 1 0 0 1 1-1zm2.5-8.5c1-.8 2-1 3-.3M12 2c1 .5 1.5 1.3 1.2 2.2M17 3.8c.8.8 1 1.8.5 2.7"/></svg>
+      </div>
+      <div class="brand-name">Барбургер</div>
+      <div class="brand-sub">Бар и гриль</div>
+    </div>
+  </div>
+
+  <div class="intro">
+    <h1>Помогите нам стать лучше!</h1>
+    <p>Уделите пару минут этой анкете — ваше мнение помогает нам делать Барбургер лучше.</p>
+  </div>
+
+  <form id="surveyForm">
+
+    <div class="section">
+      <div class="profile-box">
+        <div class="profile-grid">
+          <div class="pf-col">
+            <label class="q">Ваш пол?</label>
+            <div class="opt-list">
+              <label class="opt"><input type="radio" name="gender" value="Мужской"><span>Мужской</span></label>
+              <label class="opt"><input type="radio" name="gender" value="Женский"><span>Женский</span></label>
+            </div>
+          </div>
+          <div class="pf-col">
+            <label class="q">Сколько вам лет?</label>
+            <div class="opt-list">
+              <label class="opt"><input type="radio" name="age" value="До 20"><span>До 20</span></label>
+              <label class="opt"><input type="radio" name="age" value="20-30"><span>20-30</span></label>
+              <label class="opt"><input type="radio" name="age" value="30-45"><span>30-45</span></label>
+              <label class="opt"><input type="radio" name="age" value="45 и выше"><span>45 и выше</span></label>
+            </div>
+          </div>
+          <div class="pf-col">
+            <label class="q">Время вашего визита</label>
+            <div class="opt-list">
+              <label class="opt"><input type="radio" name="visit_time" value="12:00-15:00"><span>12:00–15:00</span></label>
+              <label class="opt"><input type="radio" name="visit_time" value="15:00-18:00"><span>15:00–18:00</span></label>
+              <label class="opt"><input type="radio" name="visit_time" value="18:00-22:00"><span>18:00–22:00</span></label>
+            </div>
+          </div>
+          <div class="pf-col">
+            <label class="q">Откуда вы?</label>
+            <div class="opt-list">
+              <label class="opt"><input type="radio" name="origin" value="Из Судака"><span>Из Судака</span></label>
+              <label class="opt"><input type="radio" name="origin" value="Из Судакского района"><span>Из Судакского района</span></label>
+              <label class="opt"><input type="radio" name="origin" value="Приезжий" id="originGuestRadio"><span>Приезжий</span></label>
+            </div>
+            <input type="text" class="other-input" id="originGuestText" name="origin_city" placeholder="Откуда именно?" disabled>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">С кем вы сегодня посетили наш ресторан?</div>
+      <div class="opt-row">
+        <label class="opt"><input type="radio" name="company" value="Один/одна"><span>Один/одна</span></label>
+        <label class="opt"><input type="radio" name="company" value="С друзьями"><span>С друзьями</span></label>
+        <label class="opt"><input type="radio" name="company" value="Со второй половинкой"><span>Со второй половинкой</span></label>
+        <label class="opt"><input type="radio" name="company" value="С детьми"><span>С детьми</span></label>
+        <label class="opt"><input type="radio" name="company" value="С коллегами"><span>С коллегами</span></label>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Оцените, пожалуйста, по 5-балльной шкале <span class="section-hint">(где 1 — плохо, а 5 — хорошо)</span></div>
+
+      <div class="scale-row">
+        <div class="scale-label">Как вы оцениваете вкус наших блюд?</div>
+        <div class="scale-nums">
+          <label><input type="radio" name="rate_taste" value="1"><span>1</span></label>
+          <label><input type="radio" name="rate_taste" value="2"><span>2</span></label>
+          <label><input type="radio" name="rate_taste" value="3"><span>3</span></label>
+          <label><input type="radio" name="rate_taste" value="4"><span>4</span></label>
+          <label><input type="radio" name="rate_taste" value="5"><span>5</span></label>
+        </div>
+      </div>
+
+      <div class="scale-row">
+        <div class="scale-label">Соотношение цены и качества блюд?</div>
+        <div class="scale-nums">
+          <label><input type="radio" name="rate_value" value="1"><span>1</span></label>
+          <label><input type="radio" name="rate_value" value="2"><span>2</span></label>
+          <label><input type="radio" name="rate_value" value="3"><span>3</span></label>
+          <label><input type="radio" name="rate_value" value="4"><span>4</span></label>
+          <label><input type="radio" name="rate_value" value="5"><span>5</span></label>
+        </div>
+      </div>
+
+      <div class="scale-row">
+        <div class="scale-label">Ассортимент (выбор) блюд в меню?</div>
+        <div class="scale-nums">
+          <label><input type="radio" name="rate_range" value="1"><span>1</span></label>
+          <label><input type="radio" name="rate_range" value="2"><span>2</span></label>
+          <label><input type="radio" name="rate_range" value="3"><span>3</span></label>
+          <label><input type="radio" name="rate_range" value="4"><span>4</span></label>
+          <label><input type="radio" name="rate_range" value="5"><span>5</span></label>
+        </div>
+      </div>
+
+      <div class="scale-row">
+        <div class="scale-label">Меню в качестве дизайна?</div>
+        <div class="scale-nums">
+          <label><input type="radio" name="rate_design" value="1"><span>1</span></label>
+          <label><input type="radio" name="rate_design" value="2"><span>2</span></label>
+          <label><input type="radio" name="rate_design" value="3"><span>3</span></label>
+          <label><input type="radio" name="rate_design" value="4"><span>4</span></label>
+          <label><input type="radio" name="rate_design" value="5"><span>5</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Насколько вас устраивает размер порций?</div>
+      <div class="opt-row">
+        <label class="opt"><input type="radio" name="portion_size" value="Порции слишком большие"><span>Порции слишком большие</span></label>
+        <label class="opt"><input type="radio" name="portion_size" value="Размер порции оптимальный"><span>Размер порции оптимальный</span></label>
+        <label class="opt"><input type="radio" name="portion_size" value="Порции маленькие"><span>Порции маленькие</span></label>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Что из нашего ассортимента вам больше всего понравилось? <span class="section-hint">(можно выбрать несколько)</span></div>
+      <div class="opt-row">
+        <label class="opt"><input type="checkbox" name="favorites" value="Бургеры"><span>Бургеры</span></label>
+        <label class="opt"><input type="checkbox" name="favorites" value="Стритфуд"><span>Стритфуд</span></label>
+        <label class="opt"><input type="checkbox" name="favorites" value="Мясо и пасты"><span>Мясо и пасты</span></label>
+        <label class="opt"><input type="checkbox" name="favorites" value="Супы / салаты"><span>Супы / салаты</span></label>
+        <label class="opt"><input type="checkbox" name="favorites" value="Закуски"><span>Закуски</span></label>
+        <label class="opt"><input type="checkbox" name="favorites" value="Другое" id="favOtherCheck"><span>Другое</span></label>
+      </div>
+      <input type="text" class="other-input" id="favOtherText" name="favorites_other" placeholder="Что именно?" disabled>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Какие блюда и напитки вам бы хотелось увидеть в нашем меню?</div>
+      <textarea name="menu_wishes" placeholder="Ваши пожелания по меню..."></textarea>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Ваши комментарии и пожелания <span class="section-hint">Любая критика или похвала!</span></div>
+      <textarea name="comments" placeholder="Напишите нам..."></textarea>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Насколько вероятно, что вы порекомендуете нас своим друзьям и знакомым? <span class="section-hint">(от 1 до 10, где 10 — точно порекомендую)</span></div>
+      <div class="nps-row" id="npsRow">
+        <label><input type="radio" name="nps" value="1"><span>1</span></label>
+        <label><input type="radio" name="nps" value="2"><span>2</span></label>
+        <label><input type="radio" name="nps" value="3"><span>3</span></label>
+        <label><input type="radio" name="nps" value="4"><span>4</span></label>
+        <label><input type="radio" name="nps" value="5"><span>5</span></label>
+        <label><input type="radio" name="nps" value="6"><span>6</span></label>
+        <label><input type="radio" name="nps" value="7"><span>7</span></label>
+        <label><input type="radio" name="nps" value="8"><span>8</span></label>
+        <label><input type="radio" name="nps" value="9"><span>9</span></label>
+        <label><input type="radio" name="nps" value="10"><span>10</span></label>
+      </div>
+      <div class="nps-caps"><span>Точно не порекомендую</span><span>Точно порекомендую</span></div>
+    </div>
+
+    <div class="submit-wrap">
+      <button type="submit" class="submit-btn">Отправить анкету</button>
+      <div class="submit-note">Спасибо, что помогаете нам расти! Ждём вас снова! ♥</div>
+    </div>
+
+  </form>
+
+  <div class="thanks" id="thanksBlock">
+    <div class="thanks-icon"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg></div>
+    <h2>Спасибо за ответы!</h2>
+    <p>Ваша анкета отправлена. Мы обязательно учтём ваше мнение — до встречи в Барбургере!</p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var originRadio = document.getElementById('originGuestRadio');
+  var originText = document.getElementById('originGuestText');
+  document.querySelectorAll('input[name="origin"]').forEach(function(r){
+    r.addEventListener('change', function(){
+      originText.disabled = !originRadio.checked;
+      if(!originRadio.checked) originText.value='';
+    });
+  });
+
+  var favOther = document.getElementById('favOtherCheck');
+  var favOtherText = document.getElementById('favOtherText');
+  favOther.addEventListener('change', function(){
+    favOtherText.disabled = !favOther.checked;
+    if(!favOther.checked) favOtherText.value='';
+  });
+
+  var form = document.getElementById('surveyForm');
+  var thanks = document.getElementById('thanksBlock');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    form.style.display = 'none';
+    thanks.classList.add('show');
+    thanks.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+})();
+</script>
+</body>
+</html>
