@@ -1,0 +1,15 @@
+[Unit]
+Description=aifaces platform (Next.js)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=aifaces
+WorkingDirectory=/var/www/aifaces
+EnvironmentFile=/var/www/aifaces/.env
+ExecStart=/usr/bin/npm run start -- -p 3050
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
