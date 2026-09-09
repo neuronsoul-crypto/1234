@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
@@ -168,9 +169,9 @@ export default async function TalentDashboard() {
               </p>
             </>
           ) : (
-            <a href="/consent/biometric" className="btn btn-primary w-full">
+            <Link href="/consent/biometric" className="btn btn-primary w-full">
               Дать согласие
-            </a>
+            </Link>
           )}
         </section>
       </aside>

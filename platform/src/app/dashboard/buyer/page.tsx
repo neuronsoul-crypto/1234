@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
@@ -29,7 +30,7 @@ export default async function BuyerDashboard() {
       <h1 className="mb-6 text-xl font-semibold text-ink">Мои лицензии</h1>
       {licenses.length === 0 && (
         <p className="text-sm text-slate-500">
-          Заявок пока нет. Найдите подходящую внешность в <a href="/" className="text-accent underline">каталоге</a>.
+          Заявок пока нет. Найдите подходящую внешность в <Link href="/" className="text-accent underline">каталоге</Link>.
         </p>
       )}
       <div className="space-y-4">
