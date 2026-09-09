@@ -1,0 +1,241 @@
+// Схема данных соответствует разделу 9 docs/TZ.md (v1.1, юрисдикция РФ)
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  TALENT
+  BUYER
+  AGENCY
+  MODERATOR
+  ADMIN
+}
+
+enum VerificationStatus {
+  UNVERIFIED
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum ModerationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum Availability {
+  AVAILABLE
+  BUSY
+  HIDDEN
+}
+
+enum MediaKind {
+  PHOTO
+  VIDEO
+}
+
+enum LicenseStatus {
+  REQUESTED
+  CONSENT_PENDING
+  SIGNED
+  ACTIVE
+  EXPIRED
+  REVOKED
+  REJECTED
+  DISPUTED
+}
+
+enum EscrowStatus {
+  HELD
+  RELEASED
+  REFUNDED
+}
+
+enum DisputeStatus {
+  OPEN
+  IN_REVIEW
+  RESOLVED
+}
+
+model User {
+  id                 String              @id @default(cuid())
+  email              String              @unique
+  passwordHash       String
+  role               Role
+  companyName        String? // для Buyer/юрлиц
+  verificationStatus VerificationStatus  @default(UNVERIFIED)
+  createdAt          DateTime            @default(now())
+
+  talentProfile   TalentProfile?
+  licensesBought  License[]     @relation("BuyerLicenses")
+  disputesRaised  Dispute[]
+  notifications   Notification[]
+  auditLogEntries AuditLog[]
+  agency          Agency?
+}
+
+model TalentProfile {
+  id                String            @id @default(cuid())
+  userId            String            @unique
+  user              User              @relation(fields: [userId], references: [id])
+  displayName       String
+  age               Int
+  gender            String
+  ethnicity         String?
+  genreTags         String[] // реклама/игры/триллер/комедия и т.д.
+  basePriceRub      Int
+  availability      Availability      @default(HIDDEN)
+  bio               String?
+  moderationStatus  ModerationStatus  @default(PENDING)
+  createdAt         DateTime          @default(now())
+
+  mediaAssets       MediaAsset[]
+  licenses          License[]
+  biometricConsents BiometricConsent[]
+  reviews           Review[]
+  agencyLinks       AgencyTalentLink[]
+}
+
+// Отдельное биометрическое согласие (ст. 11 152-ФЗ) — не путать с LicenseConsent
+model BiometricConsent {
+  id              String        @id @default(cuid())
+  talentProfileId String
+  talentProfile   TalentProfile @relation(fields: [talentProfileId], references: [id])
+  textVersion     String
+  givenAt         DateTime      @default(now())
+  revokedAt       DateTime?
+}
+
+model MediaAsset {
+  id               String            @id @default(cuid())
+  talentProfileId  String
+  talentProfile    TalentProfile     @relation(fields: [talentProfileId], references: [id])
+  url              String // MVP-стаб: ссылка на файл. В проде — объектное хранилище РФ (см. docs/TZ.md 8.1)
+  kind             MediaKind
+  watermarked      Boolean           @default(false)
+  moderationStatus ModerationStatus  @default(PENDING)
+  createdAt        DateTime          @default(now())
+}
+
+model License {
+  id                 String         @id @default(cuid())
+  talentProfileId    String
+  talentProfile      TalentProfile  @relation(fields: [talentProfileId], references: [id])
+  buyerId            String
+  buyer              User           @relation("BuyerLicenses", fields: [buyerId], references: [id])
+  projectDescription String
+  contentType        String // реклама/игра/сериал/иное
+  territory          String         @default("РФ")
+  exclusivity        Boolean        @default(false)
+  durationDays       Int
+  priceRub           Int
+  commissionRub      Int
+  status             LicenseStatus  @default(REQUESTED)
+  createdAt          DateTime       @default(now())
+  expiresAt          DateTime?
+
+  licenseConsent LicenseConsent?
+  contract       Contract?
+  transaction    Transaction?
+  disputes       Dispute[]
+  review         Review?
+}
+
+// Согласие Talent на конкретную заявку — отдельно от биометрического, не отзывается после оплаты
+model LicenseConsent {
+  id        String   @id @default(cuid())
+  licenseId String   @unique
+  license   License  @relation(fields: [licenseId], references: [id])
+  givenAt   DateTime @default(now())
+}
+
+model Contract {
+  id             String    @id @default(cuid())
+  licenseId      String    @unique
+  license        License   @relation(fields: [licenseId], references: [id])
+  textVersion    String
+  contentHash    String
+  signedByTalent Boolean   @default(false)
+  signedByBuyer  Boolean   @default(false)
+  signedAt       DateTime?
+}
+
+model Transaction {
+  id            String       @id @default(cuid())
+  licenseId     String       @unique
+  license       License      @relation(fields: [licenseId], references: [id])
+  amountRub     Int
+  commissionRub Int
+  escrowStatus  EscrowStatus @default(HELD)
+  paidAt        DateTime?
+  payoutAt      DateTime?
+}
+
+model Dispute {
+  id             String        @id @default(cuid())
+  licenseId      String
+  license        License       @relation(fields: [licenseId], references: [id])
+  raisedByUserId String
+  raisedBy       User          @relation(fields: [raisedByUserId], references: [id])
+  reason         String
+  status         DisputeStatus @default(OPEN)
+  resolutionNote String?
+  createdAt      DateTime      @default(now())
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  type      String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id              String        @id @default(cuid())
+  licenseId       String        @unique
+  license         License       @relation(fields: [licenseId], references: [id])
+  talentProfileId String
+  talentProfile   TalentProfile @relation(fields: [talentProfileId], references: [id])
+  rating          Int
+  comment         String?
+  createdAt       DateTime      @default(now())
+}
+
+model Agency {
+  id          String             @id @default(cuid())
+  ownerUserId String             @unique
+  owner       User               @relation(fields: [ownerUserId], references: [id])
+  name        String
+  createdAt   DateTime           @default(now())
+  talentLinks AgencyTalentLink[]
+}
+
+model AgencyTalentLink {
+  id              String        @id @default(cuid())
+  agencyId        String
+  agency          Agency        @relation(fields: [agencyId], references: [id])
+  talentProfileId String
+  talentProfile   TalentProfile @relation(fields: [talentProfileId], references: [id])
+  status          String        @default("ACTIVE")
+}
+
+// Обязателен по НФТ (docs/TZ.md раздел 7) — обращения к биометрическим данным
+model AuditLog {
+  id           String   @id @default(cuid())
+  actorUserId  String?
+  actor        User?    @relation(fields: [actorUserId], references: [id])
+  action       String
+  targetType   String
+  targetId     String
+  reason       String?
+  createdAt    DateTime @default(now())
+}
