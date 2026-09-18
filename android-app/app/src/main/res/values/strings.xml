@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Личный органайзер</string>
+
+    <string name="nav_flights">Рейсы</string>
+    <string name="nav_shopping">Покупки</string>
+    <string name="nav_tasks">Задачи</string>
+    <string name="nav_notes">Заметки</string>
+
+    <string name="flights_title">Рейсы</string>
+    <string name="flights_empty">Нет отслеживаемых рейсов.\nДобавьте рейс, чтобы получать push-уведомления об изменениях.</string>
+    <string name="flights_add">Добавить рейс</string>
+
+    <string name="shopping_title">Списки покупок</string>
+    <string name="shopping_empty">Списков пока нет.\nСоздайте первый список покупок.</string>
+    <string name="shopping_add_list">Новый список</string>
+
+    <string name="tasks_title">Задачи</string>
+    <string name="tasks_empty">Задач пока нет.\nДобавьте первую задачу.</string>
+    <string name="tasks_add">Добавить задачу</string>
+    <string name="tasks_filter_active">Активные</string>
+    <string name="tasks_filter_done">Выполненные</string>
+    <string name="tasks_filter_all">Все</string>
+
+    <string name="notes_title">Заметки</string>
+    <string name="notes_empty">Заметок пока нет.\nСоздайте первую заметку.</string>
+    <string name="notes_add">Новая заметка</string>
+    <string name="notes_search_hint">Поиск по заметкам</string>
+    <string name="notes_voice_input">Голосовой ввод</string>
+</resources>
