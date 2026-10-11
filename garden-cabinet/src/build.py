@@ -10,6 +10,7 @@ import sheets_frame as SF
 import sheets_nodes as SN
 import sheets_interior as SI
 import sheets_text as ST
+import sheets_estimate as SE
 
 SHEETS = [
     (ST.sheet_cover, 'Титульный лист'),
@@ -24,6 +25,8 @@ SHEETS = [
     (SN.sheet_doors, 'Узел 5 и двери'),
     (SI.sheet_interior, 'Внутреннее оснащение'),
     (ST.sheet_bom, 'Спецификация материалов'),
+    (SE.sheet_estimate, 'Смета: цены Крыма'),
+    (SE.sheet_estimate_summary, 'Смета: итог и экономия'),
     (ST.sheet_cutlist, 'Раскрой деталей'),
     (ST.sheet_assembly, 'Порядок сборки'),
     (ST.sheet_care, 'Отделка и обслуживание'),
