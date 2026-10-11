@@ -78,7 +78,7 @@ def sheet_frame(c, num, total):
         c.restoreState()
         View(c, x + dx, y + dy, 1).marker(0, 0, pid, r=2.0)
     part_list(c, 112, 183, [str(i) for i in range(1, 11)], 'Позиции каркаса')
-    text(c, 112, 113, 'Двери — лист 8, раскрой — лист 9.', 5.6, F, GREY)
+    text(c, 112, 113, 'Двери — лист 8, стеллаж — лист 9, раскрой — лист 10.', 5.6, F, GREY)
     # схема основания
     v = View(c, 175, 160, 15)
     B = lambda y: -y

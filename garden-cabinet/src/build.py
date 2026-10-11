@@ -8,6 +8,7 @@ from draw import *
 import sheets_a as SA
 import sheets_b as SB
 import sheets_c as SC
+import sheets_d as SD
 
 SHEETS = [
     (SC.sheet_cover, 'Титульный лист'),
@@ -18,6 +19,7 @@ SHEETS = [
     (SB.sheet_nodes12, 'Узлы 1, 2'),
     (SB.sheet_nodes34, 'Узлы 3, 4'),
     (SB.sheet_doors, 'Двери, раскрой профнастила'),
+    (SD.sheet_interior, 'Внутреннее оснащение'),
     (SC.sheet_spec, 'Спецификация и раскрой'),
     (SC.sheet_estimate, 'Смета (цены Крыма)'),
     (SC.sheet_assembly, 'Порядок сборки'),

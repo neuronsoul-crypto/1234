@@ -120,7 +120,6 @@ def section_11(v):
                 (ROOF_Y[0] + 125, zr(ROOF_Y[0] + 125) - 5)], color=METAL, lw=1.2)
     v.circle(HOUSE_Y + 1, zb + 134, 8, fill=SEALANT, stroke=None)
     # полка, держатели, инструмент
-    v.rect(SHELF_Y[0], SHELF_Z, SHELF_Y[1], SHELF_Z + 12, fill=OSB, stroke=INK, lw=0.4)
     v.rect(T, Z_GIRT[0] + 10, T + 40, Z_GIRT[0] + 35, fill=STEEL, stroke=None)
     v.line(T + 45, Z_FLOOR + 5, T + 45, Z_FLOOR + 1650, color=HexColor('#9C6B3C'), lw=1.6)
     v.poly([(T + 25, Z_FLOOR + 3), (T + 65, Z_FLOOR + 3), (T + 65, Z_FLOOR + 300), (T + 25, Z_FLOOR + 300)],
@@ -146,7 +145,6 @@ def section_11_notes(v, xl, xr, y_min, y_max):
         (22, Z_B - 20, 'Прогон 45×45'),
         (-PN, 1700, 'Профнастил С10, волна\nвертикально'),
         (22, Z_GIRT[0] + 20, 'Ригель 45×45 + держатели'),
-        (SHELF_Y[0] + 80, SHELF_Z + 6, 'Полка из ОСП (остаток листа)'),
         (22, 900, 'Стойка 45×45 (за разрезом)'),
         (-PN, CLAD_Z0 + 10, 'Низ листа на 20 мм ниже\nобвязки — капельник'),
         (120, Z_BLK - 2, 'Рубероид под обвязку'),
@@ -237,7 +235,12 @@ def section_22(v):
             pts = [(hx + s * r * math.cos(math.radians(a)), B(D + 5 + r * math.sin(math.radians(a))))
                    for a in range(0, 91, 5)]
             v.polyline(pts, color=ACCENT, lw=0.3, dash=(1.5, 1))
-    for x in range(140, 900, 110):
+    # стеллаж: нижняя полка видна сверху, стойки и бруски в разрезе
+    v.rect(RACK_SHELF_X[0], B(RACK_SHELF_Y[0]), RACK_SHELF_X[1], B(RACK_SHELF_Y[1]), fill=OSB, stroke=INK, lw=0.4)
+    v.text((RACK_SHELF_X[0] + RACK_SHELF_X[1]) / 2, B(260), 'полка\nстеллажа', 5, anchor='c')
+    for (y0, y1) in RACK_Y:
+        v.cut(RACK_X[0], B(y0), RACK_X[1], B(y1))
+    for x in range(110, 560, 105):
         v.circle(x, B(T + 45), 17, fill=HexColor('#B27B47'), stroke=INK, lw=0.25)
 
 
