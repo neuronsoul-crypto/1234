@@ -32,6 +32,8 @@
   function humanDate(d) { return d.getDate() + ' ' + MONTHS_GEN[d.getMonth()] + ' ' + d.getFullYear(); }
 
   function load(url) {
+    // Данные, встроенные в страницу (однофайловая версия сайта для просмотра без сервера)
+    if (window.EMBEDDED_DATA && window.EMBEDDED_DATA[url]) return Promise.resolve(window.EMBEDDED_DATA[url]);
     return fetch(url, { cache: 'no-cache' }).then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
