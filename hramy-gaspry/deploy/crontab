@@ -1,0 +1,8 @@
+# crontab -e  (пользователь, от которого работает сайт). Время сервера — Europe/Simferopol.
+CRON_TZ=Europe/Simferopol
+# бэкап БД и медиа
+30 3 * * * /var/www/hramy-gaspry/deploy/backup.sh >> /var/log/hramy-backup.log 2>&1
+# понедельник 10:00 — напоминание в Telegram, если расписание на следующую неделю не заполнено
+0 10 * * 1 curl -fsS -X POST -H "Authorization: Bearer $(grep ^CRON_SECRET= /var/www/hramy-gaspry/.env | cut -d= -f2)" http://127.0.0.1:3000/api/cron/weekly-reminder
+# ежедневно — очистка корзины (старше 30 дней)
+15 4 * * * curl -fsS -X POST -H "Authorization: Bearer $(grep ^CRON_SECRET= /var/www/hramy-gaspry/.env | cut -d= -f2)" http://127.0.0.1:3000/api/cron/purge-trash

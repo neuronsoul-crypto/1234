@@ -1,0 +1,66 @@
+// Брендинг админки в стилистике сайта: лазурь, золото, Onest.
+:root {
+  --hg-lazur: #1f4e79;
+  --hg-gold: #b08a3e;
+  --hg-nina: #7a8c6e;
+  --font-body: 'Onest Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+html[data-theme='dark'] {
+  --hg-lazur: #7fa8d1;
+  --hg-gold: #c9a55c;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+}
+
+.btn--style-primary {
+  background-color: var(--hg-lazur);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background-color: color-mix(in srgb, var(--hg-lazur) 85%, black);
+  }
+}
+
+html[data-theme='dark'] .btn--style-primary {
+  color: #14130f;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+// Крупнее зоны нажатия — админкой пользуются с телефона
+.btn {
+  min-height: 44px;
+}
+
+.hg-admin-logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--theme-text);
+
+  &__name {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  &__sub {
+    color: var(--theme-elevation-500);
+  }
+}
+
+.hg-open-site {
+  font-weight: 500;
+  color: var(--hg-lazur);
+  white-space: nowrap;
+}
+
+.hg-print-bar {
+  margin: 0 0 16px;
+}
